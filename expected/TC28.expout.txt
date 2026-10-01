@@ -1,0 +1,4 @@
+TC28 – Buy Nonexistent Game
+
+Expected behaviour: The purchase is rejected because the requested game
+does not exist.

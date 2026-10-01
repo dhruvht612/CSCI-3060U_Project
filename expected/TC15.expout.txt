@@ -1,0 +1,4 @@
+TC15 – Delete Nonexistent User
+
+Expected behaviour: Delete is rejected because ‘ghostuser’ is not a
+current user.

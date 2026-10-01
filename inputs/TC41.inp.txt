@@ -1,0 +1,1 @@
+login buyer1 addcredit 400.00 addcredit 600.00 logout

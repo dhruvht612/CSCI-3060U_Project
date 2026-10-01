@@ -1,0 +1,1 @@
+login seller1 sell BrandNewGame 10.00 buy BrandNewGame seller1 logout

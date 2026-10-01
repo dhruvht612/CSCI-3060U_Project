@@ -1,0 +1,4 @@
+TC16 – Delete Current User
+
+Expected behaviour: Delete is rejected because the username is the
+current logged-in user.

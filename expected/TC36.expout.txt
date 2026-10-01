@@ -1,0 +1,4 @@
+TC36 – Valid Add Credit - Standard User
+
+Expected behaviour: The standard user adds $100.00 to their own account
+and the add-credit transaction is saved for the Daily Transaction File.

@@ -1,0 +1,5 @@
+Expected Daily Transaction File requirement: Include only transactions
+that the requirements say are saved to the Daily Transaction File. Use
+the required transaction code/field format and end the session with
+transaction code 00. Exact screen-message wording is not specified by
+the provided requirements.

@@ -1,0 +1,1 @@
+login admin delete delete1 logout

@@ -1,0 +1,4 @@
+TC07 – Transaction After Logout
+
+Expected behaviour: After logout, sell is rejected because only login
+may be accepted. A new login can then begin another session.

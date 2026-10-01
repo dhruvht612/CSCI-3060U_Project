@@ -1,0 +1,5 @@
+TC02 – Invalid Login
+
+Expected behaviour: The nonexistent username ‘ghostuser’ is rejected.
+The Front End remains able to accept a valid login. The later admin
+login and logout are accepted.

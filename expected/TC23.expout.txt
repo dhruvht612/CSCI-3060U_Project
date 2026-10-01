@@ -1,0 +1,4 @@
+TC23 – Duplicate Game Name
+
+Expected behaviour: The sell transaction is rejected because all game
+names must be unique and ‘ExistingGame’ already exists.

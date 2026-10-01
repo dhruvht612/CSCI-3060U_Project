@@ -1,0 +1,4 @@
+TC33 – Unauthorized Refund
+
+Expected behaviour: Refund is rejected because it is a privileged
+transaction and the logged-in user is not an admin.

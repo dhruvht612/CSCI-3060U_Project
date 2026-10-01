@@ -1,0 +1,3 @@
+admin | AA | 5000.00 buyer1 | BS | 500.00 seller1 | SS | 500.00 seller2
+| SS | 500.00 delete1 | FS | 100.00 lowcredit | BS | 5.00 exactbuyer |
+BS | 10.00 END

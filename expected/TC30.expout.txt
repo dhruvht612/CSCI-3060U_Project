@@ -1,0 +1,4 @@
+TC30 – Exact Credit Purchase
+
+Expected behaviour: The purchase is accepted when the buyer’s available
+credit exactly equals the game’s price.

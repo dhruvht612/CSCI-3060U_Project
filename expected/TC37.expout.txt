@@ -1,0 +1,4 @@
+TC37 – Valid Add Credit - Admin
+
+Expected behaviour: The admin adds $100.00 to the existing user
+‘buyer1’.

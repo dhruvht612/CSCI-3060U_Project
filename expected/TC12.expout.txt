@@ -1,0 +1,4 @@
+TC12 – Username Exactly 15 Characters
+
+Expected behaviour: The 15-character unique username is accepted when
+the other create requirements are satisfied.

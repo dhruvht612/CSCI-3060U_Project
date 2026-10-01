@@ -1,0 +1,5 @@
+TC13 – Valid Delete User
+
+Expected behaviour: The existing user ‘delete1’ is deleted. Any games
+they have for sale are cancelled. The delete transaction is saved for
+the Daily Transaction File.

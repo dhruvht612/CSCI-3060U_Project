@@ -1,0 +1,4 @@
+TC06 – Logout Before Login
+
+Expected behaviour: The first logout is rejected because no user is
+logged in. The later login and logout are accepted.

@@ -1,0 +1,4 @@
+TC03 – Transaction Before Login
+
+Expected behaviour: The sell transaction before login is rejected. Login
+is then accepted normally.

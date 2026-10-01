@@ -1,0 +1,4 @@
+TC14 – Unauthorized Delete User
+
+Expected behaviour: Delete is rejected because the logged-in user is not
+an admin.

@@ -1,0 +1,5 @@
+TC17 – Valid Sell
+
+Expected behaviour: The sell transaction is accepted because the user
+may sell, the game name is unique and within 25 characters, and the
+price is within the maximum.

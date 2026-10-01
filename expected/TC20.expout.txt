@@ -1,0 +1,4 @@
+TC20 – Price Above Maximum
+
+Expected behaviour: The sell transaction is rejected because the price
+exceeds $999.99.

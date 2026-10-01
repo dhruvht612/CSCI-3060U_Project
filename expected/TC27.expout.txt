@@ -1,0 +1,4 @@
+TC27 – Sell-Standard User Attempts Buy
+
+Expected behaviour: Buy is rejected because a sell-standard account
+cannot perform buy transactions.
