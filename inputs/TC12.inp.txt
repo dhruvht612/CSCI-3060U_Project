@@ -1,1 +1,6 @@
-login admin create abcdefghijklmno full-standard logout
+login
+admin
+create
+abcdefghijklmno
+full-standard
+logout

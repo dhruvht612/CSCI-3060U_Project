@@ -1,1 +1,6 @@
-login exactbuyer buy TenDollarGame seller1 logout
+login
+exactbuyer
+buy
+TenDollarGame
+seller1
+logout

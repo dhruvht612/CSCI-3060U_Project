@@ -1,1 +1,5 @@
-login admin login buyer1 logout
+login
+admin
+login
+buyer1
+logout

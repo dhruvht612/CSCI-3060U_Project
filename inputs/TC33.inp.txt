@@ -1,1 +1,4 @@
-login buyer1 refund buyer1 seller1 10.00 logout
+login
+buyer1
+refund
+logout

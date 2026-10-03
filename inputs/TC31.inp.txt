@@ -1,1 +1,6 @@
-login buyer1 buy OwnedGame seller1 logout
+login
+buyer1
+buy
+OwnedGame
+seller1
+logout

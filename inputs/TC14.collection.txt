@@ -1,1 +1,2 @@
-OwnedGame | buyer1 END
+OwnedGame                 buyer1         
+END                                      

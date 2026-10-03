@@ -1,1 +1,6 @@
-login seller1 sell MaxPriceGame 999.99 logout
+login
+seller1
+sell
+MaxPriceGame
+999.99
+logout

@@ -1,1 +1,5 @@
-login ghostuser login admin logout
+login
+ghostuser
+login
+admin
+logout

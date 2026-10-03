@@ -1,1 +1,6 @@
-login seller1 sell ExistingGame 15.00 logout
+login
+seller1
+sell
+ExistingGame
+15.00
+logout

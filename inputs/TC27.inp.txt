@@ -1,1 +1,4 @@
-login seller1 buy ExistingGame seller2 logout
+login
+seller1
+buy
+logout

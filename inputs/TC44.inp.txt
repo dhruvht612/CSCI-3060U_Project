@@ -1,1 +1,4 @@
-login admin invalidcommand logout
+login
+admin
+invalidcommand
+logout

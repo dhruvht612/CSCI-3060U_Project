@@ -1,1 +1,6 @@
-login admin create buyer1 full-standard logout
+login
+admin
+create
+buyer1
+full-standard
+logout

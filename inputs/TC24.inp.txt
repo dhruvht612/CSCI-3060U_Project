@@ -1,1 +1,6 @@
-login seller1 sell NewGame not-a-price logout
+login
+seller1
+sell
+NewGame
+not-a-price
+logout

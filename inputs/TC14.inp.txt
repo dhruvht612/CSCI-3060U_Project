@@ -1,1 +1,4 @@
-login buyer1 delete delete1 logout
+login
+buyer1
+delete
+logout

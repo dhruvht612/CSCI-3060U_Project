@@ -1,1 +1,7 @@
-login admin logout sell login admin logout
+login
+admin
+logout
+sell
+login
+admin
+logout

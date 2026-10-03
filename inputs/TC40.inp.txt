@@ -1,1 +1,5 @@
-login buyer1 addcredit 1000.01 logout
+login
+buyer1
+addcredit
+1000.01
+logout

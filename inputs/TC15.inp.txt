@@ -1,1 +1,5 @@
-login admin delete ghostuser logout
+login
+admin
+delete
+ghostuser
+logout
