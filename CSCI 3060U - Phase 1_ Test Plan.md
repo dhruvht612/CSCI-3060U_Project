@@ -13,6 +13,7 @@ This structure allows our 46 requirements tests to remain organized and reusable
 
 ## Directory Structure Printout
 
+```text
 CSCI-3060U_Project/
 │
 ├── inputs/
@@ -34,6 +35,7 @@ CSCI-3060U_Project/
 ├── CSCI 3060U - Phase 1_ Test Plan.md
 ├── README.md
 └── README.txt
+```
 
 ## Script File Printouts
 
