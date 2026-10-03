@@ -40,6 +40,7 @@ CSCI-3060U_Project/
 ## Script File Printouts
 
 The following scripts are planned to automate the requirements tests once the Front End has been implemented. A shell script (run_tests.sh) can be used on Linux/macOS, while a batch file (run_tests.bat) can be used on Windows.
+
 The scripts will run each test case independently using the appropriate files from the inputs/ directory. They will capture the Front End's output and generated Daily Transaction File and store these results separately from the test inputs and expected outputs. The actual results can then be compared with the corresponding files in the expected/ directory to determine whether the test passed or failed.
 
 
