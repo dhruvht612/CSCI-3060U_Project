@@ -5,31 +5,13 @@
 #include <stdexcept>
 #include <utility>
 
+#include "Money.h"
+
 namespace {
 
 // Current User Accounts File line layout (handout and fixtures agree):
 // 15-char username, space, 2-char type, space, 9-char credit "DDDDDD.DD".
 constexpr std::size_t kUserLineWidth = 28;
-
-// True if `text` is non-empty and contains only decimal digits.
-bool isDigits(const std::string& text) {
-    if (text.empty()) return false;
-    for (unsigned char c : text) {
-        if (!std::isdigit(c)) return false;
-    }
-    return true;
-}
-
-// Parses digits-dot-two-digits money text (e.g. "005000.00") into cents.
-// Returns false and leaves `cents` unchanged if the text is not in that form.
-bool parseCents(const std::string& text, long long& cents) {
-    if (text.size() < 4 || text[text.size() - 3] != '.') return false;
-    const std::string whole = text.substr(0, text.size() - 3);
-    const std::string fraction = text.substr(text.size() - 2);
-    if (!isDigits(whole) || !isDigits(fraction)) return false;
-    cents = std::stoll(whole) * 100 + std::stoll(fraction);
-    return true;
-}
 
 // Returns `text` without its trailing spaces (the padding of a fixed-width field).
 std::string trimRight(std::string text) {
@@ -63,7 +45,7 @@ std::vector<User> FileManager::loadUsers() const {
 
         User user;
         bool valid = line.size() == kUserLineWidth && line[15] == ' ' && line[18] == ' ' &&
-                     parseCents(line.substr(19), user.creditCents);
+                     money::parseCents(line.substr(19), user.creditCents);
         if (valid) {
             user.username = trimRight(line.substr(0, 15));
             user.type = line.substr(16, 2);

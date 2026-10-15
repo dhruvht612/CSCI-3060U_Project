@@ -1,0 +1,8 @@
+admin           AA 005000.00
+buyer1          BS 000500.00
+seller1         SS 000500.00
+seller2         SS 000500.00
+delete1         FS 000100.00
+lowcredit       BS 000005.00
+exactbuyer      BS 000010.00
+END                         

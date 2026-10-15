@@ -1,7 +1,9 @@
 # CSCI 3060U – Phase 2: Front End Design Notes
 
-Status: initial prototype (2026-10-13). Only the command loop, login, logout and
-the session and account-type checks work. Everything else is a placeholder.
+Status: Phase 2 prototype (2026-10-15). The command loop, login, logout, the
+session and account-type checks and the field prompting for every command all
+work. The six transaction methods in `TransactionProcessor` are still stubs
+(they return false and record nothing); applying them is Phase 3 work.
 
 **Sources**
 - Handout: `Project_Docs/Extreme Project - Games Distribution (2026).docx.md`
@@ -37,9 +39,16 @@ files. Money is stored as integer cents (`long long`) so that limit checks like
 | `FrontEnd(processor, in, out)` | processor, input and output streams | Set up a front end that reads from `in` and writes to `out`. | done |
 | `FrontEnd::run` | — | Process commands until the end of input. | done |
 | `FrontEnd::readLine` *(private)* | → line, `bool` | Read one input line, dropping a trailing `\r`; false at end of input. | done |
-| `FrontEnd::dispatch` *(private)* | command | Apply the session and account-type checks, then run the command. | done (non-login/logout commands print "not implemented") |
+| `FrontEnd::dispatch` *(private)* | command | Apply the session and account-type checks, then run the command. | done |
 | `FrontEnd::handleLogin` *(private)* | — | Prompt for a username and start the session if it is accepted. | done |
 | `FrontEnd::handleLogout` *(private)* | — | End the session and report whether the DTF was written. | done |
+| `FrontEnd::handleCreate` *(private)* | — | Prompt for the new username and account type, then call `createUser`. | done (processor stub returns false) |
+| `FrontEnd::handleDelete` *(private)* | — | Prompt for the username, then call `deleteUser`. | done (processor stub returns false) |
+| `FrontEnd::handleSell` *(private)* | — | Prompt for the game name and price, parse the price, then call `sell`. | done (processor stub returns false) |
+| `FrontEnd::handleBuy` *(private)* | — | Prompt for the game name and seller, then call `buy`. | done (processor stub returns false) |
+| `FrontEnd::handleRefund` *(private)* | — | Prompt for buyer, seller and amount, parse the amount, then call `refund`. | done (processor stub returns false) |
+| `FrontEnd::handleAddCredit` *(private)* | — | Prompt for the amount (and the username for an admin), then call `addCredit`. | done (processor stub returns false) |
+| `FrontEnd::readField` *(private)* | prompt, → field, `bool` | Print a prompt and read one field line; false if input ends mid-command. | done |
 | `TransactionProcessor(files)` | `FileManager` | Set up a processor that reads and writes through `files`. | done |
 | `TransactionProcessor::isLoggedIn` | → `bool` | Report whether a session is active. | done |
 | `TransactionProcessor::currentUser` | → `const User&` | Return the logged-in user (throws if none). | done |
@@ -84,6 +93,13 @@ classDiagram
         -dispatch(command) void
         -handleLogin() void
         -handleLogout() void
+        -handleCreate() void
+        -handleDelete() void
+        -handleSell() void
+        -handleBuy() void
+        -handleRefund() void
+        -handleAddCredit() void
+        -readField(prompt, field) bool
     }
     class TransactionProcessor {
         -FileManager& files_
@@ -166,14 +182,21 @@ Where the inputs and outputs fit:
  stdout ◄─ prompts, results ─┘
 ```
 
+`FrontEnd::run` removes leading and trailing whitespace from each command line
+before dispatching it, so `logout ` is accepted. Commands stay case-sensitive
+(`LOGIN` is unrecognized).
+
 How `FrontEnd::dispatch` handles a command, in order:
 
-1. Unknown command → error (TC44).
+1. Empty or unknown command → error listing the valid commands (TC44).
 2. `login` → rejected if someone is already logged in (TC04); otherwise prompt for a username (TC01, TC02).
 3. Any other command while logged out → error (TC03, TC06, TC07).
 4. `logout` → write the DTF (TC05, TC45).
 5. Account type not allowed → error (TC09, TC14, TC18, TC27, TC33).
-6. Otherwise → "not implemented yet; nothing was recorded".
+6. Otherwise → prompt for the command's fields (§4 table), parse money as
+   `DDDDDD.DD`, and call the matching `TransactionProcessor` method, printing
+   whether it was accepted. The processor methods are stubs, so the prototype
+   always reports a rejection; wiring them up is Phase 3 work.
 
 Account-type rules (`isPermitted`), all from the handout's Transaction Code Details:
 
@@ -273,17 +296,20 @@ TA = needs an answer from the TA/client. Group = our decision.
 | 12 | Money input: the handout gives `15.00` as the example. Are `15`, `15.5`, `$15` or negative values valid? | Not parsed yet | TA |
 | 13 | When a field is invalid (e.g. a 26-char game name), is it rejected straight away or only after all fields are read? The fixtures always supply every field. | — | Group |
 | 14 | **TC25 doesn't isolate what it claims to test.** It uses `seller1` (`SS`) to buy, which the handout forbids, so the buy fails on account type before the "new game" rule is checked. It also has a seller buying their own game. | — | Group: rewrite TC25 with a user allowed to buy |
-| 15 | Console prompt and message wording isn't prescribed. | Placeholder wording | Group |
+| 15 | Console prompt and message wording isn't prescribed. | Errors start with `Error:`; messages name the logged-in user where relevant | Group |
 | 16 | Line endings: the fixtures are CRLF; on Linux the program writes LF. | Compare with `diff --strip-trailing-cr` | Group |
 | 17 | The Phase 1 test plan's text says `tests/inputs`, `tests/expected`, `tests/actual`, but the repo uses `inputs/` and `expected/` at the root. | Unchanged | Group |
-| 18 | Names are matched case-sensitively, exactly as typed. | Exact match | TA |
+| 18 | Names are matched case-sensitively, exactly as typed. Should spaces around a typed username (or other field) be ignored, as they are for commands? | Exact match; only command lines are trimmed | TA |
 
 ## 6. Placeholders still to implement
 
-- `FileManager::loadGames` and `loadCollections`: blocked on §5 #2–3.
+The Front End itself is complete for Phase 2: it prompts for every command's
+fields, parses money and calls the matching `TransactionProcessor` method.
+What remains is the transaction behaviour behind those methods (Phase 3):
+
 - `TransactionProcessor::createUser`, `deleteUser`, `sell`, `buy`, `refund`, `addCredit`, including the DTF record formatting (§5 #1, #4–7).
 - `UserManager::removeUser`, `adjustCredit`; `GameManager::addToCollection`, `removeGamesBySeller`.
-- `FrontEnd::dispatch` placeholder branch: prompt for each command's fields (§4), parse amounts, call the matching `TransactionProcessor` method and print the result. Until this is done, the field lines after a permitted command are read as (unrecognized) commands.
+- `FileManager::loadGames` and `loadCollections`: blocked on §5 #2–3.
 - Session tracking still to add: credit added per account (TC39–TC42), games listed this session (TC25), and deleted users' games.
 - Test runner scripts (`run_tests.sh` / `run_tests.bat`), as planned in the Phase 1 test plan.
 

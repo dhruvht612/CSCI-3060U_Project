@@ -4,12 +4,14 @@ Games Distribution System: a console front end written in C++ for CSCI 3060U (Fa
 
 ## Status
 
-Early Phase 2 skeleton. Working so far: the command loop, `login`, `logout` (writes the
-Daily Transaction File, currently only the `00` end-of-session record), the "log in
-first" check and the account-type checks. `create`, `delete`, `sell`, `buy`, `refund`
-and `addcredit` are recognized but **not implemented**. See
-[docs/phase2_design_notes.md](docs/phase2_design_notes.md) for the design, file formats,
-open questions and remaining work.
+Phase 2 prototype. The Front End is complete: the command loop, `login`, `logout`
+(writes the Daily Transaction File, currently only the `00` end-of-session record),
+the "log in first" check, the account-type checks, and field prompting for every
+command. The transaction methods in `TransactionProcessor` are still stubs that
+return false, so `create`, `delete`, `sell`, `buy`, `refund` and `addcredit` are
+prompted for correctly but not yet applied — validation and record writing are
+Phase 3 work. See [docs/phase2_design_notes.md](docs/phase2_design_notes.md) for the
+design, file formats, open questions and remaining work.
 
 ## Layout
 
