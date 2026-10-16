@@ -17,7 +17,8 @@
 // Standard input is the transaction stream; standard output shows prompts and
 // results. The program ends when standard input ends.
 //
-// Phase 2 prototype: only login and logout are implemented so far; see
+// Phase 2 prototype: login, logout and the prompting for every command work;
+// the transactions themselves are stubs until Phase 3. See
 // docs/phase2_design_notes.md.
 
 #include <exception>
