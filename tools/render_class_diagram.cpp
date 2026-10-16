@@ -60,7 +60,7 @@ std::string escapeXml(const std::string& text) {
 void writeText(std::ostream& svg, int x, int y, const std::string& text,
                const std::string& anchor, const std::string& style) {
     svg << "<text x=\"" << x << "\" y=\"" << y << "\" text-anchor=\"" << anchor
-        << "\" dominant-baseline=\"middle\" " << style << ">" << escapeXml(text) << "</text>\n";
+        << "\" dominant-baseline=\"middle\" xml:space=\"preserve\" " << style << ">" << escapeXml(text) << "</text>\n";
 }
 
 // Writes a label for a relationship line: small italic text on a white background.
@@ -207,13 +207,13 @@ int main() {
     drawComposition(svg, 660, processor.bottom(), userManager.centerX(), userManager.top);
     writeLabel(svg, 612, (processor.bottom() + userManager.top) / 2 + 4, "owns 1", "start");
     drawComposition(svg, 960, processor.bottom(), gameManager.centerX(), gameManager.top);
-    writeLabel(svg, 1030, (processor.bottom() + gameManager.top) / 2 + 4, "owns 1", "start");
+    writeLabel(svg, 1045, (processor.bottom() + gameManager.top) / 2 + 4, "owns 1", "start");
 
     // Each manager owns any number of its data records.
     drawComposition(svg, userManager.centerX(), userManager.bottom(), user.centerX(), user.top);
     writeLabel(svg, userManager.centerX() + 12, (userManager.bottom() + user.top) / 2, "0..*", "start");
     drawComposition(svg, gameManager.centerX() - 60, gameManager.bottom(), game.centerX(), game.top);
-    writeLabel(svg, game.centerX() + 50, (gameManager.bottom() + game.top) / 2, "0..*", "start");
+    writeLabel(svg, game.centerX() + 35, (gameManager.bottom() + game.top) / 2, "0..*", "end");
     drawComposition(svg, gameManager.centerX() + 60, gameManager.bottom(),
                     collectionEntry.centerX(), collectionEntry.top);
     writeLabel(svg, collectionEntry.centerX() - 20, (gameManager.bottom() + collectionEntry.top) / 2,
@@ -232,11 +232,11 @@ int main() {
 
     // Legend, with where the program's inputs and outputs fit.
     const std::vector<std::string> legend = {
-        "Legend:  +  public    -  private    arrow  uses    filled diamond  owns (composition)    dashed  creates",
+        "Legend:  + public  |  - private  |  arrow = uses  |  filled diamond = owns (composition)  |  dashed = creates",
         "Inputs: stdin -> FrontEnd (commands and fields); users, games and collections files -> FileManager.",
         "Outputs: stdout <- FrontEnd (prompts and results); Daily Transaction File <- FileManager at logout.",
         "main.cpp builds FileManager, then TransactionProcessor, then FrontEnd, and calls FrontEnd::run()."};
-    const int legendTop = 1020;
+    const int legendTop = 1000;
     svg << "<rect x=\"20\" y=\"" << legendTop << "\" width=\"720\" height=\""
         << 20 + 24 * static_cast<int>(legend.size()) << "\" rx=\"6\" fill=\"#eef2f7\" stroke=\""
         << kLine << "\"/>\n";
