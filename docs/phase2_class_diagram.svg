@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1132" viewBox="0 0 1600 1132" font-family="Segoe UI, DejaVu Sans, Arial, sans-serif" fill="#1a1a2e">
+<defs>
+<marker id="arrowhead" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#34495e"/></marker>
+<marker id="openhead" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0,0 L10,5 L0,10" fill="none" stroke="#34495e" stroke-width="1.5"/></marker>
+<marker id="diamond" viewBox="0 0 24 12" refX="0" refY="6" markerWidth="24" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,6 L12,0 L24,6 L12,12 z" fill="#34495e"/></marker>
+</defs>
+<rect width="100%" height="100%" fill="white"/>
+<text x="800" y="32" text-anchor="middle" dominant-baseline="middle" xml:space="preserve" font-size="22" font-weight="bold">Games Distribution System: UML Class Diagram (CSCI 3060U, Phase 2)</text>
+<rect x="30" y="72" width="450" height="418" rx="6" fill="white" stroke="#1a1a2e" stroke-width="2"/>
+<rect x="30" y="72" width="450" height="42" rx="6" fill="#1a1a2e"/>
+<text x="255" y="93" text-anchor="middle" dominant-baseline="middle" xml:space="preserve" font-size="17" font-weight="bold" fill="white">FrontEnd</text>
+<text x="42" y="134" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">- processor_ : TransactionProcessor&amp;</text>
+<text x="42" y="155" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">- in_ : istream&amp;</text>
+<text x="42" y="176" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">- out_ : ostream&amp;</text>
+<line x1="30" y1="197" x2="480" y2="197" stroke="#1a1a2e"/>
+<text x="42" y="217" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ FrontEnd(processor, in, out)</text>
+<text x="42" y="238" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ run() : void</text>
+<text x="42" y="259" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">- readLine(line&amp;) : bool</text>
+<text x="42" y="280" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">- dispatch(command) : void</text>
+<text x="42" y="301" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">- handleLogin() : void</text>
+<text x="42" y="322" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">- handleLogout() : void</text>
+<text x="42" y="343" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">- handleCreate() : void</text>
+<text x="42" y="364" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">- handleDelete() : void</text>
+<text x="42" y="385" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">- handleSell() : void</text>
+<text x="42" y="406" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">- handleBuy() : void</text>
+<text x="42" y="427" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">- handleRefund() : void</text>
+<text x="42" y="448" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">- handleAddCredit() : void</text>
+<text x="42" y="469" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">- readField(prompt, field&amp;) : bool</text>
+<rect x="560" y="72" width="500" height="418" rx="6" fill="white" stroke="#1a1a2e" stroke-width="2"/>
+<rect x="560" y="72" width="500" height="42" rx="6" fill="#1a1a2e"/>
+<text x="810" y="93" text-anchor="middle" dominant-baseline="middle" xml:space="preserve" font-size="17" font-weight="bold" fill="white">TransactionProcessor</text>
+<text x="572" y="134" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">- files_ : const FileManager&amp;</text>
+<text x="572" y="155" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">- users_ : UserManager</text>
+<text x="572" y="176" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">- games_ : GameManager</text>
+<text x="572" y="197" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">- session_ : optional&lt;User&gt;</text>
+<text x="572" y="218" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">- records_ : vector&lt;string&gt;</text>
+<line x1="560" y1="239" x2="1060" y2="239" stroke="#1a1a2e"/>
+<text x="572" y="259" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ TransactionProcessor(files)</text>
+<text x="572" y="280" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ isLoggedIn() : bool</text>
+<text x="572" y="301" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ currentUser() : const User&amp;</text>
+<text x="572" y="322" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ login(username) : bool</text>
+<text x="572" y="343" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ logout() : bool</text>
+<text x="572" y="364" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ createUser(username, userType) : bool</text>
+<text x="572" y="385" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ deleteUser(username) : bool</text>
+<text x="572" y="406" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ sell(gameName, priceCents) : bool</text>
+<text x="572" y="427" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ buy(gameName, sellerName) : bool</text>
+<text x="572" y="448" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ refund(buyerName, sellerName, amountCents) : bool</text>
+<text x="572" y="469" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ addCredit(username, amountCents) : bool</text>
+<rect x="1140" y="72" width="430" height="271" rx="6" fill="white" stroke="#1a1a2e" stroke-width="2"/>
+<rect x="1140" y="72" width="430" height="42" rx="6" fill="#1a1a2e"/>
+<text x="1355" y="93" text-anchor="middle" dominant-baseline="middle" xml:space="preserve" font-size="17" font-weight="bold" fill="white">FileManager</text>
+<text x="1152" y="134" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">- usersPath_ : string</text>
+<text x="1152" y="155" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">- gamesPath_ : string</text>
+<text x="1152" y="176" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">- collectionsPath_ : string</text>
+<text x="1152" y="197" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">- transactionsPath_ : string</text>
+<line x1="1140" y1="218" x2="1570" y2="218" stroke="#1a1a2e"/>
+<text x="1152" y="238" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ FileManager(4 paths)</text>
+<text x="1152" y="259" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ loadUsers() : vector&lt;User&gt;</text>
+<text x="1152" y="280" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ loadGames() : vector&lt;Game&gt;</text>
+<text x="1152" y="301" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ loadCollections() : vector&lt;CollectionEntry&gt;</text>
+<text x="1152" y="322" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ writeTransactions(records) : bool</text>
+<rect x="340" y="532" width="390" height="187" rx="6" fill="white" stroke="#1a1a2e" stroke-width="2"/>
+<rect x="340" y="532" width="390" height="42" rx="6" fill="#1a1a2e"/>
+<text x="535" y="553" text-anchor="middle" dominant-baseline="middle" xml:space="preserve" font-size="17" font-weight="bold" fill="white">UserManager</text>
+<text x="352" y="594" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">- users_ : vector&lt;User&gt;</text>
+<line x1="340" y1="615" x2="730" y2="615" stroke="#1a1a2e"/>
+<text x="352" y="635" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ UserManager(users)</text>
+<text x="352" y="656" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ find(username) : const User*</text>
+<text x="352" y="677" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ removeUser(username) : bool</text>
+<text x="352" y="698" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ adjustCredit(username, deltaCents) : bool</text>
+<rect x="860" y="532" width="420" height="229" rx="6" fill="white" stroke="#1a1a2e" stroke-width="2"/>
+<rect x="860" y="532" width="420" height="42" rx="6" fill="#1a1a2e"/>
+<text x="1070" y="553" text-anchor="middle" dominant-baseline="middle" xml:space="preserve" font-size="17" font-weight="bold" fill="white">GameManager</text>
+<text x="872" y="594" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">- games_ : vector&lt;Game&gt;</text>
+<text x="872" y="615" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">- collections_ : vector&lt;CollectionEntry&gt;</text>
+<line x1="860" y1="636" x2="1280" y2="636" stroke="#1a1a2e"/>
+<text x="872" y="656" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ GameManager(games, collections)</text>
+<text x="872" y="677" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ find(gameName) : const Game*</text>
+<text x="872" y="698" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ isOwnedBy(gameName, username) : bool</text>
+<text x="872" y="719" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ addToCollection(gameName, owner) : void</text>
+<text x="872" y="740" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ removeGamesBySeller(seller) : void</text>
+<rect x="385" y="827" width="300" height="166" rx="6" fill="white" stroke="#1a1a2e" stroke-width="2"/>
+<rect x="385" y="827" width="300" height="42" rx="6" fill="#1a1a2e"/>
+<text x="535" y="848" text-anchor="middle" dominant-baseline="middle" xml:space="preserve" font-size="17" font-weight="bold" fill="white">User</text>
+<text x="397" y="889" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ username : string</text>
+<text x="397" y="910" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ type : string</text>
+<text x="397" y="931" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ creditCents : long long</text>
+<line x1="385" y1="952" x2="685" y2="952" stroke="#1a1a2e"/>
+<text x="397" y="972" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13" font-style="italic">(data only, no methods)</text>
+<rect x="770" y="827" width="285" height="166" rx="6" fill="white" stroke="#1a1a2e" stroke-width="2"/>
+<rect x="770" y="827" width="285" height="42" rx="6" fill="#1a1a2e"/>
+<text x="912" y="848" text-anchor="middle" dominant-baseline="middle" xml:space="preserve" font-size="17" font-weight="bold" fill="white">Game</text>
+<text x="782" y="889" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ name : string</text>
+<text x="782" y="910" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ seller : string</text>
+<text x="782" y="931" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ priceCents : long long</text>
+<line x1="770" y1="952" x2="1055" y2="952" stroke="#1a1a2e"/>
+<text x="782" y="972" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13" font-style="italic">(data only, no methods)</text>
+<rect x="1085" y="827" width="285" height="145" rx="6" fill="white" stroke="#1a1a2e" stroke-width="2"/>
+<rect x="1085" y="827" width="285" height="42" rx="6" fill="#1a1a2e"/>
+<text x="1227" y="848" text-anchor="middle" dominant-baseline="middle" xml:space="preserve" font-size="17" font-weight="bold" fill="white">CollectionEntry</text>
+<text x="1097" y="889" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ gameName : string</text>
+<text x="1097" y="910" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13">+ owner : string</text>
+<line x1="1085" y1="931" x2="1370" y2="931" stroke="#1a1a2e"/>
+<text x="1097" y="951" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-family="monospace" font-size="13" font-style="italic">(data only, no methods)</text>
+<line x1="480" y1="172" x2="560" y2="172" stroke="#34495e" stroke-width="2" marker-end="url(#arrowhead)"/>
+<text x="520" y="132" text-anchor="middle" dominant-baseline="middle" xml:space="preserve" font-size="12" font-style="italic" fill="#34495e" stroke="white" stroke-width="4" paint-order="stroke">sends</text>
+<text x="520" y="148" text-anchor="middle" dominant-baseline="middle" xml:space="preserve" font-size="12" font-style="italic" fill="#34495e" stroke="white" stroke-width="4" paint-order="stroke">commands</text>
+<line x1="1060" y1="172" x2="1140" y2="172" stroke="#34495e" stroke-width="2" marker-end="url(#arrowhead)"/>
+<text x="1100" y="132" text-anchor="middle" dominant-baseline="middle" xml:space="preserve" font-size="12" font-style="italic" fill="#34495e" stroke="white" stroke-width="4" paint-order="stroke">loads at login,</text>
+<text x="1100" y="148" text-anchor="middle" dominant-baseline="middle" xml:space="preserve" font-size="12" font-style="italic" fill="#34495e" stroke="white" stroke-width="4" paint-order="stroke">writes at logout</text>
+<line x1="660" y1="490" x2="535" y2="532" stroke="#34495e" stroke-width="2" marker-start="url(#diamond)"/>
+<text x="612" y="515" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-size="12" font-style="italic" fill="#34495e" stroke="white" stroke-width="4" paint-order="stroke">owns 1</text>
+<line x1="960" y1="490" x2="1070" y2="532" stroke="#34495e" stroke-width="2" marker-start="url(#diamond)"/>
+<text x="1045" y="515" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-size="12" font-style="italic" fill="#34495e" stroke="white" stroke-width="4" paint-order="stroke">owns 1</text>
+<line x1="535" y1="719" x2="535" y2="827" stroke="#34495e" stroke-width="2" marker-start="url(#diamond)"/>
+<text x="547" y="773" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-size="12" font-style="italic" fill="#34495e" stroke="white" stroke-width="4" paint-order="stroke">0..*</text>
+<line x1="1010" y1="761" x2="912" y2="827" stroke="#34495e" stroke-width="2" marker-start="url(#diamond)"/>
+<text x="947" y="794" text-anchor="end" dominant-baseline="middle" xml:space="preserve" font-size="12" font-style="italic" fill="#34495e" stroke="white" stroke-width="4" paint-order="stroke">0..*</text>
+<line x1="1130" y1="761" x2="1227" y2="827" stroke="#34495e" stroke-width="2" marker-start="url(#diamond)"/>
+<text x="1207" y="794" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-size="12" font-style="italic" fill="#34495e" stroke="white" stroke-width="4" paint-order="stroke">0..*</text>
+<polyline points="1460,343 1460,872 1370,872" fill="none" stroke="#34495e" stroke-width="1.5" stroke-dasharray="7,5" marker-end="url(#openhead)"/>
+<text x="1445" y="390" text-anchor="end" dominant-baseline="middle" xml:space="preserve" font-size="12" font-style="italic" fill="#34495e" stroke="white" stroke-width="4" paint-order="stroke">creates User, Game and</text>
+<text x="1445" y="407" text-anchor="end" dominant-baseline="middle" xml:space="preserve" font-size="12" font-style="italic" fill="#34495e" stroke="white" stroke-width="4" paint-order="stroke">CollectionEntry records</text>
+<text x="1445" y="424" text-anchor="end" dominant-baseline="middle" xml:space="preserve" font-size="12" font-style="italic" fill="#34495e" stroke="white" stroke-width="4" paint-order="stroke">from the data files</text>
+<rect x="20" y="1000" width="720" height="116" rx="6" fill="#eef2f7" stroke="#34495e"/>
+<text x="32" y="1022" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-size="13">Legend:  + public  |  - private  |  arrow = uses  |  filled diamond = owns (composition)  |  dashed = creates</text>
+<text x="32" y="1046" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-size="13">Inputs: stdin -&gt; FrontEnd (commands and fields); users, games and collections files -&gt; FileManager.</text>
+<text x="32" y="1070" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-size="13">Outputs: stdout &lt;- FrontEnd (prompts and results); Daily Transaction File &lt;- FileManager at logout.</text>
+<text x="32" y="1094" text-anchor="start" dominant-baseline="middle" xml:space="preserve" font-size="13">main.cpp builds FileManager, then TransactionProcessor, then FrontEnd, and calls FrontEnd::run().</text>
+</svg>
