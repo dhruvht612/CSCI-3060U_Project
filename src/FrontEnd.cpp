@@ -52,9 +52,12 @@ bool isPermitted(const std::string& command, const std::string& userType) {
 
 }  // namespace
 
+// Creates the front end with the processor to send transactions to
+// and the input and output streams to use.
 FrontEnd::FrontEnd(TransactionProcessor& processor, std::istream& in, std::ostream& out)
     : processor_(processor), in_(in), out_(out) {}
 
+// Runs the session: prompts for a command and dispatches it until input ends.
 void FrontEnd::run() {
     std::string line;
     while (true) {
@@ -65,12 +68,16 @@ void FrontEnd::run() {
     out_ << '\n';
 }
 
+// Reads one line from the input, removing a trailing carriage return.
+// Returns false if input has ended.
 bool FrontEnd::readLine(std::string& line) {
     if (!std::getline(in_, line)) return false;
     if (!line.empty() && line.back() == '\r') line.pop_back();
     return true;
 }
 
+// Checks a command (not empty, known, logged in, permitted) and sends it to
+// its handler, or prints why it was rejected.
 void FrontEnd::dispatch(const std::string& command) {
     if (command.empty()) {
         out_ << "Error: no command entered.\n";
@@ -105,6 +112,7 @@ void FrontEnd::dispatch(const std::string& command) {
     }
 }
 
+// Handles login: asks for a username and starts the session.
 void FrontEnd::handleLogin() {
     if (processor_.isLoggedIn()) {
         out_ << "Error: already logged in as " << processor_.currentUser().username
@@ -130,6 +138,7 @@ void FrontEnd::handleLogin() {
     }
 }
 
+// Handles logout: ends the session and writes the Daily Transaction File.
 void FrontEnd::handleLogout() {
     const std::string username = processor_.currentUser().username;  // copied: logout ends the session
     if (processor_.logout()) {
@@ -140,6 +149,8 @@ void FrontEnd::handleLogout() {
     }
 }
 
+// Prints a prompt and reads one line into field.
+// Returns false if input ended before a line was read.
 bool FrontEnd::readField(const std::string& prompt, std::string& field) {
     out_ << prompt;
     if (!readLine(field)) {
@@ -149,6 +160,7 @@ bool FrontEnd::readField(const std::string& prompt, std::string& field) {
     return true;
 }
 
+// Handles create: asks for a username and account type, then creates the user.
 void FrontEnd::handleCreate() {
     std::string username;
     std::string userType;
@@ -163,6 +175,7 @@ void FrontEnd::handleCreate() {
     }
 }
 
+// Handles delete: asks for a username, then deletes that user.
 void FrontEnd::handleDelete() {
     std::string username;
     if (!readField("Enter the username to delete: ", username)) return;
@@ -173,6 +186,7 @@ void FrontEnd::handleDelete() {
     }
 }
 
+// Handles sell: asks for a game name and price, then lists the game for sale.
 void FrontEnd::handleSell() {
     std::string gameName;
     std::string priceText;
@@ -190,6 +204,7 @@ void FrontEnd::handleSell() {
     }
 }
 
+// Handles buy: asks for a game name and seller, then buys the game.
 void FrontEnd::handleBuy() {
     std::string gameName;
     std::string sellerName;
@@ -203,6 +218,7 @@ void FrontEnd::handleBuy() {
     }
 }
 
+// Handles refund: asks for the buyer, seller, and amount, then moves the credit.
 void FrontEnd::handleRefund() {
     std::string buyerName;
     std::string sellerName;
@@ -224,6 +240,8 @@ void FrontEnd::handleRefund() {
     }
 }
 
+// Handles addcredit: asks for an amount (and a username if the user is an admin),
+// then adds the credit.
 void FrontEnd::handleAddCredit() {
     std::string amountText;
     if (!readField("Enter the amount to add (e.g. 15.00): ", amountText)) return;
