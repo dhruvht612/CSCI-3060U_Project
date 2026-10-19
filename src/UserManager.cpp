@@ -21,4 +21,9 @@ bool UserManager::removeUser(const std::string& /*username*/) {
 // Changes a user's credit by the given amount. Not implemented yet.
 bool UserManager::adjustCredit(const std::string& /*username*/, long long /*deltaCents*/) {
     return false;  // TODO(Phase 2)
+
+// Returns every user read for the current session, in file order.
+const std::vector<User>& UserManager::all() const {
+    return users_;
+}
 }
