@@ -14,6 +14,11 @@ const User& TransactionProcessor::currentUser() const {
     return session_.value();
 }
 
+// Returns the active user accounts for this session. Writes no record.
+const std::vector<User>& TransactionProcessor::activeUsers() const {
+    return users_.all();
+}
+
 // Starts a session for an existing user and loads the users, games, and collections.
 // Returns false if already logged in or the user doesn't exist.
 bool TransactionProcessor::login(const std::string& username) {
