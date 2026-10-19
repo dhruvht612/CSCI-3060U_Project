@@ -1,17 +1,20 @@
 #include "TransactionProcessor.h"
 
 #include "FileManager.h"
-
 TransactionProcessor::TransactionProcessor(const FileManager& files) : files_(files) {}
 
+// Creates a processor that reads and writes data through the given FileManager.
 bool TransactionProcessor::isLoggedIn() const {
     return session_.has_value();
 }
 
+// Returns true if a user is logged in.
 const User& TransactionProcessor::currentUser() const {
     return session_.value();
 }
 
+// Starts a session for an existing user and loads the users, games, and collections.
+// Returns false if already logged in or the user doesn't exist.
 bool TransactionProcessor::login(const std::string& username) {
     if (session_) return false;
     users_ = UserManager(files_.loadUsers());
@@ -22,6 +25,8 @@ bool TransactionProcessor::login(const std::string& username) {
     return true;
 }
 
+// Ends the session and writes the Daily Transaction File, ending with 00.
+// Returns false if nobody is logged in or the file couldn't be written.
 bool TransactionProcessor::logout() {
     if (!session_) return false;
     std::vector<std::string> output = records_;
