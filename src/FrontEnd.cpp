@@ -11,12 +11,13 @@
 
 namespace {
 
-// The transaction codes the handout lists, in its order. They are lowercase and
-// matched case-sensitively, exactly as the handout writes them.
-constexpr std::array<const char*, 8> kCommands = {
+// The transaction codes the front end accepts: the handout's codes, in its
+// order, followed by "list", which is an added requirement. They are lowercase
+// and matched case-sensitively, exactly as the handout writes them.
+constexpr std::array<const char*, 9> kCommands = {
     "login", "logout", "create", "delete", "sell", "buy", "refund", "addcredit", "list"};
 
-// True for the transaction codes the handout lists.
+// True for the transaction codes the front end accepts.
 bool isKnownCommand(const std::string& command) {
     return std::find(kCommands.begin(), kCommands.end(), command) != kCommands.end();
 }
@@ -39,11 +40,35 @@ std::string trimWhitespace(const std::string& text) {
     return text.substr(first, text.find_last_not_of(kWhitespace) - first + 1);
 }
 
+// Returns `text` padded on the right with spaces to `width` characters.
+std::string padRight(std::string text, std::size_t width) {
+    if (text.size() < width) text.append(width - text.size(), ' ');
+    return text;
+}
+
+// Returns `text` padded on the left with spaces to `width` characters.
+std::string padLeft(std::string text, std::size_t width) {
+    if (text.size() < width) text.insert(0, width - text.size(), ' ');
+    return text;
+}
+
+// Formats integer cents as dollars and cents, e.g. 500000 -> "5000.00".
+std::string formatMoney(long long cents) {
+    const long long dollars = cents / 100;
+    const int remainder = static_cast<int>(cents % 100);
+    std::string text = std::to_string(dollars) + '.';
+    if (remainder < 10) text += '0';
+    text += std::to_string(remainder);
+    return text;
+}
+
 // True if an account of `userType` may run `command` (any command except login/logout).
-// Rules from the handout's Transaction Code Details.
+// Rules from the handout's Transaction Code Details; list is privileged.
 bool isPermitted(const std::string& command, const std::string& userType) {
     // create, delete, list and refund are privileged: admin only.
-    if (command == "create" || command == "delete" || command == "refund"|| command == "list") return userType == "AA";
+    if (command == "create" || command == "delete" || command == "refund" ||
+        command == "list")
+        return userType == "AA";
     if (command == "sell") return userType != "BS";  // any type except buy-standard
     if (command == "buy") return userType != "SS";   // any type except sell-standard
     if (command == "addcredit") return true;         // unprivileged
@@ -263,14 +288,19 @@ void FrontEnd::handleAddCredit() {
     } else {
         out_ << "Error: addcredit to " << username << " was not accepted.\n";
     }
+}
 
 // Handles list: prints every active account with its type and credit (admin only).
 void FrontEnd::handleList() {
-    for (const User& user : processor_.activeUsers()) {
-        const long long dollars = user.creditCents / 100;
-        const long long cents = user.creditCents % 100;
-        out_ << user.username << "  " << user.type << "  $" << dollars << "."
-             << (cents < 10 ? "0" : "") << cents << "\n";
+    const std::vector<User>& users = processor_.activeUsers();
+    out_ << "Active accounts (" << users.size() << "):\n";
+    if (users.empty()) {
+        out_ << "No accounts on file.\n";
+        return;
     }
-}
+    out_ << padRight("Username", 16) << padRight("Type", 6) << "Credit ($)\n";
+    for (const User& user : users) {
+        out_ << padRight(user.username, 16) << padRight(user.type, 6)
+             << padLeft(formatMoney(user.creditCents), 10) << '\n';
+    }
 }

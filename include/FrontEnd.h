@@ -49,7 +49,7 @@ private:
     // then asks the processor to add the credit.
     void handleAddCredit();
 
-    // list: print all active accounts (admin only).
+    // list: prints every active account and its details (admin only).
     void handleList();
 
     // Reads one prompt and line of a command's fields into `field`. Prints an

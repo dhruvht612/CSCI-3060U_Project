@@ -2,8 +2,8 @@
 //
 // A console point-of-purchase terminal for buying and selling games. It reads
 // a stream of transactions (login, logout, create, delete, sell, buy, refund,
-// addcredit) from standard input, one item per line, and at each logout writes
-// the session's transactions to the Daily Transaction File.
+// addcredit, list) from standard input, one item per line, and at each logout
+// writes the session's transactions to the Daily Transaction File.
 //
 // Usage:
 //   games-distribution <users-file> <games-file> <collections-file> <daily-transaction-file>
