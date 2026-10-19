@@ -49,6 +49,9 @@ private:
     // then asks the processor to add the credit.
     void handleAddCredit();
 
+    // list: print all active accounts (admin only).
+    void handleList();
+
     // Reads one prompt and line of a command's fields into `field`. Prints an
     // "unexpected end of input" error and returns false if input ends mid-command.
     bool readField(const std::string& prompt, std::string& field);
