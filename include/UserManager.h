@@ -15,6 +15,9 @@ public:
     // The pointer is valid until the user list changes.
     const User* find(const std::string& username) const;
 
+    // Returns every user read for the current session, in file order.
+    const std::vector<User>& all() const;
+
     // TODO(Phase 2): not implemented; always returns false.
     // Removes the user (delete). Returns false if no such user exists.
     bool removeUser(const std::string& username);
