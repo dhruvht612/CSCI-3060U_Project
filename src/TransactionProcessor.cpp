@@ -1,14 +1,15 @@
 #include "TransactionProcessor.h"
 
 #include "FileManager.h"
+// Creates a processor that reads and writes data through the given FileManager.
 TransactionProcessor::TransactionProcessor(const FileManager& files) : files_(files) {}
 
-// Creates a processor that reads and writes data through the given FileManager.
+// Returns true if a user is logged in.
 bool TransactionProcessor::isLoggedIn() const {
     return session_.has_value();
 }
 
-// Returns true if a user is logged in.
+// Returns the logged-in user. Only call when isLoggedIn() is true.
 const User& TransactionProcessor::currentUser() const {
     return session_.value();
 }
