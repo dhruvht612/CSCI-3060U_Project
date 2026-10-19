@@ -24,6 +24,9 @@ public:
     // The logged-in user. Throws std::bad_optional_access if nobody is logged in.
     const User& currentUser() const;
 
+    // The active user accounts for this session (read-only). Writes no record.
+    const std::vector<User>& activeUsers() const;
+
     // Starts a session for `username`. As the handout requires, the user accounts
     // file is read first, and the games and collections only once the username
     // is accepted. Returns false if a session is already active or no such user
