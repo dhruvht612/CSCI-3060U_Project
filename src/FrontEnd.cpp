@@ -14,7 +14,7 @@ namespace {
 // The transaction codes the handout lists, in its order. They are lowercase and
 // matched case-sensitively, exactly as the handout writes them.
 constexpr std::array<const char*, 8> kCommands = {
-    "login", "logout", "create", "delete", "sell", "buy", "refund", "addcredit"};
+    "login", "logout", "create", "delete", "sell", "buy", "refund", "addcredit", "list"};
 
 // True for the transaction codes the handout lists.
 bool isKnownCommand(const std::string& command) {
@@ -42,8 +42,8 @@ std::string trimWhitespace(const std::string& text) {
 // True if an account of `userType` may run `command` (any command except login/logout).
 // Rules from the handout's Transaction Code Details.
 bool isPermitted(const std::string& command, const std::string& userType) {
-    // create, delete and refund are privileged: admin only.
-    if (command == "create" || command == "delete" || command == "refund") return userType == "AA";
+    // create, delete, list and refund are privileged: admin only.
+    if (command == "create" || command == "delete" || command == "refund"|| command == "list") return userType == "AA";
     if (command == "sell") return userType != "BS";  // any type except buy-standard
     if (command == "buy") return userType != "SS";   // any type except sell-standard
     if (command == "addcredit") return true;         // unprivileged
@@ -106,6 +106,8 @@ void FrontEnd::dispatch(const std::string& command) {
         handleRefund();
     } else if (command == "addcredit") {
         handleAddCredit();
+    } else if (command == "list") {
+        handleList();
     } else {
         // Unreachable: dispatch only reaches here for a known command.
         out_ << "Error: \"" << command << "\" has no handler.\n";
@@ -261,4 +263,14 @@ void FrontEnd::handleAddCredit() {
     } else {
         out_ << "Error: addcredit to " << username << " was not accepted.\n";
     }
+
+// Handles list: prints every active account with its type and credit (admin only).
+void FrontEnd::handleList() {
+    for (const User& user : processor_.activeUsers()) {
+        const long long dollars = user.creditCents / 100;
+        const long long cents = user.creditCents % 100;
+        out_ << user.username << "  " << user.type << "  $" << dollars << "."
+             << (cents < 10 ? "0" : "") << cents << "\n";
+    }
+}
 }
