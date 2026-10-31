@@ -1,0 +1,4 @@
+TC45 – Daily Transaction File End Code
+
+Expected behaviour: The Daily Transaction File produced at logout ends
+with the required 00 end-of-session transaction code.

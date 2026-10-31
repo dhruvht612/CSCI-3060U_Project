@@ -1,0 +1,4 @@
+TC22 – Game Name Over 25 Characters
+
+Expected behaviour: The sell transaction is rejected because the game
+name is longer than 25 characters.

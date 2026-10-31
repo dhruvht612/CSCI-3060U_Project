@@ -1,0 +1,5 @@
+TC46 – Daily Transaction File Formatting
+
+Expected behaviour: The generated Daily Transaction File uses the
+required transaction code and field formatting for the create
+transaction and ends with 00.

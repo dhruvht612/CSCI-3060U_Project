@@ -1,0 +1,9 @@
+login
+admin
+create
+Jane Doe
+full-standard
+sell
+ABCDEFGHIJKLMNOPQRSTUVWXY
+999.99
+logout

@@ -1,0 +1,13 @@
+Enter command: Enter username: Login accepted. Welcome, admin.
+Enter command: Enter the amount to add (e.g. 15.00): Enter the username to add the credit to: Error: addcredit to buyer1 was not accepted.
+Enter command: Active accounts (7):
+Username        Type  Credit ($)
+admin           AA       5000.00
+buyer1          BS     999999.00
+seller1         SS        500.00
+seller2         SS        500.00
+delete1         FS        100.00
+lowcredit       BS          5.00
+exactbuyer      BS         10.00
+Enter command: Logout accepted. Session for admin ended.
+Enter command: 

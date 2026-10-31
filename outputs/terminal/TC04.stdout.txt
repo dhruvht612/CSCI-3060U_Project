@@ -1,0 +1,5 @@
+Enter command: Enter username: Login accepted. Welcome, admin.
+Enter command: Error: already logged in as admin; log out first.
+Enter command: Error: unrecognized command "buyer1". Valid commands: login, logout, create, delete, sell, buy, refund, addcredit, list.
+Enter command: Logout accepted. Session for admin ended.
+Enter command: 

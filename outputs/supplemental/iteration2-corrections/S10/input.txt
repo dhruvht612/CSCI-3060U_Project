@@ -1,0 +1,6 @@
+login
+buyer1
+buy
+ExistingGame
+seller2
+logout

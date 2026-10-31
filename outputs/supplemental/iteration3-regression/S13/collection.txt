@@ -1,0 +1,2 @@
+bad record
+END

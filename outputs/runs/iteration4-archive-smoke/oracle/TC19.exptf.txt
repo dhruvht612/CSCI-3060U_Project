@@ -1,0 +1,2 @@
+03 MaxPriceGame              seller1         999.99
+00

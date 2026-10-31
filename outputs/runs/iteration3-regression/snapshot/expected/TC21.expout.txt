@@ -1,0 +1,4 @@
+TC21 – Game Name Exactly 25 Characters
+
+Expected behaviour: The sell transaction is accepted because the unique
+game name is exactly 25 characters.

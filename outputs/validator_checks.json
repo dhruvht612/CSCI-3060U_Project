@@ -1,0 +1,46 @@
+[
+  {
+    "check": "padding",
+    "detected": true
+  },
+  {
+    "check": "code",
+    "detected": true
+  },
+  {
+    "check": "money",
+    "detected": true
+  },
+  {
+    "check": "ordering",
+    "detected": true
+  },
+  {
+    "check": "end record",
+    "detected": true
+  },
+  {
+    "check": "newline",
+    "detected": true
+  },
+  {
+    "check": "exit status",
+    "detected": true
+  },
+  {
+    "check": "stderr",
+    "detected": true
+  },
+  {
+    "check": "missing event",
+    "detected": true
+  },
+  {
+    "check": "extra success",
+    "detected": true
+  },
+  {
+    "check": "missing file",
+    "detected": true
+  }
+]

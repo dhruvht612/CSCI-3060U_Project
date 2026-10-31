@@ -1,0 +1,19 @@
+Enter command: Enter username: Login accepted. Welcome, admin.
+Enter command: Enter the new username: Enter the account type (admin, full-standard, buy-standard, sell-standard): Create accepted. User newadmin created.
+Enter command: Enter the new username: Enter the account type (admin, full-standard, buy-standard, sell-standard): Create accepted. User newbuyer created.
+Enter command: Enter the new username: Enter the account type (admin, full-standard, buy-standard, sell-standard): Create accepted. User newseller created.
+Enter command: Enter the new username: Enter the account type (admin, full-standard, buy-standard, sell-standard): Error: create of newbuyer was not accepted.
+Enter command: Active accounts (10):
+Username        Type  Credit ($)
+admin           AA       5000.00
+buyer1          BS        500.00
+seller1         SS        500.00
+seller2         SS        500.00
+delete1         FS        100.00
+lowcredit       BS          5.00
+exactbuyer      BS         10.00
+newadmin        AA          0.00
+newbuyer        BS          0.00
+newseller       SS          0.00
+Enter command: Logout accepted. Session for admin ended.
+Enter command: 
