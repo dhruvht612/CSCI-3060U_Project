@@ -4,3 +4,4 @@ build/
 submission
 __pycache__/
 *.pyc
+.opencode
