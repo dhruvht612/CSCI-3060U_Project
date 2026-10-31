@@ -1,0 +1,7 @@
+# Keep runnable scripts portable and historical evidence byte-for-byte intact.
+*.sh text eol=lf
+*.py text eol=lf
+inputs/** -text -whitespace
+expected/** -text -whitespace
+# Captured prompts and fixed-width fixtures intentionally contain trailing spaces.
+outputs/** -text -whitespace

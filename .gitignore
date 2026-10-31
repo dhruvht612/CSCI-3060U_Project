@@ -2,3 +2,5 @@ build/
 .opencode
 .vscode
 submission
+__pycache__/
+*.pyc
