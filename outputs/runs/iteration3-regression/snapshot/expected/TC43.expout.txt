@@ -1,0 +1,4 @@
+TC43 – Invalid Credit Amount
+
+Expected behaviour: The invalid credit input is handled gracefully and
+the Front End does not crash.

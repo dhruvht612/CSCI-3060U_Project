@@ -18,11 +18,9 @@ public:
     // Returns true if the collections list `username` as an owner of `gameName`.
     bool isOwnedBy(const std::string& gameName, const std::string& username) const;
 
-    // TODO(Phase 2): not implemented; does nothing.
     // Records that `owner` now owns `gameName` (buy).
     void addToCollection(const std::string& gameName, const std::string& owner);
 
-    // TODO(Phase 2): not implemented; does nothing.
     // Removes every game `seller` has for sale (delete).
     void removeGamesBySeller(const std::string& seller);
 

@@ -1,0 +1,6 @@
+Enter command: Enter username: Login accepted. Welcome, admin.
+Enter command: Enter the game name: Enter the asking price (e.g. 15.00): Error: sell of Fresh Game was not accepted.
+Enter command: Enter the game name: Enter the seller's username: Error: buy of Fresh Game was not accepted.
+Enter command: Enter the game name: Enter the asking price (e.g. 15.00): Error: sell of Fresh Game was not accepted.
+Enter command: Logout accepted. Session for admin ended.
+Enter command: 

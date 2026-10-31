@@ -1,0 +1,12 @@
+login
+admin
+delete
+seller1
+buy
+ExistingGame
+seller1
+addcredit
+1.00
+seller1
+list
+logout

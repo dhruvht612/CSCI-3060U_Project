@@ -1,0 +1,4 @@
+TC05 – Valid Logout
+
+Expected behaviour: Logout is accepted while logged in. The Daily
+Transaction File is written and the session ends.

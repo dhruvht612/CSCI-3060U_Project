@@ -1,0 +1,3 @@
+Enter command: Enter username: Error: cannot open games file C:\Users\thaka\OneDrive\Desktop\CSCI-3060U_Project\outputs\supplemental\iteration2-corrections\S12\game.txt. Login rejected.
+Enter command: Error: you must log in before using "logout".
+Enter command: 

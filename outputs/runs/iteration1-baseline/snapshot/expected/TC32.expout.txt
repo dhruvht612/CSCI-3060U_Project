@@ -1,0 +1,5 @@
+TC32 – Valid Refund
+
+Expected behaviour: The refund is accepted because both buyer and seller
+are current users. The specified credit is transferred from seller to
+buyer.

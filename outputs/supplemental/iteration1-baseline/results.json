@@ -1,0 +1,182 @@
+[
+  {
+    "id": "S01",
+    "purpose": "Huge money must reject and continue to logout",
+    "passed": false,
+    "failures": [
+      "nonzero exit or stderr",
+      "DTF mismatch",
+      "unexpected error count",
+      "did not recover to logout"
+    ]
+  },
+  {
+    "id": "S02",
+    "purpose": "Integer cents multiplication must not overflow",
+    "passed": true,
+    "failures": []
+  },
+  {
+    "id": "S03",
+    "purpose": "Duplicate purchase and buyer/seller balance changes",
+    "passed": false,
+    "failures": [
+      "DTF mismatch",
+      "unexpected error count",
+      "wrong/missing balance: admin=4985.00",
+      "wrong/missing balance: seller1=515.00"
+    ]
+  },
+  {
+    "id": "S04",
+    "purpose": "Refund transfers credit to buyer and from seller",
+    "passed": false,
+    "failures": [
+      "DTF mismatch",
+      "unexpected error count",
+      "wrong/missing balance: buyer1=510.00",
+      "wrong/missing balance: seller1=490.00"
+    ]
+  },
+  {
+    "id": "S05",
+    "purpose": "Deleted seller inventory and account cannot be used",
+    "passed": false,
+    "failures": [
+      "DTF mismatch",
+      "unexpected error count",
+      "deleted account still listed"
+    ]
+  },
+  {
+    "id": "S06",
+    "purpose": "New listing unavailable to a buy-capable account; duplicate listing rejected",
+    "passed": false,
+    "failures": [
+      "DTF mismatch",
+      "unexpected error count"
+    ]
+  },
+  {
+    "id": "S07",
+    "purpose": "Per-account credit limits independent within session",
+    "passed": false,
+    "failures": [
+      "DTF mismatch",
+      "unexpected error count",
+      "wrong/missing balance: buyer1=1500.00",
+      "wrong/missing balance: seller1=1500.00"
+    ]
+  },
+  {
+    "id": "S08",
+    "purpose": "New accounts, duplicate names, all valid type words",
+    "passed": false,
+    "failures": [
+      "DTF mismatch",
+      "unexpected error count",
+      "wrong/missing balance: newadmin=0.00",
+      "wrong/missing balance: newbuyer=0.00",
+      "wrong/missing balance: newseller=0.00"
+    ]
+  },
+  {
+    "id": "S09",
+    "purpose": "Blank, reserved, padded names and invalid account types",
+    "passed": true,
+    "failures": []
+  },
+  {
+    "id": "S10",
+    "purpose": "Seller identity must match listing",
+    "passed": true,
+    "failures": []
+  },
+  {
+    "id": "S11",
+    "purpose": "Insufficient seller refund funds leave both balances unchanged",
+    "passed": true,
+    "failures": []
+  },
+  {
+    "id": "S12",
+    "purpose": "Missing games file rejects login politely",
+    "passed": false,
+    "failures": [
+      "DTF mismatch",
+      "unexpected error count"
+    ]
+  },
+  {
+    "id": "S13",
+    "purpose": "Malformed collection file rejects login politely",
+    "passed": false,
+    "failures": [
+      "DTF mismatch",
+      "unexpected error count"
+    ]
+  },
+  {
+    "id": "S14",
+    "purpose": "Missing END in games file rejects login",
+    "passed": false,
+    "failures": [
+      "DTF mismatch",
+      "unexpected error count"
+    ]
+  },
+  {
+    "id": "S15",
+    "purpose": "49/42 character handout input compatibility",
+    "passed": false,
+    "failures": [
+      "DTF mismatch",
+      "unexpected error count"
+    ]
+  },
+  {
+    "id": "S16",
+    "purpose": "EOF in a command is recoverable and creates no DTF",
+    "passed": true,
+    "failures": []
+  },
+  {
+    "id": "S17",
+    "purpose": "Credit limit resets and input files reload at next login",
+    "passed": false,
+    "failures": [
+      "DTF mismatch",
+      "unexpected error count"
+    ]
+  },
+  {
+    "id": "S18",
+    "purpose": "Buy uses credit added earlier in same session",
+    "passed": false,
+    "failures": [
+      "DTF mismatch",
+      "unexpected error count"
+    ]
+  },
+  {
+    "id": "S19",
+    "purpose": "Maximum balance guard preserves account",
+    "passed": true,
+    "failures": []
+  },
+  {
+    "id": "S20",
+    "purpose": "Failed output write retains session and reports failure",
+    "passed": true,
+    "failures": []
+  },
+  {
+    "id": "S21",
+    "purpose": "Printable names with embedded spaces and maximum field lengths",
+    "passed": false,
+    "failures": [
+      "DTF mismatch",
+      "unexpected error count"
+    ]
+  }
+]

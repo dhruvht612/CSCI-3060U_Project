@@ -1,0 +1,4 @@
+TC34 – Refund to Nonexistent Buyer
+
+Expected behaviour: Refund is rejected because the buyer is not a
+current user.

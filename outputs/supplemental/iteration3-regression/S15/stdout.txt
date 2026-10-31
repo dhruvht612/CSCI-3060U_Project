@@ -1,0 +1,4 @@
+Enter command: Enter username: Login accepted. Welcome, buyer1.
+Enter command: Enter the game name: Enter the seller's username: Buy accepted. buyer1 now owns ExistingGame.
+Enter command: Logout accepted. Session for buyer1 ended.
+Enter command: 

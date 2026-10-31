@@ -1,0 +1,5 @@
+TC08 – Valid Create User
+
+Expected behaviour: The admin login is accepted. The new unique user
+‘newuser’ is created as full-standard and the create transaction is
+saved for the Daily Transaction File.

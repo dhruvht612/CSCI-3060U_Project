@@ -4,8 +4,10 @@
 #include <fstream>
 #include <stdexcept>
 #include <utility>
+#include <set>
 
 #include "Money.h"
+#include "RecordFormat.h"
 
 namespace {
 
@@ -42,6 +44,7 @@ std::vector<User> FileManager::loadUsers() const {
     if (!file) throw std::runtime_error("cannot open user accounts file " + usersPath_);
 
     std::vector<User> users;
+    std::set<std::string> names;
     std::string line;
     for (int lineNumber = 1; std::getline(file, line); ++lineNumber) {
         if (!line.empty() && line.back() == '\r') line.pop_back();
@@ -53,7 +56,8 @@ std::vector<User> FileManager::loadUsers() const {
         if (valid) {
             user.username = trimRight(line.substr(0, 15));
             user.type = line.substr(16, 2);
-            valid = !user.username.empty() && isUserType(user.type);
+            valid = record::validName(user.username, 15) && isUserType(user.type) &&
+                    user.creditCents <= record::maxCreditCents && names.insert(user.username).second;
         }
         if (!valid) {
             throw std::runtime_error(usersPath_ + " line " + std::to_string(lineNumber) +
@@ -64,20 +68,60 @@ std::vector<User> FileManager::loadUsers() const {
     throw std::runtime_error(usersPath_ + ": missing END line");
 }
 
-// Reads the Available Games File. Not implemented yet (returns an empty list).
+// Accept the two documented name-field widths (25 in fixtures, 26 in handout).
+// The 26th position is padding: the explicit game-name limit remains 25.
 std::vector<Game> FileManager::loadGames() const {
-    // TODO(Phase 2): parse gamesPath_. The handout's template is 49 characters
-    // (26-char name, space, 15-char seller, space, 6-char price) but its
-    // constraint says 42; the Phase 1 fixtures use 48 (25-char name). Confirm with the TA.
-    return {};
+    std::ifstream file(gamesPath_);
+    if (!file) throw std::runtime_error("cannot open games file " + gamesPath_);
+    std::vector<Game> games;
+    std::set<std::string> names;
+    std::string line;
+    for (int number = 1; std::getline(file, line); ++number) {
+        if (!line.empty() && line.back() == '\r') line.pop_back();
+        if (trimRight(line) == "END") return games;
+        Game game;
+        bool valid = line.size() == 48 || line.size() == 49;
+        if (valid) {
+            const std::size_t width = line.size() - 23;
+            game.name = trimRight(line.substr(0, width));
+            game.seller = trimRight(line.substr(width + 1, 15));
+            valid = line[width] == ' ' && line[width + 16] == ' ' &&
+                    record::validName(game.name, 25) && record::validName(game.seller, 15) &&
+                    money::parseCents(line.substr(width + 17), game.priceCents) &&
+                    game.priceCents <= 99999 && names.insert(game.name).second;
+        }
+        if (!valid) throw std::runtime_error(gamesPath_ + " line " + std::to_string(number) +
+                                            ": malformed game record");
+        games.push_back(game);
+    }
+    throw std::runtime_error(gamesPath_ + ": missing END line");
 }
 
-// Reads the Game Collection File. Not implemented yet (returns an empty list).
+// Same compatibility policy as loadGames; ownership pairs must be unique.
 std::vector<CollectionEntry> FileManager::loadCollections() const {
-    // TODO(Phase 2): parse collectionsPath_. The handout says 42 characters
-    // (26-char name, space, 15-char owner); the Phase 1 fixtures use 41
-    // (25-char name). Confirm with the TA.
-    return {};
+    std::ifstream file(collectionsPath_);
+    if (!file) throw std::runtime_error("cannot open collections file " + collectionsPath_);
+    std::vector<CollectionEntry> collections;
+    std::set<std::pair<std::string, std::string>> pairs;
+    std::string line;
+    for (int number = 1; std::getline(file, line); ++number) {
+        if (!line.empty() && line.back() == '\r') line.pop_back();
+        if (trimRight(line) == "END") return collections;
+        CollectionEntry entry;
+        bool valid = line.size() == 41 || line.size() == 42;
+        if (valid) {
+            const std::size_t width = line.size() - 16;
+            entry.gameName = trimRight(line.substr(0, width));
+            entry.owner = trimRight(line.substr(width + 1));
+            valid = line[width] == ' ' && record::validName(entry.gameName, 25) &&
+                    record::validName(entry.owner, 15) &&
+                    pairs.insert({entry.gameName, entry.owner}).second;
+        }
+        if (!valid) throw std::runtime_error(collectionsPath_ + " line " + std::to_string(number) +
+                                            ": malformed collection record");
+        collections.push_back(entry);
+    }
+    throw std::runtime_error(collectionsPath_ + ": missing END line");
 }
 
 // Writes the records to the Daily Transaction File, one per line.

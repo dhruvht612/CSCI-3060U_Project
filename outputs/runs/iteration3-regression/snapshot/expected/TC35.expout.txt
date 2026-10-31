@@ -1,0 +1,4 @@
+TC35 – Refund from Nonexistent Seller
+
+Expected behaviour: Refund is rejected because the seller is not a
+current user.

@@ -1,0 +1,4 @@
+TC31 – Already-Owned Game
+
+Expected behaviour: The purchase is rejected because the buyer already
+owns the game.

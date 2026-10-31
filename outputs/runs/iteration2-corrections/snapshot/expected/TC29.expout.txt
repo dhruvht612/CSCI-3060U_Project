@@ -1,0 +1,4 @@
+TC29 – Insufficient Credit
+
+Expected behaviour: The purchase is rejected because the buyer does not
+have enough credit.

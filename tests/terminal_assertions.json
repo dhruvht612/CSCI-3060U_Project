@@ -1,0 +1,375 @@
+{
+  "TC01": {
+    "source": "expected/TC01.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, admin\\.",
+      "Logout accepted\\. Session for admin ended\\."
+    ]
+  },
+  "TC02": {
+    "source": "expected/TC02.expout.txt",
+    "events": [
+      "Error: no user named \"ghostuser\"\\. Login rejected\\.",
+      "Login accepted\\. Welcome, admin\\.",
+      "Logout accepted\\. Session for admin ended\\."
+    ]
+  },
+  "TC03": {
+    "source": "expected/TC03.expout.txt",
+    "events": [
+      "Error: you must log in before using \"sell\"\\.",
+      "Login accepted\\. Welcome, admin\\.",
+      "Logout accepted\\. Session for admin ended\\."
+    ]
+  },
+  "TC04": {
+    "source": "expected/TC04.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, admin\\.",
+      "Error: already logged in as admin; log out first\\.",
+      "Error: unrecognized command \"buyer1\"\\. Valid commands: .*",
+      "Logout accepted\\. Session for admin ended\\."
+    ]
+  },
+  "TC05": {
+    "source": "expected/TC05.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, admin\\.",
+      "Logout accepted\\. Session for admin ended\\."
+    ]
+  },
+  "TC06": {
+    "source": "expected/TC06.expout.txt",
+    "events": [
+      "Error: you must log in before using \"logout\"\\.",
+      "Login accepted\\. Welcome, admin\\.",
+      "Logout accepted\\. Session for admin ended\\."
+    ]
+  },
+  "TC07": {
+    "source": "expected/TC07.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, admin\\.",
+      "Logout accepted\\. Session for admin ended\\.",
+      "Error: you must log in before using \"sell\"\\.",
+      "Login accepted\\. Welcome, admin\\.",
+      "Logout accepted\\. Session for admin ended\\."
+    ]
+  },
+  "TC08": {
+    "source": "expected/TC08.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, admin\\.",
+      "Create accepted\\. User newuser created\\.",
+      "Logout accepted\\. Session for admin ended\\."
+    ]
+  },
+  "TC09": {
+    "source": "expected/TC09.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, buyer1\\.",
+      "Error: \"create\" is not permitted for buyer1 \\(account type BS\\)\\.",
+      "Logout accepted\\. Session for buyer1 ended\\."
+    ]
+  },
+  "TC10": {
+    "source": "expected/TC10.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, admin\\.",
+      "Error: create of buyer1 was not accepted\\.",
+      "Logout accepted\\. Session for admin ended\\."
+    ]
+  },
+  "TC11": {
+    "source": "expected/TC11.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, admin\\.",
+      "Error: create of abcdefghijklmnop was not accepted\\.",
+      "Logout accepted\\. Session for admin ended\\."
+    ]
+  },
+  "TC12": {
+    "source": "expected/TC12.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, admin\\.",
+      "Create accepted\\. User abcdefghijklmno created\\.",
+      "Logout accepted\\. Session for admin ended\\."
+    ]
+  },
+  "TC13": {
+    "source": "expected/TC13.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, admin\\.",
+      "Delete accepted\\. User delete1 deleted\\.",
+      "Logout accepted\\. Session for admin ended\\."
+    ]
+  },
+  "TC14": {
+    "source": "expected/TC14.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, buyer1\\.",
+      "Error: \"delete\" is not permitted for buyer1 \\(account type BS\\)\\.",
+      "Logout accepted\\. Session for buyer1 ended\\."
+    ]
+  },
+  "TC15": {
+    "source": "expected/TC15.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, admin\\.",
+      "Error: delete of ghostuser was not accepted\\.",
+      "Logout accepted\\. Session for admin ended\\."
+    ]
+  },
+  "TC16": {
+    "source": "expected/TC16.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, admin\\.",
+      "Error: delete of admin was not accepted\\.",
+      "Logout accepted\\. Session for admin ended\\."
+    ]
+  },
+  "TC17": {
+    "source": "expected/TC17.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, seller1\\.",
+      "Sell accepted\\. NewGame is for sale\\.",
+      "Logout accepted\\. Session for seller1 ended\\."
+    ]
+  },
+  "TC18": {
+    "source": "expected/TC18.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, buyer1\\.",
+      "Error: \"sell\" is not permitted for buyer1 \\(account type BS\\)\\.",
+      "Logout accepted\\. Session for buyer1 ended\\."
+    ]
+  },
+  "TC19": {
+    "source": "expected/TC19.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, seller1\\.",
+      "Sell accepted\\. MaxPriceGame is for sale\\.",
+      "Logout accepted\\. Session for seller1 ended\\."
+    ]
+  },
+  "TC20": {
+    "source": "expected/TC20.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, seller1\\.",
+      "Error: sell of TooPricey was not accepted\\.",
+      "Logout accepted\\. Session for seller1 ended\\."
+    ]
+  },
+  "TC21": {
+    "source": "expected/TC21.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, seller1\\.",
+      "Sell accepted\\. ABCDEFGHIJKLMNOPQRSTUVWXY is for sale\\.",
+      "Logout accepted\\. Session for seller1 ended\\."
+    ]
+  },
+  "TC22": {
+    "source": "expected/TC22.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, seller1\\.",
+      "Error: sell of ABCDEFGHIJKLMNOPQRSTUVWXYZ was not accepted\\.",
+      "Logout accepted\\. Session for seller1 ended\\."
+    ]
+  },
+  "TC23": {
+    "source": "expected/TC23.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, seller1\\.",
+      "Error: sell of ExistingGame was not accepted\\.",
+      "Logout accepted\\. Session for seller1 ended\\."
+    ]
+  },
+  "TC24": {
+    "source": "expected/TC24.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, seller1\\.",
+      "Error: \"not-a-price\" is not a price like 15\\.00\\.",
+      "Logout accepted\\. Session for seller1 ended\\."
+    ]
+  },
+  "TC25": {
+    "source": "expected/TC25.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, seller1\\.",
+      "Sell accepted\\. BrandNewGame is for sale\\.",
+      "Error: \"buy\" is not permitted for seller1 \\(account type SS\\)\\.",
+      "Error: unrecognized command \"BrandNewGame\"\\. Valid commands: .*",
+      "Error: unrecognized command \"seller1\"\\. Valid commands: .*",
+      "Logout accepted\\. Session for seller1 ended\\."
+    ]
+  },
+  "TC26": {
+    "source": "expected/TC26.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, buyer1\\.",
+      "Buy accepted\\. buyer1 now owns ExistingGame\\.",
+      "Logout accepted\\. Session for buyer1 ended\\."
+    ]
+  },
+  "TC27": {
+    "source": "expected/TC27.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, seller1\\.",
+      "Error: \"buy\" is not permitted for seller1 \\(account type SS\\)\\.",
+      "Logout accepted\\. Session for seller1 ended\\."
+    ]
+  },
+  "TC28": {
+    "source": "expected/TC28.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, buyer1\\.",
+      "Error: buy of MissingGame was not accepted\\.",
+      "Logout accepted\\. Session for buyer1 ended\\."
+    ]
+  },
+  "TC29": {
+    "source": "expected/TC29.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, lowcredit\\.",
+      "Error: buy of ExistingGame was not accepted\\.",
+      "Logout accepted\\. Session for lowcredit ended\\."
+    ]
+  },
+  "TC30": {
+    "source": "expected/TC30.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, exactbuyer\\.",
+      "Buy accepted\\. exactbuyer now owns TenDollarGame\\.",
+      "Logout accepted\\. Session for exactbuyer ended\\."
+    ]
+  },
+  "TC31": {
+    "source": "expected/TC31.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, buyer1\\.",
+      "Error: buy of OwnedGame was not accepted\\.",
+      "Logout accepted\\. Session for buyer1 ended\\."
+    ]
+  },
+  "TC32": {
+    "source": "expected/TC32.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, admin\\.",
+      "Refund accepted\\. 10\\.00 moved from seller1 to buyer1\\.",
+      "Logout accepted\\. Session for admin ended\\."
+    ]
+  },
+  "TC33": {
+    "source": "expected/TC33.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, buyer1\\.",
+      "Error: \"refund\" is not permitted for buyer1 \\(account type BS\\)\\.",
+      "Logout accepted\\. Session for buyer1 ended\\."
+    ]
+  },
+  "TC34": {
+    "source": "expected/TC34.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, admin\\.",
+      "Error: refund from seller1 to ghostuser was not accepted\\.",
+      "Logout accepted\\. Session for admin ended\\."
+    ]
+  },
+  "TC35": {
+    "source": "expected/TC35.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, admin\\.",
+      "Error: refund from ghostuser to buyer1 was not accepted\\.",
+      "Logout accepted\\. Session for admin ended\\."
+    ]
+  },
+  "TC36": {
+    "source": "expected/TC36.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, buyer1\\.",
+      "Addcredit accepted\\. 100\\.00 added to buyer1\\.",
+      "Logout accepted\\. Session for buyer1 ended\\."
+    ]
+  },
+  "TC37": {
+    "source": "expected/TC37.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, admin\\.",
+      "Addcredit accepted\\. 100\\.00 added to buyer1\\.",
+      "Logout accepted\\. Session for admin ended\\."
+    ]
+  },
+  "TC38": {
+    "source": "expected/TC38.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, admin\\.",
+      "Error: addcredit to ghostuser was not accepted\\.",
+      "Logout accepted\\. Session for admin ended\\."
+    ]
+  },
+  "TC39": {
+    "source": "expected/TC39.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, buyer1\\.",
+      "Addcredit accepted\\. 1000\\.00 added to buyer1\\.",
+      "Logout accepted\\. Session for buyer1 ended\\."
+    ]
+  },
+  "TC40": {
+    "source": "expected/TC40.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, buyer1\\.",
+      "Error: addcredit to buyer1 was not accepted\\.",
+      "Logout accepted\\. Session for buyer1 ended\\."
+    ]
+  },
+  "TC41": {
+    "source": "expected/TC41.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, buyer1\\.",
+      "Addcredit accepted\\. 400\\.00 added to buyer1\\.",
+      "Addcredit accepted\\. 600\\.00 added to buyer1\\.",
+      "Logout accepted\\. Session for buyer1 ended\\."
+    ]
+  },
+  "TC42": {
+    "source": "expected/TC42.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, buyer1\\.",
+      "Addcredit accepted\\. 600\\.00 added to buyer1\\.",
+      "Error: addcredit to buyer1 was not accepted\\.",
+      "Logout accepted\\. Session for buyer1 ended\\."
+    ]
+  },
+  "TC43": {
+    "source": "expected/TC43.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, buyer1\\.",
+      "Error: \"not-a-number\" is not an amount like 15\\.00\\.",
+      "Logout accepted\\. Session for buyer1 ended\\."
+    ]
+  },
+  "TC44": {
+    "source": "expected/TC44.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, admin\\.",
+      "Error: unrecognized command \"invalidcommand\"\\. Valid commands: .*",
+      "Logout accepted\\. Session for admin ended\\."
+    ]
+  },
+  "TC45": {
+    "source": "expected/TC45.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, admin\\.",
+      "Logout accepted\\. Session for admin ended\\."
+    ]
+  },
+  "TC46": {
+    "source": "expected/TC46.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, admin\\.",
+      "Create accepted\\. User newuser created\\.",
+      "Logout accepted\\. Session for admin ended\\."
+    ]
+  }
+}

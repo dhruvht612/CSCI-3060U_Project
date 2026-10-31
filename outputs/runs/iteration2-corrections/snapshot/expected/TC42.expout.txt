@@ -1,0 +1,4 @@
+TC42 – Multiple Credit Additions Over $1000
+
+Expected behaviour: The first addition is accepted. The second is
+rejected because it would make the session total exceed $1000.00.

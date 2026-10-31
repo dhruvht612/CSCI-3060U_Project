@@ -1,0 +1,4 @@
+Enter command: Enter username: Login accepted. Welcome, seller1.
+Enter command: Enter the game name: Enter the asking price (e.g. 15.00): Error: sell of ABCDEFGHIJKLMNOPQRSTUVWXY was not accepted.
+Enter command: Logout accepted. Session for seller1 ended.
+Enter command: 

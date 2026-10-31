@@ -1,0 +1,4 @@
+TC41 – Multiple Credit Additions to $1000
+
+Expected behaviour: Both additions are accepted because the total added
+to the account during the session is exactly $1000.00.

@@ -1,0 +1,4 @@
+Enter command: Enter username: Login accepted. Welcome, admin.
+Enter command: Enter the amount to add (e.g. 15.00): Enter the username to add the credit to: Error: addcredit to ghostuser was not accepted.
+Enter command: Logout accepted. Session for admin ended.
+Enter command: 

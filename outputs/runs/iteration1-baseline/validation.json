@@ -1,0 +1,286 @@
+{
+  "passed": 30,
+  "failed": 16,
+  "total": 46,
+  "integrity_failures": [],
+  "results": [
+    {
+      "id": "TC01",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC02",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC03",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC04",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC05",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC06",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC07",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC08",
+      "passed": false,
+      "failures": [
+        "DTF differs from original fixture (including order/padding/amounts)",
+        "terminal events: expected ['Login accepted\\\\. Welcome, admin\\\\.', 'Create accepted\\\\. User newuser created\\\\.', 'Logout accepted\\\\. Session for admin ended\\\\.']; actual ['Login accepted. Welcome, admin.', 'Error: create of newuser was not accepted.', 'Logout accepted. Session for admin ended.']"
+      ]
+    },
+    {
+      "id": "TC09",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC10",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC11",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC12",
+      "passed": false,
+      "failures": [
+        "DTF differs from original fixture (including order/padding/amounts)",
+        "terminal events: expected ['Login accepted\\\\. Welcome, admin\\\\.', 'Create accepted\\\\. User abcdefghijklmno created\\\\.', 'Logout accepted\\\\. Session for admin ended\\\\.']; actual ['Login accepted. Welcome, admin.', 'Error: create of abcdefghijklmno was not accepted.', 'Logout accepted. Session for admin ended.']"
+      ]
+    },
+    {
+      "id": "TC13",
+      "passed": false,
+      "failures": [
+        "DTF differs from original fixture (including order/padding/amounts)",
+        "terminal events: expected ['Login accepted\\\\. Welcome, admin\\\\.', 'Delete accepted\\\\. User delete1 deleted\\\\.', 'Logout accepted\\\\. Session for admin ended\\\\.']; actual ['Login accepted. Welcome, admin.', 'Error: delete of delete1 was not accepted.', 'Logout accepted. Session for admin ended.']"
+      ]
+    },
+    {
+      "id": "TC14",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC15",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC16",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC17",
+      "passed": false,
+      "failures": [
+        "DTF differs from original fixture (including order/padding/amounts)",
+        "terminal events: expected ['Login accepted\\\\. Welcome, seller1\\\\.', 'Sell accepted\\\\. NewGame is for sale\\\\.', 'Logout accepted\\\\. Session for seller1 ended\\\\.']; actual ['Login accepted. Welcome, seller1.', 'Error: sell of NewGame was not accepted.', 'Logout accepted. Session for seller1 ended.']"
+      ]
+    },
+    {
+      "id": "TC18",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC19",
+      "passed": false,
+      "failures": [
+        "DTF differs from original fixture (including order/padding/amounts)",
+        "terminal events: expected ['Login accepted\\\\. Welcome, seller1\\\\.', 'Sell accepted\\\\. MaxPriceGame is for sale\\\\.', 'Logout accepted\\\\. Session for seller1 ended\\\\.']; actual ['Login accepted. Welcome, seller1.', 'Error: sell of MaxPriceGame was not accepted.', 'Logout accepted. Session for seller1 ended.']"
+      ]
+    },
+    {
+      "id": "TC20",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC21",
+      "passed": false,
+      "failures": [
+        "DTF differs from original fixture (including order/padding/amounts)",
+        "terminal events: expected ['Login accepted\\\\. Welcome, seller1\\\\.', 'Sell accepted\\\\. ABCDEFGHIJKLMNOPQRSTUVWXY is for sale\\\\.', 'Logout accepted\\\\. Session for seller1 ended\\\\.']; actual ['Login accepted. Welcome, seller1.', 'Error: sell of ABCDEFGHIJKLMNOPQRSTUVWXY was not accepted.', 'Logout accepted. Session for seller1 ended.']"
+      ]
+    },
+    {
+      "id": "TC22",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC23",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC24",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC25",
+      "passed": false,
+      "failures": [
+        "DTF differs from original fixture (including order/padding/amounts)",
+        "terminal events: expected ['Login accepted\\\\. Welcome, seller1\\\\.', 'Sell accepted\\\\. BrandNewGame is for sale\\\\.', 'Error: \"buy\" is not permitted for seller1 \\\\(account type SS\\\\)\\\\.', 'Error: unrecognized command \"BrandNewGame\"\\\\. Valid commands: .*', 'Error: unrecognized command \"seller1\"\\\\. Valid commands: .*', 'Logout accepted\\\\. Session for seller1 ended\\\\.']; actual ['Login accepted. Welcome, seller1.', 'Error: sell of BrandNewGame was not accepted.', 'Error: \"buy\" is not permitted for seller1 (account type SS).', 'Error: unrecognized command \"BrandNewGame\". Valid commands: login, logout, create, delete, sell, buy, refund, addcredit, list.', 'Error: unrecognized command \"seller1\". Valid commands: login, logout, create, delete, sell, buy, refund, addcredit, list.', 'Logout accepted. Session for seller1 ended.']"
+      ]
+    },
+    {
+      "id": "TC26",
+      "passed": false,
+      "failures": [
+        "DTF differs from original fixture (including order/padding/amounts)",
+        "terminal events: expected ['Login accepted\\\\. Welcome, buyer1\\\\.', 'Buy accepted\\\\. buyer1 now owns ExistingGame\\\\.', 'Logout accepted\\\\. Session for buyer1 ended\\\\.']; actual ['Login accepted. Welcome, buyer1.', 'Error: buy of ExistingGame was not accepted.', 'Logout accepted. Session for buyer1 ended.']"
+      ]
+    },
+    {
+      "id": "TC27",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC28",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC29",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC30",
+      "passed": false,
+      "failures": [
+        "DTF differs from original fixture (including order/padding/amounts)",
+        "terminal events: expected ['Login accepted\\\\. Welcome, exactbuyer\\\\.', 'Buy accepted\\\\. exactbuyer now owns TenDollarGame\\\\.', 'Logout accepted\\\\. Session for exactbuyer ended\\\\.']; actual ['Login accepted. Welcome, exactbuyer.', 'Error: buy of TenDollarGame was not accepted.', 'Logout accepted. Session for exactbuyer ended.']"
+      ]
+    },
+    {
+      "id": "TC31",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC32",
+      "passed": false,
+      "failures": [
+        "DTF differs from original fixture (including order/padding/amounts)",
+        "terminal events: expected ['Login accepted\\\\. Welcome, admin\\\\.', 'Refund accepted\\\\. 10\\\\.00 moved from seller1 to buyer1\\\\.', 'Logout accepted\\\\. Session for admin ended\\\\.']; actual ['Login accepted. Welcome, admin.', 'Error: refund from seller1 to buyer1 was not accepted.', 'Logout accepted. Session for admin ended.']"
+      ]
+    },
+    {
+      "id": "TC33",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC34",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC35",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC36",
+      "passed": false,
+      "failures": [
+        "DTF differs from original fixture (including order/padding/amounts)",
+        "terminal events: expected ['Login accepted\\\\. Welcome, buyer1\\\\.', 'Addcredit accepted\\\\. 100\\\\.00 added to buyer1\\\\.', 'Logout accepted\\\\. Session for buyer1 ended\\\\.']; actual ['Login accepted. Welcome, buyer1.', 'Error: addcredit to buyer1 was not accepted.', 'Logout accepted. Session for buyer1 ended.']"
+      ]
+    },
+    {
+      "id": "TC37",
+      "passed": false,
+      "failures": [
+        "DTF differs from original fixture (including order/padding/amounts)",
+        "terminal events: expected ['Login accepted\\\\. Welcome, admin\\\\.', 'Addcredit accepted\\\\. 100\\\\.00 added to buyer1\\\\.', 'Logout accepted\\\\. Session for admin ended\\\\.']; actual ['Login accepted. Welcome, admin.', 'Error: addcredit to buyer1 was not accepted.', 'Logout accepted. Session for admin ended.']"
+      ]
+    },
+    {
+      "id": "TC38",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC39",
+      "passed": false,
+      "failures": [
+        "DTF differs from original fixture (including order/padding/amounts)",
+        "terminal events: expected ['Login accepted\\\\. Welcome, buyer1\\\\.', 'Addcredit accepted\\\\. 1000\\\\.00 added to buyer1\\\\.', 'Logout accepted\\\\. Session for buyer1 ended\\\\.']; actual ['Login accepted. Welcome, buyer1.', 'Error: addcredit to buyer1 was not accepted.', 'Logout accepted. Session for buyer1 ended.']"
+      ]
+    },
+    {
+      "id": "TC40",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC41",
+      "passed": false,
+      "failures": [
+        "DTF differs from original fixture (including order/padding/amounts)",
+        "terminal events: expected ['Login accepted\\\\. Welcome, buyer1\\\\.', 'Addcredit accepted\\\\. 400\\\\.00 added to buyer1\\\\.', 'Addcredit accepted\\\\. 600\\\\.00 added to buyer1\\\\.', 'Logout accepted\\\\. Session for buyer1 ended\\\\.']; actual ['Login accepted. Welcome, buyer1.', 'Error: addcredit to buyer1 was not accepted.', 'Error: addcredit to buyer1 was not accepted.', 'Logout accepted. Session for buyer1 ended.']"
+      ]
+    },
+    {
+      "id": "TC42",
+      "passed": false,
+      "failures": [
+        "DTF differs from original fixture (including order/padding/amounts)",
+        "terminal events: expected ['Login accepted\\\\. Welcome, buyer1\\\\.', 'Addcredit accepted\\\\. 600\\\\.00 added to buyer1\\\\.', 'Error: addcredit to buyer1 was not accepted\\\\.', 'Logout accepted\\\\. Session for buyer1 ended\\\\.']; actual ['Login accepted. Welcome, buyer1.', 'Error: addcredit to buyer1 was not accepted.', 'Error: addcredit to buyer1 was not accepted.', 'Logout accepted. Session for buyer1 ended.']"
+      ]
+    },
+    {
+      "id": "TC43",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC44",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC45",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC46",
+      "passed": false,
+      "failures": [
+        "DTF differs from original fixture (including order/padding/amounts)",
+        "terminal events: expected ['Login accepted\\\\. Welcome, admin\\\\.', 'Create accepted\\\\. User newuser created\\\\.', 'Logout accepted\\\\. Session for admin ended\\\\.']; actual ['Login accepted. Welcome, admin.', 'Error: create of newuser was not accepted.', 'Logout accepted. Session for admin ended.']"
+      ]
+    }
+  ]
+}

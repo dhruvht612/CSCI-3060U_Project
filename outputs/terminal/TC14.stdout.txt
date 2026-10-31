@@ -1,0 +1,4 @@
+Enter command: Enter username: Login accepted. Welcome, buyer1.
+Enter command: Error: "delete" is not permitted for buyer1 (account type BS).
+Enter command: Logout accepted. Session for buyer1 ended.
+Enter command: 

@@ -1,0 +1,10 @@
+login
+admin
+buy
+ExistingGame
+seller1
+buy
+ExistingGame
+seller1
+list
+logout

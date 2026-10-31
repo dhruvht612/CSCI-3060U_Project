@@ -1,0 +1,4 @@
+TC25 – Transaction on Newly Listed Game
+
+Expected behaviour: The sell is accepted, but no further transaction on
+the newly listed game is accepted until the next session.

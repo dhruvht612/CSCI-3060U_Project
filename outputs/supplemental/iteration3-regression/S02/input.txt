@@ -1,0 +1,5 @@
+login
+buyer1
+addcredit
+92233720368547759.00
+logout

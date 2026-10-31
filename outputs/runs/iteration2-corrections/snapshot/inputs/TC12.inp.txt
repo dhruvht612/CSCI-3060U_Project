@@ -1,0 +1,6 @@
+login
+admin
+create
+abcdefghijklmno
+full-standard
+logout

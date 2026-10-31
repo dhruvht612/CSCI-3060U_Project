@@ -1,6 +1,8 @@
 #pragma once
 
 #include <optional>
+#include <map>
+#include <set>
 #include <string>
 #include <vector>
 
@@ -12,7 +14,7 @@ class FileManager;
 
 // Owns the login session and the data read for it, validates transactions,
 // and collects the session's Daily Transaction File records until logout.
-// Account-type permission checks are done by FrontEnd before these are called.
+// Permissions are enforced here as well as by FrontEnd's early prompt checks.
 class TransactionProcessor {
 public:
     // `files` supplies the data files and must outlive this object.
@@ -38,8 +40,7 @@ public:
     // the write fails; on failure the session and its records are kept.
     bool logout();
 
-    // TODO(Phase 2): the transactions below are not implemented. Each returns
-    // false and records nothing. Amounts are in cents.
+    // Transactions return false without mutation on invalid input. Amounts are cents.
 
     // create (01): add a user with the given type word, e.g. "full-standard".
     bool createUser(const std::string& username, const std::string& userType);
@@ -60,4 +61,6 @@ private:
     GameManager games_;
     std::optional<User> session_;       // the logged-in user, if any
     std::vector<std::string> records_;  // this session's records, not including "00"
+    std::map<std::string, long long> creditAdded_;  // per account, per session
+    std::set<std::string> newGames_;  // reserve names; unavailable until next session
 };

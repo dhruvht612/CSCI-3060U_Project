@@ -18,12 +18,10 @@ public:
     // Throws std::runtime_error naming the file and line if it is missing or malformed.
     std::vector<User> loadUsers() const;
 
-    // TODO(Phase 2): not implemented; always returns an empty list.
-    // The record width conflicts between the handout and the fixtures (see docs).
+    // Parses 48/49-character records (fixture/handout compatibility); requires END.
     std::vector<Game> loadGames() const;
 
-    // TODO(Phase 2): not implemented; always returns an empty list.
-    // The record width conflicts between the handout and the fixtures (see docs).
+    // Parses 41/42-character records (fixture/handout compatibility); requires END.
     std::vector<CollectionEntry> loadCollections() const;
 
     // Replaces the Daily Transaction File's contents with `records`, one per line.

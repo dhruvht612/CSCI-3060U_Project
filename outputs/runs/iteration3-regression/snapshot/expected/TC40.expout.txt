@@ -1,0 +1,4 @@
+TC40 – Add More Than $1000
+
+Expected behaviour: The credit addition is rejected because it exceeds
+the $1000.00 per-session limit.

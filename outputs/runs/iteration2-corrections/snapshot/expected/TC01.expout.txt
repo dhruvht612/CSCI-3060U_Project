@@ -1,0 +1,4 @@
+TC01 – Valid Login
+
+Expected behaviour: Login for the existing user ‘admin’ is accepted. The
+session begins. Logout is accepted and ends the session.

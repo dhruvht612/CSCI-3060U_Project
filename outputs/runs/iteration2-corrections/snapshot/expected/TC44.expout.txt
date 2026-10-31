@@ -1,0 +1,4 @@
+TC44 – Invalid Transaction Code
+
+Expected behaviour: The invalid transaction code is handled gracefully.
+The Front End remains running and can process the later logout.

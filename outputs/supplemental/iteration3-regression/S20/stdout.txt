@@ -1,0 +1,3 @@
+Enter command: Enter username: Login accepted. Welcome, admin.
+Enter command: Error: could not write the Daily Transaction File; admin is still logged in.
+Enter command: 

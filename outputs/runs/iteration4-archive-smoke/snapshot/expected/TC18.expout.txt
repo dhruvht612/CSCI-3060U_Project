@@ -1,0 +1,4 @@
+TC18 – Buy-Standard User Attempts Sell
+
+Expected behaviour: Sell is rejected because a buy-standard account
+cannot perform sell transactions.

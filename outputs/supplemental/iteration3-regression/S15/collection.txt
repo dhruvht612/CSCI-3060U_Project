@@ -1,0 +1,2 @@
+OwnedGame                  buyer1         
+END                                       
