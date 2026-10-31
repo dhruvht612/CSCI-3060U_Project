@@ -18,13 +18,14 @@ public:
     // Returns every user read for the current session, in file order.
     const std::vector<User>& all() const;
 
-    // TODO(Phase 2): not implemented; always returns false.
+    // Adds a unique, validated account to the current session.
+    bool addUser(const User& user);
+
     // Removes the user (delete). Returns false if no such user exists.
     bool removeUser(const std::string& username);
 
-    // TODO(Phase 2): not implemented; always returns false.
     // Adds `deltaCents` (negative to deduct) to the user's credit (buy, refund,
-    // addcredit). Returns false if no such user exists.
+    // addcredit). Returns false for a missing user or an out-of-range balance.
     bool adjustCredit(const std::string& username, long long deltaCents);
 
 private:

@@ -1,6 +1,7 @@
 #include "GameManager.h"
 
 #include <utility>
+#include <algorithm>
 
 GameManager::GameManager(std::vector<Game> games, std::vector<CollectionEntry> collections)
     : games_(std::move(games)), collections_(std::move(collections)) {}
@@ -21,12 +22,14 @@ bool GameManager::isOwnedBy(const std::string& gameName, const std::string& user
     return false;
 }
 
-// Adds a game to a user's collection. Not implemented yet.
-void GameManager::addToCollection(const std::string& /*gameName*/, const std::string& /*owner*/) {
-    // TODO(Phase 2)
+// A collection is a set of game/owner pairs.
+void GameManager::addToCollection(const std::string& gameName, const std::string& owner) {
+    if (!isOwnedBy(gameName, owner)) collections_.push_back({gameName, owner});
 }
 
-// Removes all games listed by a seller. Not implemented yet.
-void GameManager::removeGamesBySeller(const std::string& /*seller*/) {
-    // TODO(Phase 2)
+// Cancel the listings, preserving copies already owned by other users.
+void GameManager::removeGamesBySeller(const std::string& seller) {
+    games_.erase(std::remove_if(games_.begin(), games_.end(), [&](const Game& game) {
+        return game.seller == seller;
+    }), games_.end());
 }

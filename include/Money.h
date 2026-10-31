@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cctype>
+#include <limits>
 #include <string>
 
 // Parsing of money text shared by FileManager (file records) and FrontEnd
@@ -24,7 +25,15 @@ inline bool parseCents(const std::string& text, long long& cents) {
     const std::string whole = text.substr(0, text.size() - 3);
     const std::string fraction = text.substr(text.size() - 2);
     if (!isDigits(whole) || !isDigits(fraction)) return false;
-    cents = std::stoll(whole) * 100 + std::stoll(fraction);
+    // Accumulate all digits with a pre-multiply bound check. stoll could throw
+    // on long input, and multiplying an otherwise valid long long could overflow.
+    long long parsed = 0;
+    for (char digit : whole + fraction) {
+        const int value = digit - '0';
+        if (parsed > (std::numeric_limits<long long>::max() - value) / 10) return false;
+        parsed = parsed * 10 + value;
+    }
+    cents = parsed;
     return true;
 }
 
