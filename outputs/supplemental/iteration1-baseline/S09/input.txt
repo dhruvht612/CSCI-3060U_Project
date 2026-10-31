@@ -1,0 +1,15 @@
+login
+admin
+create
+
+admin
+create
+END
+admin
+create
+name 
+admin
+create
+valid
+invalid
+logout

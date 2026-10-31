@@ -1,0 +1,4 @@
+Enter command: Enter username: Login accepted. Welcome, admin.
+Enter command: Enter the new username: Enter the account type (admin, full-standard, buy-standard, sell-standard): Error: create of newuser was not accepted.
+Enter command: Logout accepted. Session for admin ended.
+Enter command: 

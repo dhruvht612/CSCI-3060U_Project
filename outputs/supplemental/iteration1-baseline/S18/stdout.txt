@@ -1,0 +1,5 @@
+Enter command: Enter username: Login accepted. Welcome, lowcredit.
+Enter command: Enter the amount to add (e.g. 15.00): Error: addcredit to lowcredit was not accepted.
+Enter command: Enter the game name: Enter the seller's username: Error: buy of ExistingGame was not accepted.
+Enter command: Logout accepted. Session for lowcredit ended.
+Enter command: 

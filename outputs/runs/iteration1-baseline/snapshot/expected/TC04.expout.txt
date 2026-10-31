@@ -1,0 +1,5 @@
+TC04 – Second Login During Session
+
+Expected behaviour: The first login is accepted. The second login is
+rejected because a user is already logged in. Logout ends the original
+session.

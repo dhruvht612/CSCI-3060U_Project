@@ -1,0 +1,4 @@
+TC24 – Invalid Sell Input
+
+Expected behaviour: The invalid price is handled gracefully. The Front
+End does not crash or stop unexpectedly.

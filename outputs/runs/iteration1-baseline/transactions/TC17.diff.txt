@@ -1,0 +1,5 @@
+--- expected
++++ actual
+@@ -1,2 +1 @@
+-03 NewGame                   seller1         015.00
+ 00

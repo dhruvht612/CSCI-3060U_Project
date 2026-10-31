@@ -1,0 +1,4 @@
+TC10 – Duplicate Username
+
+Expected behaviour: Create is rejected because ‘buyer1’ is already a
+current username.

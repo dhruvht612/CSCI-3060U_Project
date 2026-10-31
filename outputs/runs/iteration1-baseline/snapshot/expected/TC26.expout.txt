@@ -1,0 +1,5 @@
+TC26 – Valid Buy
+
+Expected behaviour: The purchase is accepted when the game exists, the
+account may buy, the buyer has enough credit, and the buyer does not
+already own the game.

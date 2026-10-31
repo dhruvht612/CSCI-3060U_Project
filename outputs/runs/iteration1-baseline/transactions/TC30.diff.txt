@@ -1,0 +1,5 @@
+--- expected
++++ actual
+@@ -1,2 +1 @@
+-04 TenDollarGame             seller1         exactbuyer      010.00
+ 00
