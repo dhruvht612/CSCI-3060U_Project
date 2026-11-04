@@ -52,9 +52,9 @@ private:
     // list: prints every active account and its details (admin only).
     void handleList();
 
-    // Reads one prompt and line of a command's fields into `field`. Prints an
-    // "unexpected end of input" error and returns false if input ends mid-command.
-    bool readField(const std::string& prompt, std::string& field);
+    // search: prompts for the search text, then prints the matching games for sale
+    // and user accounts (any account type; non-admins don't see non-selling admins).
+    void handleSearch();
 
     TransactionProcessor& processor_;
     std::istream& in_;
