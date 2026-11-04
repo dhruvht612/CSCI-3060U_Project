@@ -12,10 +12,10 @@
 namespace {
 
 // The transaction codes the front end accepts: the handout's codes, in its
-// order, followed by "list", which is an added requirement. They are lowercase
-// and matched case-sensitively, exactly as the handout writes them.
-constexpr std::array<const char*, 9> kCommands = {
-    "login", "logout", "create", "delete", "sell", "buy", "refund", "addcredit", "list"};
+// order, followed by "list" and "search", which are added requirements. They are
+// lowercase and matched case-sensitively, exactly as the handout writes them.
+constexpr std::array<const char*, 10> kCommands = {
+    "login", "logout", "create", "delete", "sell", "buy", "refund", "addcredit", "list", "search"};
 
 // True for the transaction codes the front end accepts.
 bool isKnownCommand(const std::string& command) {
@@ -72,6 +72,7 @@ bool isPermitted(const std::string& command, const std::string& userType) {
     if (command == "sell") return userType != "BS";  // any type except buy-standard
     if (command == "buy") return userType != "SS";   // any type except sell-standard
     if (command == "addcredit") return true;         // unprivileged
+    if (command == "search") return true;            // any type; results are filtered
     return false;
 }
 
@@ -133,6 +134,8 @@ void FrontEnd::dispatch(const std::string& command) {
         handleAddCredit();
     } else if (command == "list") {
         handleList();
+    } else if (command == "search") {
+        handleSearch();
     } else {
         // Unreachable: dispatch only reaches here for a known command.
         out_ << "Error: \"" << command << "\" has no handler.\n";
@@ -303,4 +306,29 @@ void FrontEnd::handleList() {
         out_ << padRight(user.username, 16) << padRight(user.type, 6)
              << padLeft(formatMoney(user.creditCents), 10) << '\n';
     }
+}
+
+// Prompts for the search text and prints the matching games (name, seller,
+// price) and accounts (name, type). Search writes no transaction record.
+void FrontEnd::handleSearch() {
+    std::string query;
+    if (!readField("Enter the text to search for: ", query)) return;
+    query = trimWhitespace(query);
+    SearchResults results;
+    if (!processor_.search(query, results)) {
+        out_ << "Error: the search text cannot be blank.\n";
+        return;
+    }
+    out_ << "Search results for \"" << query << "\":\n";
+    out_ << "Games for sale (" << results.games.size() << "):\n";
+    for (const Game& game : results.games) {
+        out_ << padRight(game.name, 26) << padRight(game.seller, 16)
+             << padLeft(formatMoney(game.priceCents), 7) << '\n';
+    }
+    out_ << "Users (" << results.users.size() << "):\n";
+    for (const User& user : results.users) {
+        out_ << padRight(user.username, 16) << user.type << '\n';
+    }
+    out_ << "Search accepted. " << results.games.size() << " game(s) and "
+         << results.users.size() << " user(s) match \"" << query << "\".\n";
 }

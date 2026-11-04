@@ -12,6 +12,12 @@
 
 class FileManager;
 
+// What a search found: games for sale and user accounts whose names contain the query.
+struct SearchResults {
+    std::vector<Game> games;
+    std::vector<User> users;
+};
+
 // Owns the login session and the data read for it, validates transactions,
 // and collects the session's Daily Transaction File records until logout.
 // Permissions are enforced here as well as by FrontEnd's early prompt checks.
@@ -54,6 +60,12 @@ public:
     bool refund(const std::string& buyerName, const std::string& sellerName, long long amountCents);
     // addcredit (06): add credit to an account (the current user's own, for non-admins).
     bool addCredit(const std::string& username, long long amountCents);
+
+    // search (added requirement, any account type): fills `results` with the games
+    // for sale and the accounts whose names contain `query`, ignoring case. A
+    // non-admin is not shown admins who have no games for sale. Writes no record.
+    // Returns false, leaving `results` empty, if nobody is logged in or `query` is blank.
+    bool search(const std::string& query, SearchResults& results) const;
 
 private:
     const FileManager& files_;

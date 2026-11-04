@@ -14,6 +14,17 @@ const Game* GameManager::find(const std::string& gameName) const {
     return nullptr;
 }
 
+// Returns the games available for sale: those loaded at login minus cancelled listings.
+const std::vector<Game>& GameManager::availableGames() const {
+    return games_;
+}
+
+// Returns true if any available game is being sold by `seller`.
+bool GameManager::isSelling(const std::string& seller) const {
+    return std::any_of(games_.begin(), games_.end(),
+                       [&](const Game& game) { return game.seller == seller; });
+}
+
 // Returns true if the user owns the game.
 bool GameManager::isOwnedBy(const std::string& gameName, const std::string& username) const {
     for (const CollectionEntry& entry : collections_) {

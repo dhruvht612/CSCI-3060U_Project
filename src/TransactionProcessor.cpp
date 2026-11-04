@@ -1,7 +1,23 @@
 #include "TransactionProcessor.h"
 
+#include <algorithm>
+#include <cctype>
+
 #include "FileManager.h"
 #include "RecordFormat.h"
+
+namespace {
+
+// True if `text` contains `query`, comparing letters without regard to case.
+bool containsIgnoringCase(const std::string& text, const std::string& query) {
+    const auto sameLetter = [](unsigned char a, unsigned char b) {
+        return std::tolower(a) == std::tolower(b);
+    };
+    return std::search(text.begin(), text.end(), query.begin(), query.end(), sameLetter) != text.end();
+}
+
+}  // namespace
+
 // Creates a processor that reads and writes data through the given FileManager.
 TransactionProcessor::TransactionProcessor(const FileManager& files) : files_(files) {}
 
@@ -132,5 +148,24 @@ bool TransactionProcessor::addCredit(const std::string& username, long long amou
     session_ = *users_.find(session_->username);
     // The fixture profile records the amount added, not the resulting balance.
     records_.push_back(record::account("06", username, user->type, amountCents));
+    return true;
+}
+
+// Games come from the available-games list, so a game sold this session is not
+// found until the next session, just as it can't be bought until then. Accounts
+// are the session's current accounts, so a user deleted this session is not found.
+bool TransactionProcessor::search(const std::string& query, SearchResults& results) const {
+    results = SearchResults();
+    if (!session_ || query.find_first_not_of(" \t") == std::string::npos) return false;
+    for (const Game& game : games_.availableGames()) {
+        if (containsIgnoringCase(game.name, query)) results.games.push_back(game);
+    }
+    const bool viewerIsAdmin = session_->type == "AA";
+    for (const User& user : users_.all()) {
+        if (!containsIgnoringCase(user.username, query)) continue;
+        // Only an admin may see admins who are not selling games.
+        if (!viewerIsAdmin && user.type == "AA" && !games_.isSelling(user.username)) continue;
+        results.users.push_back(user);
+    }
     return true;
 }

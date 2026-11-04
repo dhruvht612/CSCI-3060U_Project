@@ -15,6 +15,12 @@ public:
     // Returns the available game whose name matches exactly, or nullptr if none does.
     const Game* find(const std::string& gameName) const;
 
+    // Returns every game available for sale this session, in file order (search).
+    const std::vector<Game>& availableGames() const;
+
+    // Returns true if `seller` has at least one game available for sale (search).
+    bool isSelling(const std::string& seller) const;
+
     // Returns true if the collections list `username` as an owner of `gameName`.
     bool isOwnedBy(const std::string& gameName, const std::string& username) const;
 

@@ -56,6 +56,10 @@ private:
     // and user accounts (any account type; non-admins don't see non-selling admins).
     void handleSearch();
 
+    // Reads one prompt and line of a command's fields into `field`. Prints an
+    // "unexpected end of input" error and returns false if input ends mid-command.
+    bool readField(const std::string& prompt, std::string& field);
+
     TransactionProcessor& processor_;
     std::istream& in_;
     std::ostream& out_;

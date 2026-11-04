@@ -1,0 +1,128 @@
+[
+  {
+    "id": "S01",
+    "purpose": "Huge money must reject and continue to logout",
+    "passed": true,
+    "failures": []
+  },
+  {
+    "id": "S02",
+    "purpose": "Integer cents multiplication must not overflow",
+    "passed": true,
+    "failures": []
+  },
+  {
+    "id": "S03",
+    "purpose": "Duplicate purchase and buyer/seller balance changes",
+    "passed": true,
+    "failures": []
+  },
+  {
+    "id": "S04",
+    "purpose": "Refund transfers credit to buyer and from seller",
+    "passed": true,
+    "failures": []
+  },
+  {
+    "id": "S05",
+    "purpose": "Deleted seller inventory and account cannot be used",
+    "passed": true,
+    "failures": []
+  },
+  {
+    "id": "S06",
+    "purpose": "New listing unavailable to a buy-capable account; duplicate listing rejected",
+    "passed": true,
+    "failures": []
+  },
+  {
+    "id": "S07",
+    "purpose": "Per-account credit limits independent within session",
+    "passed": true,
+    "failures": []
+  },
+  {
+    "id": "S08",
+    "purpose": "New accounts, duplicate names, all valid type words",
+    "passed": true,
+    "failures": []
+  },
+  {
+    "id": "S09",
+    "purpose": "Blank, reserved, padded names and invalid account types",
+    "passed": true,
+    "failures": []
+  },
+  {
+    "id": "S10",
+    "purpose": "Seller identity must match listing",
+    "passed": true,
+    "failures": []
+  },
+  {
+    "id": "S11",
+    "purpose": "Insufficient seller refund funds leave both balances unchanged",
+    "passed": true,
+    "failures": []
+  },
+  {
+    "id": "S12",
+    "purpose": "Missing games file rejects login politely",
+    "passed": true,
+    "failures": []
+  },
+  {
+    "id": "S13",
+    "purpose": "Malformed collection file rejects login politely",
+    "passed": true,
+    "failures": []
+  },
+  {
+    "id": "S14",
+    "purpose": "Missing END in games file rejects login",
+    "passed": true,
+    "failures": []
+  },
+  {
+    "id": "S15",
+    "purpose": "49/42 character handout input compatibility",
+    "passed": true,
+    "failures": []
+  },
+  {
+    "id": "S16",
+    "purpose": "EOF in a command is recoverable and creates no DTF",
+    "passed": true,
+    "failures": []
+  },
+  {
+    "id": "S17",
+    "purpose": "Credit limit resets and input files reload at next login",
+    "passed": true,
+    "failures": []
+  },
+  {
+    "id": "S18",
+    "purpose": "Buy uses credit added earlier in same session",
+    "passed": true,
+    "failures": []
+  },
+  {
+    "id": "S19",
+    "purpose": "Maximum balance guard preserves account",
+    "passed": true,
+    "failures": []
+  },
+  {
+    "id": "S20",
+    "purpose": "Failed output write retains session and reports failure",
+    "passed": true,
+    "failures": []
+  },
+  {
+    "id": "S21",
+    "purpose": "Printable names with embedded spaces and maximum field lengths",
+    "passed": true,
+    "failures": []
+  }
+]
