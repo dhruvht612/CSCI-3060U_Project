@@ -7,7 +7,9 @@ Games Distribution System: a console front end written in C++ for CSCI 3060U (Fa
 Phase 3 Front End implementation and requirements testing. All six transactions
 are implemented within the existing C++ class architecture. The preserved baseline
 passed 30/46 original acceptance tests; correction and regression runs pass 46/46,
-plus 21 supplemental checks. No Python Back End is implemented.
+plus 21 supplemental checks. The client's SEARCH update (`search`: games and users
+whose names contain the query; non-admins don't see admins who aren't selling) is
+implemented and covered by TC47-TC54; all 54 tests pass. No Python Back End is implemented.
 
 See [the test report](docs/Phase3_Test_Report.md),
 [failure log](docs/Phase3_Failure_Log.md),

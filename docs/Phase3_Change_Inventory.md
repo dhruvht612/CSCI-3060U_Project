@@ -40,12 +40,29 @@ for review locally; no remote push, merge or Canvas submission has been performe
 - `docs/Phase3_Change_Inventory.md` (this inventory)
 - `docs/Phase3_File_Manifest.txt` (complete created-file listing)
 
+## SEARCH requirement change (November 4, 2026)
+
+Modified: `include/FrontEnd.h`, `src/FrontEnd.cpp` (search command and
+`handleSearch`), `include/TransactionProcessor.h`, `src/TransactionProcessor.cpp`
+(`SearchResults`, `search`), `include/GameManager.h`, `src/GameManager.cpp`
+(`availableGames`, `isSelling`), `scripts/phase3_tests.py` (discovers TC01 up to the
+highest number; checks search events and output lines), `scripts/write_phase3_report.py`,
+`tests/terminal_assertions.json`, and the Phase 3 docs. New: `inputs/TC47-TC54.*`
+and `expected/TC47-TC54.*` (48 files).
+
 ## Execution evidence
 
 - `outputs/runs/iteration1-baseline/`: 30/46 PASS, 16 FAIL.
 - `outputs/runs/iteration2-corrections/`: 46/46 PASS.
 - `outputs/runs/iteration3-regression/`: 46/46 PASS, executed through Bash wrapper.
 - `outputs/runs/iteration4-archive-smoke/`: extracted ZIP rebuilt, 46/46 PASS without Git metadata.
+- `outputs/runs/iteration5-search-baseline/`: 46/54 PASS, 8 FAIL (new SEARCH tests, before search existed).
+- `outputs/runs/iteration6-search-corrections/`: 54/54 PASS, executed through Bash wrapper.
+- `outputs/supplemental/iteration6-search-corrections/`: 21/21 PASS.
+- For iterations 5 and 6 only the summaries are committed (`validation.json` and
+  `manifest.json`, and the supplemental `results.json`); the full per-test
+  evidence folders were kept out of the repository to keep it small. Rerun
+  `bash scripts/run_tests.sh` to regenerate the full evidence.
 - `outputs/supplemental/iteration1-baseline/`: 7/21 PASS, 14 FAIL.
 - `outputs/supplemental/iteration2-corrections/` and `iteration3-regression/`: 21/21 PASS each.
 - `outputs/transactions/` and `outputs/terminal/`: current convenience copies by TC ID.

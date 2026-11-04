@@ -18,7 +18,7 @@ reads commands from stdin and writes prompts/results to stdout; main-level fatal
 errors go to stderr. Recoverable transaction/login/output-write rejections remain
 on stdout and do not produce a nonzero exit status. Input files are never updated.
 
-## Execute and validate all 46 cases
+## Execute and validate all 54 cases
 
 ```bash
 bash scripts/run_tests.sh
@@ -34,7 +34,9 @@ Use `./scripts/run_tests.sh` and `./scripts/validate_tests.sh` after checkout wi
 executable modes preserved; if a ZIP extractor loses modes, use Bash explicitly
 or `chmod +x scripts/*.sh`. An explicit binary can be passed with `--binary PATH`;
 `--timeout SECONDS` defaults to 10 seconds per process. The runner verifies that
-exactly TC01-TC46 and all six files per case exist. It records and continues past
+TC01 up to the highest test number exists with no gaps (TC01-TC54: TC01-TC46
+from Phase 1 plus TC47-TC54 for the SEARCH requirement change) and that all six
+files per case exist. It records and continues past
 nonzero exits, timeout/launch errors and assertion failures. Missing suite fixtures
 are infrastructure errors, rather than fabricated individual test results.
 
@@ -92,7 +94,7 @@ directory. Do not replace the current source or reuse an existing run label.
 ## TA and submission checklist
 
 1. Read `Phase3_Test_Report.md`, `Phase3_Failure_Log.md` and format decisions.
-2. Compile, run the 46-case suite, supplemental tests and validator checks above.
+2. Compile, run the 54-case suite, supplemental tests and validator checks above.
 3. Review `tests/terminal_assertions.json` against every original `.expout.txt`;
    prompt readability and interpretation of prose remain human review tasks.
 4. Resolve the recorded TA questions; check the missing Phase 3 handout and any

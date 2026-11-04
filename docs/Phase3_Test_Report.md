@@ -1,6 +1,6 @@
 # Phase 3 - Front End Requirements Testing
 
-CSCI 3060U - Games Distribution System - October 31, 2026
+CSCI 3060U - Games Distribution System - October 31, 2026 (SEARCH update November 4, 2026)
 
 Repository: https://github.com/dhruvht612/CSCI-3060U_Project
 
@@ -10,10 +10,9 @@ Branch: feature/phase3-frontend-testing. Base commit:
 Deadline supplied by the user: November 6, 2026, 8:00 PM (America/Toronto).
 Team/member names: pending user-provided metadata before hand-in.
 
-**Review status:** implementation and executable test evidence prepared. Original
-fixture profile passes; official format approval and assignment-specific review
-are still pending. The Phase 3 handout and complete AI conversation export have
-not been supplied. This report does not claim those requirements are complete.
+**Review status:** implementation and executable test evidence prepared, including
+the SEARCH requirement change (section 8). Official format approval is still
+pending, and the complete AI conversation export must be added before hand-in.
 
 ## 1. Introduction and project overview
 
@@ -33,8 +32,9 @@ results; prepare reproducible scripts, a detailed failure report and review pack
 Sources inspected: README, all source/header files, both Phase 2 Markdown design
 documents, Phase 1 plan and cases, Project_Docs/README.txt, the original course
 project requirements, and every input/expected fixture. Duplicate fixture contents
-were inspected as groups. The Phase 3 assignment document was not available; the
-user's checklist supplies phase-specific deliverable instructions pending that review.
+were inspected as groups. The Phase 3 assignment handout (due November 6, 2026)
+was reviewed for the SEARCH update: its required scripts, failure table and TA
+instructions are covered by sections 6-9 and 13.
 
 ## 3. Existing Front End architecture
 
@@ -77,7 +77,8 @@ reported separately and never counted as additional original acceptance cases.
 ## 6. Automated execution scripts
 
 scripts/run_tests.sh selects a working Python interpreter and invokes the standard
-library harness. The harness discovers exactly 46 IDs, checks fixtures, gives each
+library harness. The harness discovers TC01 up to the highest test number with no
+gaps (TC01-TC54 after the SEARCH change), checks fixtures, gives each
 test its own output paths, captures stdout/stderr/status, enforces a timeout and
 continues after individual failures. Each run receives a new directory; existing
 labels fail instead of overwriting history. Source/fixture/oracle snapshots and
@@ -119,6 +120,8 @@ decisions document for a complete table and TA questions.
 | iteration2-corrections | 2026-10-31T19:56:13.832098+00:00 | 46/46 PASS; 0 FAIL | 21/21 PASS |
 | iteration3-regression | 2026-10-31T19:59:39.697926+00:00 | 46/46 PASS; 0 FAIL | 21/21 PASS |
 | iteration4-archive-smoke | 2026-10-31T21:56:10.956911+00:00 | 46/46 PASS; 0 FAIL | Not rerun (application source unchanged) |
+| iteration5-search-baseline | 2026-11-04T18:04:15.315367+00:00 | 46/54 PASS; 8 FAIL | Not run (search code not yet written) |
+| iteration6-search-corrections | 2026-11-04T18:05:55.818746+00:00 | 54/54 PASS; 0 FAIL | 21/21 PASS |
 
 All original test processes exited zero with empty stderr in all three executions.
 The baseline's 16 failures were content/behavior failures, not crashes. The separate
@@ -174,13 +177,47 @@ The baseline's negative-case passes often reflected stubs rejecting everything.
 | TC45 | PASS | PASS | PASS |
 | TC46 | FAIL | PASS | PASS |
 
+### Requirement change: SEARCH
+
+The client added a SEARCH transaction: it prints all items (games for sale) and
+all users whose names contain the search query; if the user is not an
+administrator, it must not print administrators who are not selling games.
+Tests TC47-TC54 were written first, from that requirement, with expected DTFs and
+terminal assertions (including required and forbidden output lines). They were run
+against the unchanged program (iteration 5): all 8 failed and TC01-TC46 still
+passed. After search was implemented, all 54 tests passed (iteration 6), the 21
+supplemental scenarios passed and all 11 validator checks passed.
+
+| Test | Iteration 5 (before search) | Iteration 6 (after search) |
+|---|---|---|
+| TC47 | FAIL | PASS |
+| TC48 | FAIL | PASS |
+| TC49 | FAIL | PASS |
+| TC50 | FAIL | PASS |
+| TC51 | FAIL | PASS |
+| TC52 | FAIL | PASS |
+| TC53 | FAIL | PASS |
+| TC54 | FAIL | PASS |
+
+Search design decisions (pending TA confirmation): the command is `search`; any
+logged-in account type may use it; the query is one line, surrounding spaces are
+ignored and a blank query is rejected; matching is a case-insensitive substring
+match; items are the games available for sale this session (a game sold in the
+current session is not available until the next session, as for buy); a user
+deleted this session is not found; each game shows name, seller and price and
+each user shows name and account type (never credit); search writes no Daily
+Transaction File record. The Phase 2 `list` command remains admin only.
+
 ## 9. Complete failure log
 
 
 Historical failures are retained after correction. Original test fixtures were
 not edited. Iteration 1 has 16 original acceptance failures and 14 supplemental
-failures; iterations 2 and 3 have none. H01 is a harness defect; E01-E05 record
-environment/probe issues separately and do not inflate acceptance-test counts.
+failures; iterations 2 and 3 have none. After the SEARCH requirement change, the
+new tests TC47-TC54 were added and run before the feature existed: iteration 5
+has those 8 failures (TC01-TC46 still pass) and iteration 6 has none. H01 is a
+harness defect; E01-E06 record environment/probe issues separately and do not
+inflate acceptance-test counts.
 The 11 deliberately corrupted temporary runs in validator checks are expected
 negative controls, not application regressions.
 
@@ -219,12 +256,21 @@ and status files; `outputs/supplemental/<iteration>/results.json` and case folde
 | S17 | Credit limit resets and input files reload at next login | Iteration 1: DTF mismatch; unexpected error count | addCredit and adjustCredit were stubs; no session totals | Implement addCredit; reset session counters and reload data at login | Iterations 2/3: PASS/PASS |
 | S18 | Buy uses credit added earlier in same session | Iteration 1: DTF mismatch; unexpected error count | addCredit and adjustCredit were stubs; no session totals; buy and game/collection loaders were stubs | Apply credit changes in memory; purchase against updated balance | Iterations 2/3: PASS/PASS |
 | S21 | Printable names with embedded spaces and maximum field lengths | Iteration 1: DTF mismatch; unexpected error count | createUser always returned false; sell always returned false | Support embedded spaces and exact maximum name widths | Iterations 2/3: PASS/PASS |
+| TC47 | Search by Admin - Games and Users | Iteration 5: printed events ['Login accepted. Welcome, admin.', 'Error: unrecognized command "search". ...', 'Error: unrecognized command "admin". ...', 'Logout accepted. Session for admin ended.']. 6 search-result content check(s) also failed. | search was not a recognized command (added requirement not yet implemented) | Add search: FrontEnd::handleSearch prompts for the text and prints results; TransactionProcessor::search does a case-insensitive name match over available games and current accounts and hides non-selling admins from non-admins; GameManager::availableGames/isSelling support it | Iteration 6: PASS |
+| TC48 | Search by Standard User Hides Non-Selling Admins | Iteration 5: printed events ['Login accepted. Welcome, buyer1.', 'Error: unrecognized command "search". ...', 'Error: unrecognized command "admin". ...', 'Logout accepted. Session for buyer1 ended.']. 5 search-result content check(s) also failed. | search was not a recognized command (added requirement not yet implemented) | Add search: FrontEnd::handleSearch prompts for the text and prints results; TransactionProcessor::search does a case-insensitive name match over available games and current accounts and hides non-selling admins from non-admins; GameManager::availableGames/isSelling support it | Iteration 6: PASS |
+| TC49 | Search Is Case-Insensitive for a Sell-Standard User | Iteration 5: printed events ['Login accepted. Welcome, seller1.', 'Error: unrecognized command "search". ...', 'Error: unrecognized command "STAR". ...', 'Logout accepted. Session for seller1 ended.']. 3 search-result content check(s) also failed. | search was not a recognized command (added requirement not yet implemented) | Add search: FrontEnd::handleSearch prompts for the text and prints results; TransactionProcessor::search does a case-insensitive name match over available games and current accounts and hides non-selling admins from non-admins; GameManager::availableGames/isSelling support it | Iteration 6: PASS |
+| TC50 | Search With No Matches | Iteration 5: printed events ['Login accepted. Welcome, fullgamer.', 'Error: unrecognized command "search". ...', 'Error: unrecognized command "zzz". ...', 'Logout accepted. Session for fullgamer ended.']. 2 search-result content check(s) also failed. | search was not a recognized command (added requirement not yet implemented) | Add search: FrontEnd::handleSearch prompts for the text and prints results; TransactionProcessor::search does a case-insensitive name match over available games and current accounts and hides non-selling admins from non-admins; GameManager::availableGames/isSelling support it | Iteration 6: PASS |
+| TC51 | Search Before Login | Iteration 5: printed events ['Error: unrecognized command "search". ...', 'Login accepted. Welcome, admin.', 'Logout accepted. Session for admin ended.'].  | search was not a recognized command (added requirement not yet implemented) | Add search: FrontEnd::handleSearch prompts for the text and prints results; TransactionProcessor::search does a case-insensitive name match over available games and current accounts and hides non-selling admins from non-admins; GameManager::availableGames/isSelling support it | Iteration 6: PASS |
+| TC52 | Blank Search Query | Iteration 5: printed events ['Login accepted. Welcome, admin.', 'Error: unrecognized command "search". ...', 'Error: no command entered.', 'Logout accepted. Session for admin ended.'].  | search was not a recognized command (added requirement not yet implemented) | Add search: FrontEnd::handleSearch prompts for the text and prints results; TransactionProcessor::search does a case-insensitive name match over available games and current accounts and hides non-selling admins from non-admins; GameManager::availableGames/isSelling support it | Iteration 6: PASS |
+| TC53 | Search After Deleting a User | Iteration 5: printed events ['Login accepted. Welcome, admin.', 'Delete accepted. User seller1 deleted.', 'Error: unrecognized command "search". ...', 'Error: unrecognized command "seller". ...', 'Logout accepted. Session for admin ended.']. 3 search-result content check(s) also failed. | search was not a recognized command (added requirement not yet implemented) | Add search: FrontEnd::handleSearch prompts for the text and prints results; TransactionProcessor::search does a case-insensitive name match over available games and current accounts and hides non-selling admins from non-admins; GameManager::availableGames/isSelling support it | Iteration 6: PASS |
+| TC54 | Newly Listed Game Not Found by Search | Iteration 5: printed events ['Login accepted. Welcome, seller1.', 'Sell accepted. Star Shooter is for sale.', 'Error: unrecognized command "search". ...', 'Error: unrecognized command "star". ...', 'Logout accepted. Session for seller1 ended.']. 2 search-result content check(s) also failed. | search was not a recognized command (added requirement not yet implemented) | Add search: FrontEnd::handleSearch prompts for the text and prints results; TransactionProcessor::search does a case-insensitive name match over available games and current accounts and hides non-selling admins from non-admins; GameManager::availableGames/isSelling support it | Iteration 6: PASS |
 | H01 | Git Bash wrapper portability | First shell validation failed: WindowsApps/python3 Permission denied | command -v found the unusable Windows Store python3 alias | Probe Python version/execution before selecting python3; otherwise use python | Corrected wrapper validation PASS; full iteration 3 shell run 46/46 |
 | E01 | Baseline launch investigation | Cold first launch delayed output; no test timeout or failing process status was ultimately recorded | Environment delay; no application root cause established | Waited for actual process completion; did not invent a crash or rerun over evidence | All 46 baseline statuses recorded as zero |
 | E02 | One-off Bash stdin probe | PowerShell-to-Bash probe delivered loginnadminnlogoutn as one command; program rejected it | Probe quoting did not preserve newline escapes | Use fixture-file redirection / Python subprocess input for real runs | Actual input-file runs pass; probe is not counted as an acceptance test |
 | E03 | PDF dependency installation | Sandboxed pip install made no progress and was interrupted | Environment/access issue; no application defect | Approved install into ignored build/report-deps | ReportLab/pypdf installation succeeded |
 | E04 | PDF authoring dependencies | First authoring attempt failed with ModuleNotFoundError: reportlab.lib; repair install reported an access-denied cleanup error | Local dependency availability/permissions; the exact first-import cause was not established | Verified module import after installation; retried PDF authoring without changing application code | PDF generated and extracted text verified |
 | E05 | PDF visual-review tooling | MiKTeX renderers produced no pages and were interrupted; early contact-sheet attempt had no images; sandbox could not read PDFium package | Renderer/environment access and premature contact-sheet creation | Use PDFium with approved access; require rendered pages before making contact sheet; keep failure entries together | All report pages rendered and visually inspected |
+| E06 | Validator mutation checks after SEARCH | python -I scripts/check_validator.py stopped with ModuleNotFoundError: phase3_tests | Probe ran Python in isolated mode (-I), which leaves the scripts folder off the import path; no application defect | Run the script normally, as documented: python scripts/check_validator.py | All 11 validator checks PASS |
 
 ## Findings not misreported as observed failures
 
@@ -270,14 +316,18 @@ format interpretations awaiting TA confirmation.
 ## 12. Final results and submission contents
 
 46/46 original acceptance cases and 21/21 supplemental cases pass in both correction
-and final regression runs. All 11 validator mutation checks pass. The review ZIP
+and final regression runs. After the SEARCH change, all 54 acceptance cases
+(TC01-TC54) and 21/21 supplemental cases pass in iteration 6, and all 11 validator
+mutation checks pass. Iterations 5 and 6 were built with Microsoft C++ 19.51
+(cl /std:c++17 /W4, no warnings) on Windows and run through Git Bash with Python
+3.11; the g++ command below is the documented build for the TA. The review ZIP
 contains complete C++ source/headers, original fixtures and requirements, scripts,
 semantic assertions, Markdown reports, PDF report, AI disclosure instructions and
 preserved execution evidence. Build products and Python dependency downloads are
 excluded. No Canvas submission or merge into main is performed.
 
-Outstanding before final hand-in: obtain/review the actual Phase 3 assignment,
-resolve TA format questions, add team/member names, review the terminal oracle,
+Outstanding before final hand-in: resolve TA format and SEARCH questions, add
+team/member names, review the terminal oracle,
 and export the complete AI prompt-and-response history. AI_USAGE_LOG.md is a truthful
 summary and export checklist, not a fabricated replacement for missing history.
 

@@ -5,6 +5,14 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 RUNS = ['iteration1-baseline', 'iteration2-corrections', 'iteration3-regression']
+# The SEARCH requirement change: tests TC47-TC54 were added and run before the
+# feature existed (baseline), then rerun after it was implemented (corrections).
+SEARCH_RUNS = ['iteration5-search-baseline', 'iteration6-search-corrections']
+SEARCH_ROOT = ('search was not a recognized command (added requirement not yet implemented)',
+               'Add search: FrontEnd::handleSearch prompts for the text and prints results; '
+               'TransactionProcessor::search does a case-insensitive name match over available '
+               'games and current accounts and hides non-selling admins from non-admins; '
+               'GameManager::availableGames/isSelling support it')
 
 
 def load(path):
@@ -61,6 +69,22 @@ def main():
         retests=[next(r for r in run if r['id']==tid)['passed'] for run in supplemental[1:]]
         rows.append([tid,result['purpose'],'Iteration 1: '+ '; '.join(result['failures']),root,fix,
                      'Iterations 2/3: '+('/'.join('PASS' if p else 'FAIL' for p in retests))])
+    search_runs = [load(f'outputs/runs/{name}/validation.json') for name in SEARCH_RUNS]
+    for result in search_runs[0]['results']:
+        if result['passed']: continue
+        tid = result['id']
+        purpose = (ROOT/f'expected/{tid}.expout.txt').read_text(encoding='utf-8').splitlines()[0]
+        purpose = purpose.replace(tid, '', 1).strip(' -–')
+        # Quote the events the program actually printed (from the saved validation),
+        # shortening the long "Valid commands: ..." list.
+        events = result['failures'][0].split('; actual ', 1)[1]
+        events = events.replace('Valid commands: login, logout, create, delete, sell, buy, refund, addcredit, list.', '...')
+        checks = len(result['failures']) - 1
+        actual = (f'Iteration 5: printed events {events}. '
+                  + (f'{checks} search-result content check(s) also failed.' if checks else ''))
+        retest = next(r for r in search_runs[1]['results'] if r['id'] == tid)['passed']
+        rows.append([tid, purpose, actual, SEARCH_ROOT[0], SEARCH_ROOT[1],
+                     'Iteration 6: ' + ('PASS' if retest else 'FAIL')])
     rows += [
         ['H01','Git Bash wrapper portability','First shell validation failed: WindowsApps/python3 Permission denied',
          'command -v found the unusable Windows Store python3 alias','Probe Python version/execution before selecting python3; otherwise use python',
@@ -82,6 +106,10 @@ def main():
          'Renderer/environment access and premature contact-sheet creation',
          'Use PDFium with approved access; require rendered pages before making contact sheet; keep failure entries together',
          'All report pages rendered and visually inspected'],
+        ['E06','Validator mutation checks after SEARCH','python -I scripts/check_validator.py stopped with ModuleNotFoundError: phase3_tests',
+         'Probe ran Python in isolated mode (-I), which leaves the scripts folder off the import path; no application defect',
+         'Run the script normally, as documented: python scripts/check_validator.py',
+         'All 11 validator checks PASS'],
     ]
     table='| Test ID | Test Purpose | Actual Failure | Root Cause | Code/Test Fix | Retest Result |\n|---|---|---|---|---|---|\n'
     table+=''.join('| '+' | '.join(safe(x) for x in row)+' |\n' for row in rows)
@@ -89,8 +117,11 @@ def main():
 
 Historical failures are retained after correction. Original test fixtures were
 not edited. Iteration 1 has 16 original acceptance failures and 14 supplemental
-failures; iterations 2 and 3 have none. H01 is a harness defect; E01-E05 record
-environment/probe issues separately and do not inflate acceptance-test counts.
+failures; iterations 2 and 3 have none. After the SEARCH requirement change, the
+new tests TC47-TC54 were added and run before the feature existed: iteration 5
+has those 8 failures (TC01-TC46 still pass) and iteration 6 has none. H01 is a
+harness defect; E01-E06 record environment/probe issues separately and do not
+inflate acceptance-test counts.
 The 11 deliberately corrupted temporary runs in validator checks are expected
 negative controls, not application regressions.
 
@@ -124,12 +155,22 @@ and status files; `outputs/supplemental/<iteration>/results.json` and case folde
         result=json.loads(archive.read_text())
         stamp=load('outputs/runs/iteration4-archive-smoke/manifest.json')['utc']
         summary+=f'| iteration4-archive-smoke | {stamp} | {result["passed"]}/46 PASS; {result["failed"]} FAIL | Not rerun (application source unchanged) |\n'
+    for name, run in zip(SEARCH_RUNS, search_runs):
+        stamp = load(f'outputs/runs/{name}/manifest.json')['utc']
+        supp_path = ROOT/f'outputs/supplemental/{name}/results.json'
+        supp = (f'{sum(r["passed"] for r in load(supp_path.relative_to(ROOT)))}/21 PASS'
+                if supp_path.exists() else 'Not run (search code not yet written)')
+        summary += f'| {name} | {stamp} | {run["passed"]}/{run["total"]} PASS; {run["failed"]} FAIL | {supp} |\n'
     detail='| Test | Baseline | Corrections | Regression |\n|---|---|---|---|\n'
     for cases in zip(*(run['results'] for run in runs)):
         detail+='| '+cases[0]['id']+' | '+' | '.join('PASS' if r['passed'] else 'FAIL' for r in cases)+' |\n'
+    search_detail = '| Test | Iteration 5 (before search) | Iteration 6 (after search) |\n|---|---|---|\n'
+    for before, after in zip(*(run['results'] for run in search_runs)):
+        if before['id'] < 'TC47': continue
+        search_detail += f'| {before["id"]} | {"PASS" if before["passed"] else "FAIL"} | {"PASS" if after["passed"] else "FAIL"} |\n'
     report='''# Phase 3 - Front End Requirements Testing
 
-CSCI 3060U - Games Distribution System - October 31, 2026
+CSCI 3060U - Games Distribution System - October 31, 2026 (SEARCH update November 4, 2026)
 
 Repository: https://github.com/dhruvht612/CSCI-3060U_Project
 
@@ -139,10 +180,9 @@ Branch: feature/phase3-frontend-testing. Base commit:
 Deadline supplied by the user: November 6, 2026, 8:00 PM (America/Toronto).
 Team/member names: pending user-provided metadata before hand-in.
 
-**Review status:** implementation and executable test evidence prepared. Original
-fixture profile passes; official format approval and assignment-specific review
-are still pending. The Phase 3 handout and complete AI conversation export have
-not been supplied. This report does not claim those requirements are complete.
+**Review status:** implementation and executable test evidence prepared, including
+the SEARCH requirement change (section 8). Official format approval is still
+pending, and the complete AI conversation export must be added before hand-in.
 
 ## 1. Introduction and project overview
 
@@ -162,8 +202,9 @@ results; prepare reproducible scripts, a detailed failure report and review pack
 Sources inspected: README, all source/header files, both Phase 2 Markdown design
 documents, Phase 1 plan and cases, Project_Docs/README.txt, the original course
 project requirements, and every input/expected fixture. Duplicate fixture contents
-were inspected as groups. The Phase 3 assignment document was not available; the
-user's checklist supplies phase-specific deliverable instructions pending that review.
+were inspected as groups. The Phase 3 assignment handout (due November 6, 2026)
+was reviewed for the SEARCH update: its required scripts, failure table and TA
+instructions are covered by sections 6-9 and 13.
 
 ## 3. Existing Front End architecture
 
@@ -206,7 +247,8 @@ reported separately and never counted as additional original acceptance cases.
 ## 6. Automated execution scripts
 
 scripts/run_tests.sh selects a working Python interpreter and invokes the standard
-library harness. The harness discovers exactly 46 IDs, checks fixtures, gives each
+library harness. The harness discovers TC01 up to the highest test number with no
+gaps (TC01-TC54 after the SEARCH change), checks fixtures, gives each
 test its own output paths, captures stdout/stderr/status, enforces a timeout and
 continues after individual failures. Each run receives a new directory; existing
 labels fail instead of overwriting history. Source/fixture/oracle snapshots and
@@ -249,6 +291,27 @@ S01 baseline test did exit 1 with Error: stoll and no DTF, failing graceful reco
 The baseline's negative-case passes often reflected stubs rejecting everything.
 
 '''+detail+'''
+### Requirement change: SEARCH
+
+The client added a SEARCH transaction: it prints all items (games for sale) and
+all users whose names contain the search query; if the user is not an
+administrator, it must not print administrators who are not selling games.
+Tests TC47-TC54 were written first, from that requirement, with expected DTFs and
+terminal assertions (including required and forbidden output lines). They were run
+against the unchanged program (iteration 5): all 8 failed and TC01-TC46 still
+passed. After search was implemented, all 54 tests passed (iteration 6), the 21
+supplemental scenarios passed and all 11 validator checks passed.
+
+'''+search_detail+'''
+Search design decisions (pending TA confirmation): the command is `search`; any
+logged-in account type may use it; the query is one line, surrounding spaces are
+ignored and a blank query is rejected; matching is a case-insensitive substring
+match; items are the games available for sale this session (a game sold in the
+current session is not available until the next session, as for buy); a user
+deleted this session is not found; each game shows name, seller and price and
+each user shows name and account type (never credit); search writes no Daily
+Transaction File record. The Phase 2 `list` command remains admin only.
+
 ## 9. Complete failure log
 
 '''+failure_log.split('\n',1)[1]+'''
@@ -280,14 +343,18 @@ format interpretations awaiting TA confirmation.
 ## 12. Final results and submission contents
 
 46/46 original acceptance cases and 21/21 supplemental cases pass in both correction
-and final regression runs. All 11 validator mutation checks pass. The review ZIP
+and final regression runs. After the SEARCH change, all 54 acceptance cases
+(TC01-TC54) and 21/21 supplemental cases pass in iteration 6, and all 11 validator
+mutation checks pass. Iterations 5 and 6 were built with Microsoft C++ 19.51
+(cl /std:c++17 /W4, no warnings) on Windows and run through Git Bash with Python
+3.11; the g++ command below is the documented build for the TA. The review ZIP
 contains complete C++ source/headers, original fixtures and requirements, scripts,
 semantic assertions, Markdown reports, PDF report, AI disclosure instructions and
 preserved execution evidence. Build products and Python dependency downloads are
 excluded. No Canvas submission or merge into main is performed.
 
-Outstanding before final hand-in: obtain/review the actual Phase 3 assignment,
-resolve TA format questions, add team/member names, review the terminal oracle,
+Outstanding before final hand-in: resolve TA format and SEARCH questions, add
+team/member names, review the terminal oracle,
 and export the complete AI prompt-and-response history. AI_USAGE_LOG.md is a truthful
 summary and export checklist, not a fabricated replacement for missing history.
 

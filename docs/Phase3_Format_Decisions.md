@@ -67,6 +67,15 @@ in game and user names remain intact. A 26-character game name remains invalid.
    reports an abandoned command. Output-write failure retains the live session.
 9. Confirm any requirement changes issued by the TA/client outside this repository,
    including the existing admin-only `list` command, preserved from Phase 2.
+10. Confirm the SEARCH interpretation (client update: list all items and users
+   whose names contain the query; non-admins must not see administrators who are
+   not selling games). Implemented as command `search` for every account type,
+   with one query line (surrounding spaces ignored, blank rejected) and a
+   case-insensitive substring match. Items are the games available for sale this
+   session; a game sold this session is not shown until the next session, and a
+   user deleted this session is not shown. "Selling games" means having at least
+   one game available for sale. Games show name, seller and price; users show name
+   and account type, never credit. Search writes no DTF record. Tests: TC47-TC54.
 
 No approval is implied by a passing fixture test. These questions are for the
 TA/team to resolve before declaring official format compliance.
