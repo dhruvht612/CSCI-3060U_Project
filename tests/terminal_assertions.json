@@ -371,5 +371,123 @@
       "Create accepted\\. User newuser created\\.",
       "Logout accepted\\. Session for admin ended\\."
     ]
+  },
+  "TC47": {
+    "source": "expected/TC47.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, admin\\.",
+      "Search accepted\\..*",
+      "Logout accepted\\. Session for admin ended\\."
+    ],
+    "stdout_contains": [
+      "^Games for sale \\(1\\):$",
+      "^AdminQuest +selleradmin +20\\.00$",
+      "^Users \\(3\\):$",
+      "^admin +AA$",
+      "^selleradmin +AA$",
+      "^adminfan +BS$"
+    ]
+  },
+  "TC48": {
+    "source": "expected/TC48.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, buyer1\\.",
+      "Search accepted\\..*",
+      "Logout accepted\\. Session for buyer1 ended\\."
+    ],
+    "stdout_contains": [
+      "^Games for sale \\(1\\):$",
+      "^AdminQuest +selleradmin +20\\.00$",
+      "^Users \\(2\\):$",
+      "^selleradmin +AA$",
+      "^adminfan +BS$"
+    ],
+    "stdout_absent": [
+      "^admin +AA$"
+    ]
+  },
+  "TC49": {
+    "source": "expected/TC49.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, seller1\\.",
+      "Search accepted\\..*",
+      "Logout accepted\\. Session for seller1 ended\\."
+    ],
+    "stdout_contains": [
+      "^Games for sale \\(1\\):$",
+      "^Star Seller +seller1 +10\\.00$",
+      "^Users \\(0\\):$"
+    ]
+  },
+  "TC50": {
+    "source": "expected/TC50.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, fullgamer\\.",
+      "Search accepted\\..*",
+      "Logout accepted\\. Session for fullgamer ended\\."
+    ],
+    "stdout_contains": [
+      "^Games for sale \\(0\\):$",
+      "^Users \\(0\\):$"
+    ],
+    "stdout_absent": [
+      "^AdminQuest "
+    ]
+  },
+  "TC51": {
+    "source": "expected/TC51.expout.txt",
+    "events": [
+      "Error: you must log in before using \"search\"\\.",
+      "Login accepted\\. Welcome, admin\\.",
+      "Logout accepted\\. Session for admin ended\\."
+    ],
+    "stdout_absent": [
+      "^Games for sale"
+    ]
+  },
+  "TC52": {
+    "source": "expected/TC52.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, admin\\.",
+      "Error: .*blank.*",
+      "Logout accepted\\. Session for admin ended\\."
+    ],
+    "stdout_absent": [
+      "^Games for sale"
+    ]
+  },
+  "TC53": {
+    "source": "expected/TC53.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, admin\\.",
+      "Delete accepted\\. User seller1 deleted\\.",
+      "Search accepted\\..*",
+      "Logout accepted\\. Session for admin ended\\."
+    ],
+    "stdout_contains": [
+      "^Games for sale \\(0\\):$",
+      "^Users \\(1\\):$",
+      "^selleradmin +AA$"
+    ],
+    "stdout_absent": [
+      "^seller1 +SS$",
+      "^Star Seller "
+    ]
+  },
+  "TC54": {
+    "source": "expected/TC54.expout.txt",
+    "events": [
+      "Login accepted\\. Welcome, seller1\\.",
+      "Sell accepted\\. Star Shooter is for sale\\.",
+      "Search accepted\\..*",
+      "Logout accepted\\. Session for seller1 ended\\."
+    ],
+    "stdout_contains": [
+      "^Games for sale \\(1\\):$",
+      "^Star Seller +seller1 +10\\.00$"
+    ],
+    "stdout_absent": [
+      "^Star Shooter "
+    ]
   }
 }

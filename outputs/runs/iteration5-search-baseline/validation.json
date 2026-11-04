@@ -1,0 +1,315 @@
+{
+  "passed": 46,
+  "failed": 8,
+  "total": 54,
+  "integrity_failures": [],
+  "results": [
+    {
+      "id": "TC01",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC02",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC03",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC04",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC05",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC06",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC07",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC08",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC09",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC10",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC11",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC12",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC13",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC14",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC15",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC16",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC17",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC18",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC19",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC20",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC21",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC22",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC23",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC24",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC25",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC26",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC27",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC28",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC29",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC30",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC31",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC32",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC33",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC34",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC35",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC36",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC37",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC38",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC39",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC40",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC41",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC42",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC43",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC44",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC45",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC46",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "TC47",
+      "passed": false,
+      "failures": [
+        "terminal events: expected ['Login accepted\\\\. Welcome, admin\\\\.', 'Search accepted\\\\..*', 'Logout accepted\\\\. Session for admin ended\\\\.']; actual ['Login accepted. Welcome, admin.', 'Error: unrecognized command \"search\". Valid commands: login, logout, create, delete, sell, buy, refund, addcredit, list.', 'Error: unrecognized command \"admin\". Valid commands: login, logout, create, delete, sell, buy, refund, addcredit, list.', 'Logout accepted. Session for admin ended.']",
+        "terminal output missing line matching '^Games for sale \\\\(1\\\\):$'",
+        "terminal output missing line matching '^AdminQuest +selleradmin +20\\\\.00$'",
+        "terminal output missing line matching '^Users \\\\(3\\\\):$'",
+        "terminal output missing line matching '^admin +AA$'",
+        "terminal output missing line matching '^selleradmin +AA$'",
+        "terminal output missing line matching '^adminfan +BS$'"
+      ]
+    },
+    {
+      "id": "TC48",
+      "passed": false,
+      "failures": [
+        "terminal events: expected ['Login accepted\\\\. Welcome, buyer1\\\\.', 'Search accepted\\\\..*', 'Logout accepted\\\\. Session for buyer1 ended\\\\.']; actual ['Login accepted. Welcome, buyer1.', 'Error: unrecognized command \"search\". Valid commands: login, logout, create, delete, sell, buy, refund, addcredit, list.', 'Error: unrecognized command \"admin\". Valid commands: login, logout, create, delete, sell, buy, refund, addcredit, list.', 'Logout accepted. Session for buyer1 ended.']",
+        "terminal output missing line matching '^Games for sale \\\\(1\\\\):$'",
+        "terminal output missing line matching '^AdminQuest +selleradmin +20\\\\.00$'",
+        "terminal output missing line matching '^Users \\\\(2\\\\):$'",
+        "terminal output missing line matching '^selleradmin +AA$'",
+        "terminal output missing line matching '^adminfan +BS$'"
+      ]
+    },
+    {
+      "id": "TC49",
+      "passed": false,
+      "failures": [
+        "terminal events: expected ['Login accepted\\\\. Welcome, seller1\\\\.', 'Search accepted\\\\..*', 'Logout accepted\\\\. Session for seller1 ended\\\\.']; actual ['Login accepted. Welcome, seller1.', 'Error: unrecognized command \"search\". Valid commands: login, logout, create, delete, sell, buy, refund, addcredit, list.', 'Error: unrecognized command \"STAR\". Valid commands: login, logout, create, delete, sell, buy, refund, addcredit, list.', 'Logout accepted. Session for seller1 ended.']",
+        "terminal output missing line matching '^Games for sale \\\\(1\\\\):$'",
+        "terminal output missing line matching '^Star Seller +seller1 +10\\\\.00$'",
+        "terminal output missing line matching '^Users \\\\(0\\\\):$'"
+      ]
+    },
+    {
+      "id": "TC50",
+      "passed": false,
+      "failures": [
+        "terminal events: expected ['Login accepted\\\\. Welcome, fullgamer\\\\.', 'Search accepted\\\\..*', 'Logout accepted\\\\. Session for fullgamer ended\\\\.']; actual ['Login accepted. Welcome, fullgamer.', 'Error: unrecognized command \"search\". Valid commands: login, logout, create, delete, sell, buy, refund, addcredit, list.', 'Error: unrecognized command \"zzz\". Valid commands: login, logout, create, delete, sell, buy, refund, addcredit, list.', 'Logout accepted. Session for fullgamer ended.']",
+        "terminal output missing line matching '^Games for sale \\\\(0\\\\):$'",
+        "terminal output missing line matching '^Users \\\\(0\\\\):$'"
+      ]
+    },
+    {
+      "id": "TC51",
+      "passed": false,
+      "failures": [
+        "terminal events: expected ['Error: you must log in before using \"search\"\\\\.', 'Login accepted\\\\. Welcome, admin\\\\.', 'Logout accepted\\\\. Session for admin ended\\\\.']; actual ['Error: unrecognized command \"search\". Valid commands: login, logout, create, delete, sell, buy, refund, addcredit, list.', 'Login accepted. Welcome, admin.', 'Logout accepted. Session for admin ended.']"
+      ]
+    },
+    {
+      "id": "TC52",
+      "passed": false,
+      "failures": [
+        "terminal events: expected ['Login accepted\\\\. Welcome, admin\\\\.', 'Error: .*blank.*', 'Logout accepted\\\\. Session for admin ended\\\\.']; actual ['Login accepted. Welcome, admin.', 'Error: unrecognized command \"search\". Valid commands: login, logout, create, delete, sell, buy, refund, addcredit, list.', 'Error: no command entered.', 'Logout accepted. Session for admin ended.']"
+      ]
+    },
+    {
+      "id": "TC53",
+      "passed": false,
+      "failures": [
+        "terminal events: expected ['Login accepted\\\\. Welcome, admin\\\\.', 'Delete accepted\\\\. User seller1 deleted\\\\.', 'Search accepted\\\\..*', 'Logout accepted\\\\. Session for admin ended\\\\.']; actual ['Login accepted. Welcome, admin.', 'Delete accepted. User seller1 deleted.', 'Error: unrecognized command \"search\". Valid commands: login, logout, create, delete, sell, buy, refund, addcredit, list.', 'Error: unrecognized command \"seller\". Valid commands: login, logout, create, delete, sell, buy, refund, addcredit, list.', 'Logout accepted. Session for admin ended.']",
+        "terminal output missing line matching '^Games for sale \\\\(0\\\\):$'",
+        "terminal output missing line matching '^Users \\\\(1\\\\):$'",
+        "terminal output missing line matching '^selleradmin +AA$'"
+      ]
+    },
+    {
+      "id": "TC54",
+      "passed": false,
+      "failures": [
+        "terminal events: expected ['Login accepted\\\\. Welcome, seller1\\\\.', 'Sell accepted\\\\. Star Shooter is for sale\\\\.', 'Search accepted\\\\..*', 'Logout accepted\\\\. Session for seller1 ended\\\\.']; actual ['Login accepted. Welcome, seller1.', 'Sell accepted. Star Shooter is for sale.', 'Error: unrecognized command \"search\". Valid commands: login, logout, create, delete, sell, buy, refund, addcredit, list.', 'Error: unrecognized command \"star\". Valid commands: login, logout, create, delete, sell, buy, refund, addcredit, list.', 'Logout accepted. Session for seller1 ended.']",
+        "terminal output missing line matching '^Games for sale \\\\(1\\\\):$'",
+        "terminal output missing line matching '^Star Seller +seller1 +10\\\\.00$'"
+      ]
+    }
+  ]
+}

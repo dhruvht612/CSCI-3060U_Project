@@ -1,0 +1,4 @@
+TC50 – Search With No Matches
+
+Expected behaviour: A full-standard user searches for "zzz". Nothing matches, so the Front End
+reports no games and no users and keeps running until logout.

@@ -1,0 +1,5 @@
+TC47 – Search by Admin - Games and Users
+
+Expected behaviour: An admin searches for "admin". The game AdminQuest and the users admin,
+selleradmin and adminfan are all shown, because an admin sees every
+matching account. Search writes nothing to the Daily Transaction File.

@@ -1,0 +1,7 @@
+admin           AA 005000.00
+selleradmin     AA 000100.00
+adminfan        BS 000500.00
+buyer1          BS 000500.00
+seller1         SS 000500.00
+fullgamer       FS 000300.00
+END                         

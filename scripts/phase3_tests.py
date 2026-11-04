@@ -39,9 +39,12 @@ def git_head():
 
 def discover():
     ids = sorted(p.name.removesuffix('.inp.txt') for p in (ROOT / 'inputs').glob('TC*.inp.txt'))
-    required = [f'TC{i:02}' for i in range(1, 47)]
+    # TC01-TC46 are the Phase 1 tests; TC47 onward cover later requirement
+    # changes (SEARCH). Numbering must have no gaps, so a missing file is a
+    # harness error instead of a silently smaller suite.
+    required = [f'TC{i:02}' for i in range(1, max(len(ids), 46) + 1)]
     if ids != required:
-        raise ValueError(f'Expected TC01-TC46 exactly; discovered {ids}')
+        raise ValueError(f'Expected TC01-{required[-1]} with no gaps; discovered {ids}')
     for tid in ids:
         for folder, suffixes in [('inputs', ['inp', 'user', 'game', 'collection']),
                                  ('expected', ['exptf', 'expout'])]:
@@ -105,11 +108,19 @@ def validate(run, persist=False):
             output = normalized(run / 'terminal' / f'{tid}.stdout.txt').decode('utf-8', errors='replace')
             # Exact event sequence ensures no extra success/error, skipped command,
             # or unobserved rejection. Prompt prose is deliberately not an oracle.
-            events = re.findall(r'(?:Login|Logout|Create|Delete|Sell|Buy|Refund|Addcredit) accepted\.[^\n]*|Error:[^\n]*', output)
+            events = re.findall(r'(?:Login|Logout|Create|Delete|Sell|Buy|Refund|Addcredit|Search) accepted\.[^\n]*|Error:[^\n]*', output)
             wanted = assertions[tid]['events']
             if len(events) != len(wanted) or any(not re.fullmatch(pattern, event)
                                                      for pattern, event in zip(wanted, events)):
                 errors.append(f'terminal events: expected {wanted!r}; actual {events!r}')
+            # Optional content checks (used by the SEARCH tests), matched
+            # against whole lines of stdout.
+            for pattern in assertions[tid].get('stdout_contains', []):
+                if not re.search(pattern, output, re.M):
+                    errors.append(f'terminal output missing line matching {pattern!r}')
+            for pattern in assertions[tid].get('stdout_absent', []):
+                if re.search(pattern, output, re.M):
+                    errors.append(f'terminal output has forbidden line matching {pattern!r}')
             if 'Enter command: ' not in output or 'Enter username: ' not in output:
                 errors.append('missing command/login prompts')
         except (OSError, ValueError, KeyError) as exc:

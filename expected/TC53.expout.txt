@@ -1,0 +1,5 @@
+TC53 – Search After Deleting a User
+
+Expected behaviour: An admin deletes seller1 and then searches for "seller". seller1 and the
+game Star Seller (which seller1 was selling) are gone, so only the user
+selleradmin is shown. The delete is saved for the Daily Transaction File.

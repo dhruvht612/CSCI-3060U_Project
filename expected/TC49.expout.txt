@@ -1,0 +1,4 @@
+TC49 – Search Is Case-Insensitive for a Sell-Standard User
+
+Expected behaviour: A sell-standard user searches for "STAR". The game Star Seller matches even
+though the case differs. No user name contains "star".

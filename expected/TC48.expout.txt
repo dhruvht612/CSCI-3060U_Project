@@ -1,0 +1,5 @@
+TC48 – Search by Standard User Hides Non-Selling Admins
+
+Expected behaviour: A buy-standard user searches for "admin". The admin account "admin" has no
+games for sale, so it is not shown. selleradmin (an admin who is selling
+AdminQuest) and adminfan are shown, and so is the game AdminQuest.

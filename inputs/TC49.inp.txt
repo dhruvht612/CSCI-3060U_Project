@@ -1,0 +1,5 @@
+login
+seller1
+search
+STAR
+logout

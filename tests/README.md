@@ -1,6 +1,10 @@
 # Terminal behavior oracle and review status
 
-The original 46 `.expout.txt` files are descriptions, not transcripts. They are
+The original 46 `.expout.txt` files are descriptions, not transcripts. TC47-TC54
+were added for the SEARCH requirement change; their assertions were written from
+the requirement before search was implemented, and also list `stdout_contains` /
+`stdout_absent` patterns (whole stdout lines that must or must not appear), so the
+search results themselves are checked. They are
 preserved byte-for-byte. `terminal_assertions.json` maps each description to an
 ordered sequence of expected success/rejection events using regular expressions.
 These assertions were authored from the descriptions, input streams and existing

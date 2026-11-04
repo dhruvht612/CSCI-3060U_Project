@@ -1,0 +1,4 @@
+TC52 – Blank Search Query
+
+Expected behaviour: An admin enters a blank search query. It is rejected with an error and no
+results are printed; the session continues to logout.

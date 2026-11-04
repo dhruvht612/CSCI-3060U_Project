@@ -1,0 +1,8 @@
+login
+seller1
+sell
+Star Shooter
+15.00
+search
+star
+logout
