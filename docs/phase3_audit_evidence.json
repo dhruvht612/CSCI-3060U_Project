@@ -1,0 +1,582 @@
+{
+  "audit_date": "2026-11-05",
+  "recorded_utc": "2026-11-05T18:59:04.927653+00:00",
+  "base_commit": "94a37147bfaaabfe02ae2471f25d89daa7839210",
+  "branch": "audit/phase3",
+  "build": {
+    "compiler": "MSYS2 GCC 13.2.0",
+    "flags": [
+      "-std=c++17",
+      "-Wall",
+      "-Wextra"
+    ],
+    "exit_status": 0,
+    "diagnostics": []
+  },
+  "fresh_acceptance": {
+    "passed": 54,
+    "failed": 0,
+    "total": 54,
+    "integrity_failures": [],
+    "results": [
+      {
+        "id": "TC01",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC02",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC03",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC04",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC05",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC06",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC07",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC08",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC09",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC10",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC11",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC12",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC13",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC14",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC15",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC16",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC17",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC18",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC19",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC20",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC21",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC22",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC23",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC24",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC25",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC26",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC27",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC28",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC29",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC30",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC31",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC32",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC33",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC34",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC35",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC36",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC37",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC38",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC39",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC40",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC41",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC42",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC43",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC44",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC45",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC46",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC47",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC48",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC49",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC50",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC51",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC52",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC53",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "id": "TC54",
+        "passed": true,
+        "failures": []
+      }
+    ]
+  },
+  "fresh_supplemental": [
+    {
+      "id": "S01",
+      "purpose": "Huge money must reject and continue to logout",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "S02",
+      "purpose": "Integer cents multiplication must not overflow",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "S03",
+      "purpose": "Duplicate purchase and buyer/seller balance changes",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "S04",
+      "purpose": "Refund transfers credit to buyer and from seller",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "S05",
+      "purpose": "Deleted seller inventory and account cannot be used",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "S06",
+      "purpose": "New listing unavailable to a buy-capable account; duplicate listing rejected",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "S07",
+      "purpose": "Per-account credit limits independent within session",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "S08",
+      "purpose": "New accounts, duplicate names, all valid type words",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "S09",
+      "purpose": "Blank, reserved, padded names and invalid account types",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "S10",
+      "purpose": "Seller identity must match listing",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "S11",
+      "purpose": "Insufficient seller refund funds leave both balances unchanged",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "S12",
+      "purpose": "Missing games file rejects login politely",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "S13",
+      "purpose": "Malformed collection file rejects login politely",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "S14",
+      "purpose": "Missing END in games file rejects login",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "S15",
+      "purpose": "49/42 character handout input compatibility",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "S16",
+      "purpose": "EOF in a command is recoverable and creates no DTF",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "S17",
+      "purpose": "Credit limit resets and input files reload at next login",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "S18",
+      "purpose": "Buy uses credit added earlier in same session",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "S19",
+      "purpose": "Maximum balance guard preserves account",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "S20",
+      "purpose": "Failed output write retains session and reports failure",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "S21",
+      "purpose": "Printable names with embedded spaces and maximum field lengths",
+      "passed": true,
+      "failures": []
+    }
+  ],
+  "validator_checks": [
+    {
+      "check": "padding",
+      "detected": true
+    },
+    {
+      "check": "code",
+      "detected": true
+    },
+    {
+      "check": "money",
+      "detected": true
+    },
+    {
+      "check": "ordering",
+      "detected": true
+    },
+    {
+      "check": "end record",
+      "detected": true
+    },
+    {
+      "check": "newline",
+      "detected": true
+    },
+    {
+      "check": "exit status",
+      "detected": true
+    },
+    {
+      "check": "stderr",
+      "detected": true
+    },
+    {
+      "check": "missing event",
+      "detected": true
+    },
+    {
+      "check": "extra success",
+      "detected": true
+    },
+    {
+      "check": "missing file",
+      "detected": true
+    }
+  ],
+  "git_bash_saved_run_validation": {
+    "exit_status": 0,
+    "passed": 54,
+    "failed": 0,
+    "integrity_failures": 0
+  },
+  "historical_iteration3_validation": {
+    "exit_status": 1,
+    "passed": 46,
+    "failed": 8,
+    "integrity_failures": 0,
+    "unexpected_test_ids": [
+      "TC47",
+      "TC48",
+      "TC49",
+      "TC50",
+      "TC51",
+      "TC52",
+      "TC53",
+      "TC54"
+    ]
+  },
+  "historical_iteration6_validation": {
+    "exit_status": 2,
+    "reason": "Missing oracle/terminal_assertions.json"
+  },
+  "source_sha256": {
+    "src/FileManager.cpp": "1848d6254ed416cba304e47ed1028a5af92468b7d3ef7d546e1ea2f12eebb110",
+    "src/FrontEnd.cpp": "8cf3e3e593cf43b5d6346089a9600cc58de5df9220f32564c5e1ec48d819e1ff",
+    "src/GameManager.cpp": "110bb8ac5ef2e40411ade1a3bbe165e8b49a95277a73dcecca7a7eb4785cb02a",
+    "src/main.cpp": "d243294ea0bc5746d02726272bc4b00eacb92db423e636c082f60333dde40904",
+    "src/TransactionProcessor.cpp": "17ef22b08fdaa2752b491626ede5dd7d24cec4a3801eadc6d3f18023d3c465ba",
+    "src/UserManager.cpp": "8b51dca2c95808c61dbbf8c29ef8f8894960c93d8b26f1e0996ef545d7d5d23f",
+    "include/FileManager.h": "6f442795ca0a21467fe9a63efc74f0af8309a13e61f70bbb57d60b0ba11f8e1c",
+    "include/FrontEnd.h": "f138035da3eac9add9829c8d112d0148309333656216ddb9a5004ab19dbded5e",
+    "include/Game.h": "c4ef7f0a117e44f9455ba135e508228b23fda66fb64274412fac3b203dce1491",
+    "include/GameManager.h": "2735da177785438727c90aa8b62cd008634302a52ab812c483fffa1e675d2b91",
+    "include/Money.h": "452b3a48343959a5ab5897f8d578710397555efb82f9952831b01ff1ffac3256",
+    "include/RecordFormat.h": "8b261e639b5993ee13d80d78dde44eeb819ccdf88b338b4b1d840fbe6b4157ff",
+    "include/TransactionProcessor.h": "c563116ad66637d03709a9a5080ab162e36baba504c4ab5ac185fe7a0ddec615",
+    "include/User.h": "ec3c2f1aeb25fecdd8ec3d5120a95eabe7e1fc65116617d00c96e6586e332270",
+    "include/UserManager.h": "5a0e8338ea27153b24fc5cad751a743870608cb4901db5928d79190e518230fe"
+  },
+  "historical_inventory": {
+    "iteration1-baseline": {
+      "manifest_entries": 524,
+      "missing_count": 0,
+      "changed_count": 0,
+      "missing_sample": []
+    },
+    "iteration2-corrections": {
+      "manifest_entries": 526,
+      "missing_count": 0,
+      "changed_count": 0,
+      "missing_sample": []
+    },
+    "iteration3-regression": {
+      "manifest_entries": 527,
+      "missing_count": 0,
+      "changed_count": 0,
+      "missing_sample": []
+    },
+    "iteration4-archive-smoke": {
+      "manifest_entries": 530,
+      "missing_count": 0,
+      "changed_count": 0,
+      "missing_sample": []
+    },
+    "iteration5-search-baseline": {
+      "manifest_entries": 618,
+      "missing_count": 618,
+      "changed_count": 0,
+      "missing_sample": [
+        "oracle/TC01.exptf.txt",
+        "oracle/TC02.exptf.txt",
+        "oracle/TC03.exptf.txt",
+        "oracle/TC04.exptf.txt",
+        "oracle/TC05.exptf.txt"
+      ]
+    },
+    "iteration6-search-corrections": {
+      "manifest_entries": 618,
+      "missing_count": 618,
+      "changed_count": 0,
+      "missing_sample": [
+        "oracle/TC01.exptf.txt",
+        "oracle/TC02.exptf.txt",
+        "oracle/TC03.exptf.txt",
+        "oracle/TC04.exptf.txt",
+        "oracle/TC05.exptf.txt"
+      ]
+    }
+  },
+  "search_supplemental_files": [
+    "results.json"
+  ],
+  "existing_zip": {
+    "sha256": "1a3dcea68e38fc90e8db54ae259982491d61e868cf966abc3cc780f73c834ccc",
+    "entries": 3328,
+    "contains": {
+      "inputs/TC54.inp.txt": false,
+      "Phase3_AI_Use_History_Diana.docx": false,
+      "docs/AI_USAGE_LOG.md": true,
+      "outputs/runs/iteration6-search-corrections/manifest.json": false
+    },
+    "matches_current_bytes": {
+      "src/FrontEnd.cpp": false,
+      "src/TransactionProcessor.cpp": false,
+      "docs/Phase3_Test_Report.md": false
+    }
+  },
+  "fresh_run_local_directory": "build/phase3-audit/outputs/runs/audit-current",
+  "fresh_run_manifest_sha256": "d20554fd939657681f4d5a75c4fa6058e34aca43be7efc3185327a5752aa8a37",
+  "full_fresh_evidence_committed": false
+}
