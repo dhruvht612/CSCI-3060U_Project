@@ -11,6 +11,14 @@ the local ZIP contains older code, the packaging script omits the supplied
 Phase 3 AI-history document, and the SEARCH run summaries lack their underlying
 evidence. No application or test implementation was changed during this audit.
 
+**Rubric follow-up:** the user supplied the official Phase 3 assignment after
+the initial audit. The revised deadline is **Saturday, November 7, 2026,
+8:00 PM** (America/Toronto), replacing November 6. The handout is now available
+as conversation evidence; the earlier limitation about the missing Phase 3
+rubric is resolved. See `Phase3_Rubric_Checklist.md` for the category-by-category
+assessment. This follow-up adds the PDF table finding and clarifies terminal
+comparison, Phase 1 feedback and separate AI-history delivery requirements.
+
 ## Confirmed findings
 
 ### P1 — The existing submission ZIP omits the SEARCH update
@@ -26,7 +34,7 @@ claiming SEARCH support.
 inspect its contents and build/run the extracted package against all 54 cases.
 The previous 46-case archive smoke test does not verify the updated release.
 
-### P1 — Packaging excludes the Phase 3 AI-history document
+### P1 — AI-history delivery needs an explicit submission check
 
 `scripts/prepare_submission.py:138–141` selects certain directories and an
 explicit root-file list that includes `Phase2_AI_use.docx`, but excludes
@@ -34,8 +42,13 @@ explicit root-file list that includes `Phase2_AI_use.docx`, but excludes
 present at the root, but absent from the existing ZIP. Simply regenerating with
 the current script will still omit it.
 
-**Action:** explicitly include the Phase 3 history, or place it in a packaged
-directory and update the references. Verify that the provided history covers
+The supplied handout requires submission of the complete AI history but does
+**not** require it to be inside the source ZIP. A separate Canvas attachment
+satisfies that delivery arrangement. The ZIP omission is a risk if relying on
+the package alone, not proof that no AI history has been or will be submitted.
+
+**Action:** submit the history separately, explicitly include it in the package,
+or place it in a packaged directory and update the references. Verify that it covers
 all Phase 3 contributions and any subsequent submitted audit/fix work. This
 audit establishes the packaging omission; it does not certify the document's
 transcript completeness. The existing `docs/AI_USAGE_LOG.md` is untracked and
@@ -88,14 +101,57 @@ for new executions. Verify that iteration 3 validates as 46/46, the original
 baseline still reports its genuine 16 failures, and a new 54-case run validates
 as 54/54. Preserve the historical evidence while fixing the harness.
 
+### P1 — The PDF replaces the required failure table with prose entries
+
+The rubric assigns 5/10 marks to a full failure log across multiple executions
+in clear table form. `scripts/prepare_submission.py:58–66` deliberately converts
+rows headed `Test ID` into labeled paragraphs. Page 5 of the existing
+`submission/Phase3_Test_Report.pdf` was freshly rendered and visually inspected:
+TC08, TC12, TC13, TC17 and TC19 are prose entries, not table rows. Their details
+are readable, but the requested table is absent from this part of the submitted
+PDF. The Markdown table in the ZIP does not establish compliance of the separate
+required `.doc`/`.pdf` document. Regeneration with the current renderer preserves
+this problem.
+
+**Action:** render the detailed failure log as an actual table in the final
+document, retaining the test ID, purpose, incorrect output, root cause and fix
+columns, plus iteration/retest information. Use landscape pages or suitable
+column widths and repeated headers; visually verify every failure-table page.
+
+### P2 — Terminal validation does not compare the expected terminal files
+
+The handout asks for a script to compare expected terminal output files with
+actual terminal output. `expected/TC*.expout.txt` currently contains behavioral
+prose (for example TC08), and `scripts/phase3_tests.py:81,109–127` checks actual
+stdout against `tests/terminal_assertions.json` rather than those files. The
+prose files are checked for existence and copied into snapshots, but their
+contents are not the automated terminal oracle. This is meaningful behavioral
+testing, including SEARCH content checks, but not a comparison to the expected
+terminal files named in the handout. Most field prompts and other unrecognized
+output lines are not fully checked.
+
+**Action:** establish expected terminal transcripts from the requirements and
+reviewed interaction, then compare them automatically, documenting any justified
+normalization. Alternatively, obtain TA acceptance of the semantic oracle as
+the terminal-output comparison. Do not copy actual transcripts into expected
+files without independently reviewing their expected behavior. A single
+validation script may check both output types; three separate shell scripts
+are not required by the wording.
+
 ## Submission questions and documentation gaps
 
-- The official Phase 3 assignment handout is absent from `Project_Docs`.
-  `docs/Phase3_Test_Report.md:35–37` says it was reviewed, whereas the README,
-  execution guide and format decisions still describe it as missing. This audit
-  cannot settle that inconsistency or certify the exact Phase 3 rubric without
-  the handout/client updates. It uses the available project requirements and
-  Phase 1/3 documentation; the Phase 4 rubric is not applied to Phase 3.
+- The Phase 3 handout has now been supplied in the conversation. The README,
+  execution guide and format decisions still describe it as missing, while the
+  test report says it was reviewed earlier. Update the final submission's
+  provenance/status wording and the November 6 deadline in the report and its
+  generator. The supplied handout does not itself contain the SEARCH change;
+  retain the separate client/TA source for that requirement.
+- The handout requires tests to reflect Phase 1 marking feedback. No feedback
+  record or feedback-to-test mapping was found in the reviewed files. The report
+  says all 276 original fixtures are unchanged; supplemental and SEARCH cases
+  alone do not prove feedback was addressed. Obtain the feedback, document each
+  applicable correction and rerun the suite. Do not infer that changes were
+  required if the actual feedback does not call for them.
 - Team/member names remain placeholders in the report and PDF generator. The
   general project handout requires team and member names on each hand-in.
 - Record-layout and SEARCH interpretation questions remain explicitly provisional
@@ -139,4 +195,8 @@ ignored by Git; the JSON is a summary, not a replacement for those raw files.
 
 This is an audit, not a correctness guarantee or an estimated grade. It does not
 verify Canvas submission, remote repository permissions, lab attendance, team
-contributions, PDF visual layout, or completeness of prior AI conversations.
+contributions, the entire PDF layout, or completeness of prior AI conversations.
+The rubric follow-up inspected existing PDF page 5 specifically to verify the
+failure-log layout and reviewed the renderer, terminal oracle and assignment
+requirements. It did not rerun the unchanged application tests; the fresh test
+results above remain the evidence from the initial audit.
