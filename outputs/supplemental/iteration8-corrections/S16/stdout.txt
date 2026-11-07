@@ -1,0 +1,8 @@
+Enter command: login
+Enter username: admin
+Login accepted. Welcome, admin.
+Enter command: refund
+Enter the buyer's username: buyer1
+Enter the seller's username: 
+Error: unexpected end of input; command abandoned.
+Enter command: 

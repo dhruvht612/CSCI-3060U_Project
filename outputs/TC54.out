@@ -1,0 +1,17 @@
+Enter command: login
+Enter username: seller1
+Login accepted. Welcome, seller1.
+Enter command: sell
+Enter the game name: Star Shooter
+Enter the asking price (e.g. 15.00): 15.00
+Sell accepted. Star Shooter is for sale.
+Enter command: search
+Enter the text to search for: star
+Search results for "star":
+Games for sale (1):
+Star Seller               seller1           10.00
+Users (0):
+Search accepted. 1 game(s) and 0 user(s) match "star".
+Enter command: logout
+Logout accepted. Session for seller1 ended.
+Enter command: 

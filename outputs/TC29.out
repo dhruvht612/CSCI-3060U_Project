@@ -1,0 +1,10 @@
+Enter command: login
+Enter username: lowcredit
+Login accepted. Welcome, lowcredit.
+Enter command: buy
+Enter the game name: ExistingGame
+Enter the seller's username: seller1
+Error: buy of ExistingGame was not accepted.
+Enter command: logout
+Logout accepted. Session for lowcredit ended.
+Enter command: 

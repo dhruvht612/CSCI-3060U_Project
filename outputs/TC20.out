@@ -1,0 +1,10 @@
+Enter command: login
+Enter username: seller1
+Login accepted. Welcome, seller1.
+Enter command: sell
+Enter the game name: TooPricey
+Enter the asking price (e.g. 15.00): 1000.00
+Error: sell of TooPricey was not accepted.
+Enter command: logout
+Logout accepted. Session for seller1 ended.
+Enter command: 

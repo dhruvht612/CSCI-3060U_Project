@@ -1,0 +1,9 @@
+Enter command: login
+Enter username: buyer1
+Login accepted. Welcome, buyer1.
+Enter command: addcredit
+Enter the amount to add (e.g. 15.00): 100.00
+Addcredit accepted. 100.00 added to buyer1.
+Enter command: logout
+Logout accepted. Session for buyer1 ended.
+Enter command: 

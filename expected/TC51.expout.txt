@@ -1,4 +1,0 @@
-TC51 – Search Before Login
-
-Expected behaviour: search is entered before anyone logs in. It is rejected without prompting
-for a query, and the following login and logout work normally.

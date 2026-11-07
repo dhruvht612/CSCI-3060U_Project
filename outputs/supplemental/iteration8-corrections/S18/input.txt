@@ -1,0 +1,8 @@
+login
+lowcredit
+addcredit
+10.00
+buy
+ExistingGame
+seller1
+logout

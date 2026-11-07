@@ -1,0 +1,10 @@
+Enter command: login
+Enter username: buyer1
+Login accepted. Welcome, buyer1.
+Enter command: buy
+Enter the game name: ExistingGame
+Enter the seller's username: seller2
+Error: buy of ExistingGame was not accepted.
+Enter command: logout
+Logout accepted. Session for buyer1 ended.
+Enter command: 

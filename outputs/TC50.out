@@ -1,0 +1,12 @@
+Enter command: login
+Enter username: fullgamer
+Login accepted. Welcome, fullgamer.
+Enter command: search
+Enter the text to search for: zzz
+Search results for "zzz":
+Games for sale (0):
+Users (0):
+Search accepted. 0 game(s) and 0 user(s) match "zzz".
+Enter command: logout
+Logout accepted. Session for fullgamer ended.
+Enter command: 

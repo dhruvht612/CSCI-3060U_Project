@@ -1,0 +1,13 @@
+Enter command: login
+Enter username: seller1
+Login accepted. Welcome, seller1.
+Enter command: search
+Enter the text to search for: STAR
+Search results for "STAR":
+Games for sale (1):
+Star Seller               seller1           10.00
+Users (0):
+Search accepted. 1 game(s) and 0 user(s) match "STAR".
+Enter command: logout
+Logout accepted. Session for seller1 ended.
+Enter command: 

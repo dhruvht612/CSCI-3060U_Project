@@ -1,0 +1,10 @@
+Enter command: login
+Enter username: exactbuyer
+Login accepted. Welcome, exactbuyer.
+Enter command: buy
+Enter the game name: TenDollarGame
+Enter the seller's username: seller1
+Buy accepted. exactbuyer now owns TenDollarGame.
+Enter command: logout
+Logout accepted. Session for exactbuyer ended.
+Enter command: 

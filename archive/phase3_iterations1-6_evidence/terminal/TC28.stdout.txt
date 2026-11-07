@@ -1,0 +1,4 @@
+Enter command: Enter username: Login accepted. Welcome, buyer1.
+Enter command: Enter the game name: Enter the seller's username: Error: buy of MissingGame was not accepted.
+Enter command: Logout accepted. Session for buyer1 ended.
+Enter command: 

@@ -5,3 +5,4 @@ inputs/** -text -whitespace
 expected/** -text -whitespace
 # Captured prompts and fixed-width fixtures intentionally contain trailing spaces.
 outputs/** -text -whitespace
+data/** -text -whitespace

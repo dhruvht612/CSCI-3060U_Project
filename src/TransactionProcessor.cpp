@@ -56,10 +56,12 @@ bool TransactionProcessor::login(const std::string& username) {
 bool TransactionProcessor::logout() {
     if (!session_) return false;
     std::vector<std::string> output = records_;
-    // TODO(verify): the handout's template gives 00 records the
-    // "XX UUUUUUUUUUUUUUU TT CCCCCCCCC" layout, but our Phase 1 fixtures expect a
-    // bare "00". Kept as "00" until the TA confirms (docs, section 5).
-    output.push_back("00");
+    // End-of-session record, in the handout's "XX UUUUUUUUUUUUUUU TT CCCCCCCCC"
+    // layout: the logged-in user's name, type and credit at logout (after any
+    // buys, refunds and credit added during the session).
+    const User* current = users_.find(session_->username);
+    const long long credit = current ? current->creditCents : session_->creditCents;
+    output.push_back(record::account("00", session_->username, session_->type, credit));
     if (!files_.writeTransactions(output)) return false;
     session_.reset();
     records_.clear();

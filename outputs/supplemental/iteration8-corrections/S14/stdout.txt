@@ -1,0 +1,6 @@
+Enter command: login
+Enter username: admin
+Error: /home/claude/repo/CSCI-3060U_Project-main/outputs/supplemental/iteration8-corrections/S14/game.txt: missing END line. Login rejected.
+Enter command: logout
+Error: you must log in before using "logout".
+Enter command: 

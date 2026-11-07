@@ -1,0 +1,27 @@
+Enter command: login
+Enter username: admin
+Login accepted. Welcome, admin.
+Enter command: buy
+Enter the game name: ExistingGame
+Enter the seller's username: seller1
+Buy accepted. admin now owns ExistingGame.
+Enter command: buy
+Enter the game name: ExistingGame
+Enter the seller's username: seller1
+Error: buy of ExistingGame was not accepted.
+Enter command: list
+Active accounts (10):
+Username        Type  Credit ($)
+admin           AA       4985.00
+buyer1          BS        500.00
+seller1         SS        515.00
+seller2         SS        500.00
+delete1         FS        100.00
+lowcredit       BS          5.00
+exactbuyer      BS         10.00
+selleradmin     AA        100.00
+adminfan        BS        500.00
+fullgamer       FS        300.00
+Enter command: logout
+Logout accepted. Session for admin ended.
+Enter command: 

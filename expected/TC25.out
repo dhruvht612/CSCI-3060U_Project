@@ -1,0 +1,16 @@
+Enter command: login
+Enter username: seller1
+Login accepted. Welcome, seller1.
+Enter command: sell
+Enter the game name: BrandNewGame
+Enter the asking price (e.g. 15.00): 10.00
+Sell accepted. BrandNewGame is for sale.
+Enter command: buy
+Error: "buy" is not permitted for seller1 (account type SS).
+Enter command: BrandNewGame
+Error: unrecognized command "BrandNewGame". Valid commands: login, logout, create, delete, sell, buy, refund, addcredit, list, search.
+Enter command: seller1
+Error: unrecognized command "seller1". Valid commands: login, logout, create, delete, sell, buy, refund, addcredit, list, search.
+Enter command: logout
+Logout accepted. Session for seller1 ended.
+Enter command: 

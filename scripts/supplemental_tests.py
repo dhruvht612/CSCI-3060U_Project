@@ -1,8 +1,15 @@
 #!/usr/bin/env python3
-"""Focused black-box regressions for gaps in the original 46 cases.
+"""Supplemental black-box tests for situations the main suite doesn't cover
+(balances after transfers, damaged input files, write failures, and so on).
 
-Expected records/balances are calculated here from requirements, never harvested
-from the executable. Python is used only for testing, not for a Back End.
+Each case logs in, runs some commands, logs out and checks the daily transaction
+file, the number of error messages, and (through the admin-only "list" command)
+the resulting account balances. Expected records and balances are worked out by
+hand from the requirements. "end" is the user, type and credit expected in the
+00 end-of-session record.
+
+Usage: python3 scripts/supplemental_tests.py --label <new-run-name>
+Results are saved in outputs/supplemental/<run-name>/.
 """
 import argparse
 import json
@@ -12,6 +19,8 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
+# The shared data files used by the main test suite.
+SHARED_DATA = {'user': 'currentaccounts.txt', 'game': 'availablegames.txt', 'collection': 'gamescollection.txt'}
 
 
 def account(code, name, kind, cents):
@@ -28,37 +37,37 @@ def purchase(name, seller, buyer, cents):
 
 def cases():
     return [
-        dict(id='S01', purpose='Huge money must reject and continue to logout', user='buyer1',
+        dict(id='S01', end=('buyer1','BS',50000), purpose='Huge money must reject and continue to logout', user='buyer1',
              commands='addcredit\n99999999999999999999999999999999999999.00\n', records=[], errors=1),
-        dict(id='S02', purpose='Integer cents multiplication must not overflow', user='buyer1',
+        dict(id='S02', end=('buyer1','BS',50000), purpose='Integer cents multiplication must not overflow', user='buyer1',
              commands='addcredit\n92233720368547759.00\n', records=[], errors=1),
-        dict(id='S03', purpose='Duplicate purchase and buyer/seller balance changes', user='admin',
+        dict(id='S03', end=('admin','AA',498500), purpose='Duplicate purchase and buyer/seller balance changes', user='admin',
              commands='buy\nExistingGame\nseller1\nbuy\nExistingGame\nseller1\nlist\n',
              records=[purchase('ExistingGame','seller1','admin',1500)], errors=1,
              balances={'admin':'4985.00','seller1':'515.00'}),
-        dict(id='S04', purpose='Refund transfers credit to buyer and from seller', user='admin',
+        dict(id='S04', end=('admin','AA',500000), purpose='Refund transfers credit to buyer and from seller', user='admin',
              commands='refund\nbuyer1\nseller1\n10.00\nlist\n',
              records=[f'05 {"buyer1":<15} {"seller1":<15} 000010.00'], errors=0,
              balances={'buyer1':'510.00','seller1':'490.00'}),
-        dict(id='S05', purpose='Deleted seller inventory and account cannot be used', user='admin',
+        dict(id='S05', end=('admin','AA',500000), purpose='Deleted seller inventory and account cannot be used', user='admin',
              commands='delete\nseller1\nbuy\nExistingGame\nseller1\naddcredit\n1.00\nseller1\nlist\n',
              records=[account('02','seller1','',0)], errors=2, absent_account='seller1'),
-        dict(id='S06', purpose='New listing unavailable to a buy-capable account; duplicate listing rejected', user='admin',
+        dict(id='S06', end=('admin','AA',500000), purpose='New listing unavailable to a buy-capable account; duplicate listing rejected', user='admin',
              commands='sell\nFresh Game\n10.00\nbuy\nFresh Game\nadmin\nsell\nFresh Game\n10.00\n',
              records=[sale('Fresh Game','admin',1000)], errors=2),
-        dict(id='S07', purpose='Per-account credit limits independent within session', user='admin',
+        dict(id='S07', end=('admin','AA',500000), purpose='Per-account credit limits independent within session', user='admin',
              commands='addcredit\n1000.00\nbuyer1\naddcredit\n1000.00\nseller1\naddcredit\n0.01\nbuyer1\nlist\n',
              records=[account('06','buyer1','BS',100000),account('06','seller1','SS',100000)], errors=1,
              balances={'buyer1':'1500.00','seller1':'1500.00'}),
-        dict(id='S08', purpose='New accounts, duplicate names, all valid type words', user='admin',
+        dict(id='S08', end=('admin','AA',500000), purpose='New accounts, duplicate names, all valid type words', user='admin',
              commands='create\nnewadmin\nadmin\ncreate\nnewbuyer\nbuy-standard\ncreate\nnewseller\nsell-standard\ncreate\nnewbuyer\nfull-standard\nlist\n',
              records=[account('01','newadmin','AA',0),account('01','newbuyer','BS',0),account('01','newseller','SS',0)], errors=1,
              balances={'newadmin':'0.00','newbuyer':'0.00','newseller':'0.00'}),
-        dict(id='S09', purpose='Blank, reserved, padded names and invalid account types', user='admin',
+        dict(id='S09', end=('admin','AA',500000), purpose='Blank, reserved, padded names and invalid account types', user='admin',
              commands='create\n\nadmin\ncreate\nEND\nadmin\ncreate\nname \nadmin\ncreate\nvalid\ninvalid\n', records=[], errors=4),
-        dict(id='S10', purpose='Seller identity must match listing', user='buyer1',
+        dict(id='S10', end=('buyer1','BS',50000), purpose='Seller identity must match listing', user='buyer1',
              commands='buy\nExistingGame\nseller2\n', records=[], errors=1),
-        dict(id='S11', purpose='Insufficient seller refund funds leave both balances unchanged', user='admin',
+        dict(id='S11', end=('admin','AA',500000), purpose='Insufficient seller refund funds leave both balances unchanged', user='admin',
              commands='refund\nbuyer1\nseller1\n500.01\nlist\n', records=[], errors=1,
              balances={'buyer1':'500.00','seller1':'500.00'}),
         dict(id='S12', purpose='Missing games file rejects login politely', user='admin', commands='',
@@ -67,23 +76,23 @@ def cases():
              records=None, errors=2, corrupt='collection'),
         dict(id='S14', purpose='Missing END in games file rejects login', user='admin', commands='',
              records=None, errors=2, no_end='game'),
-        dict(id='S15', purpose='49/42 character handout input compatibility', user='buyer1',
+        dict(id='S15', end=('buyer1','BS',48500), purpose='49/42 character handout input compatibility', user='buyer1',
              commands='buy\nExistingGame\nseller1\n', records=[purchase('ExistingGame','seller1','buyer1',1500)],
              errors=0, wide=True),
         dict(id='S16', purpose='EOF in a command is recoverable and creates no DTF', user='admin',
              commands='refund\nbuyer1\n', records=None, errors=1, eof=True),
-        dict(id='S17', purpose='Credit limit resets and input files reload at next login', user='buyer1',
+        dict(id='S17', end=('buyer1','BS',150000), purpose='Credit limit resets and input files reload at next login', user='buyer1',
              commands='addcredit\n1000.00\nlogout\nlogin\nbuyer1\naddcredit\n1000.00\n',
              records=[account('06','buyer1','BS',100000)], errors=0),
-        dict(id='S18', purpose='Buy uses credit added earlier in same session', user='lowcredit',
+        dict(id='S18', end=('lowcredit','BS',0), purpose='Buy uses credit added earlier in same session', user='lowcredit',
              commands='addcredit\n10.00\nbuy\nExistingGame\nseller1\n',
              records=[account('06','lowcredit','BS',1000),purchase('ExistingGame','seller1','lowcredit',1500)], errors=0),
-        dict(id='S19', purpose='Maximum balance guard preserves account', user='admin',
+        dict(id='S19', end=('admin','AA',500000), purpose='Maximum balance guard preserves account', user='admin',
              commands='addcredit\n0.01\nbuyer1\nlist\n', records=[], errors=1,
              max_balance=True, balances={'buyer1':'999999.00'}),
         dict(id='S20', purpose='Failed output write retains session and reports failure', user='admin',
              commands='', records=None, errors=1, bad_output=True),
-        dict(id='S21', purpose='Printable names with embedded spaces and maximum field lengths', user='admin',
+        dict(id='S21', end=('admin','AA',500000), purpose='Printable names with embedded spaces and maximum field lengths', user='admin',
              commands='create\nJane Doe\nfull-standard\nsell\nABCDEFGHIJKLMNOPQRSTUVWXY\n999.99\n',
              records=[account('01','Jane Doe','FS',0),sale('ABCDEFGHIJKLMNOPQRSTUVWXY','admin',99999)], errors=0),
     ]
@@ -104,7 +113,7 @@ def main():
     for case in cases():
         folder = run / case['id']; folder.mkdir()
         for ext in ['user','game','collection']:
-            data = (ROOT / 'inputs' / f'TC01.{ext}.txt').read_text()
+            data = (ROOT / 'data' / SHARED_DATA[ext]).read_text()
             if case.get('missing') == ext: continue
             if case.get('corrupt') == ext: data = 'bad record\nEND\n'
             if case.get('no_end') == ext: data = '\n'.join(data.splitlines()[:-1]) + '\n'
@@ -115,7 +124,7 @@ def main():
             (folder / f'{ext}.txt').write_text(data)
         commands = f"login\n{case['user']}\n" + case['commands'] + ('' if case.get('eof') else 'logout\n')
         (folder / 'input.txt').write_text(commands)
-        expected = None if case['records'] is None else '\n'.join(case['records'] + ['00'])+'\n'
+        expected = None if case['records'] is None else '\n'.join(case['records'] + [account('00', *case['end'])])+'\n'
         if expected is not None: (folder / 'expected.atf.txt').write_text(expected)
         output = folder if case.get('bad_output') else folder / 'actual.atf.txt'
         failures=[]

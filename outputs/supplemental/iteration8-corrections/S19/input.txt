@@ -1,0 +1,7 @@
+login
+admin
+addcredit
+0.01
+buyer1
+list
+logout

@@ -1,0 +1,9 @@
+Enter command: login
+Enter username: admin
+Login accepted. Welcome, admin.
+Enter command: delete
+Enter the username to delete: admin
+Error: delete of admin was not accepted.
+Enter command: logout
+Logout accepted. Session for admin ended.
+Enter command: 

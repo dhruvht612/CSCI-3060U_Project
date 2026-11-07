@@ -1,89 +1,56 @@
 # CSCI-3060U_Project
 
-Games Distribution System: a console front end written in C++ for CSCI 3060U (Fall 2026).
+Games Distribution System: a console Front End written in C++ for CSCI 3060U (Fall 2026).
+
+Group: Qudsia Fawad, Diana Riyahi, Dhruv Thakar
 
 ## Status
 
-Phase 3 Front End implementation and requirements testing. All six transactions
-are implemented within the existing C++ class architecture. The preserved baseline
-passed 30/46 original acceptance tests; correction and regression runs pass 46/46,
-plus 21 supplemental checks. The client's SEARCH update (`search`: games and users
-whose names contain the query; non-admins don't see admins who aren't selling) is
-implemented and covered by TC47-TC54; all 54 tests pass. No Python Back End is implemented.
-
-See [the test report](docs/Phase3_Test_Report.md),
-[failure log](docs/Phase3_Failure_Log.md),
-[execution guide](docs/Phase3_Execution_Guide.md), and
-[provisional format decisions](docs/Phase3_Format_Decisions.md).
-Passing fixtures does not resolve the handout's conflicting formats. TA confirmation,
-the missing Phase 3 assignment handout, team metadata and complete AI-history export
-remain submission review items. The Phase 2 documents are retained as historical evidence.
+Phase 3 (Front End requirements testing) is complete. All transactions are implemented,
+including the client's SEARCH update. All 54 tests and 21 supplemental checks pass.
+See the [Phase 3 report](docs/Phase3_Report.md) (also as `.docx`/`.pdf` in `docs/`),
+which contains the run instructions and the full [failure log](docs/Phase3_Failure_Log.md).
 
 ## Layout
 
 ```text
-include/        class declarations
-src/            class implementations and main.cpp
-docs/           design notes
-scripts/        test execution, verification and submission tooling
-tests/          terminal behavioral assertions and review notes
-outputs/        preserved baseline, correction and regression evidence
-inputs/         Phase 1 test inputs (see Project_Docs/README.txt)
-expected/       Phase 1 expected results
-Project_Docs/   project handout, phase assignments and Phase 1 documents
+src/, include/  Front End source code and headers
+data/           shared input files used by every test
+inputs/         one transaction input file per test (TC01.txt ... TC54.txt)
+expected/       expected terminal output (.out) and daily transaction file (.etf) per test
+outputs/        actual outputs from the latest test run, plus test_history.log
+scripts/        run_tests.sh, validate_tests.sh, supplemental_tests.py, package_submission.sh
+tests/          TEST_CATALOG.md: what each test is for
+docs/           Phase 3 report and failure log, Phase 2 design documents
+archive/        saved outputs of Phase 3 test iterations 1-6 (earlier test harness)
+Project_Docs/   project handout and phase assignments
 ```
 
-## Build
+## Build and run
 
-Requires a C++17 compiler. From the repository root, in bash (Linux, macOS, Git Bash or MSYS2):
+Requires a C++17 compiler and Bash (Linux, macOS, or Git Bash on Windows).
 
 ```sh
 mkdir -p build
 g++ -std=c++17 -Wall -Wextra -Iinclude src/*.cpp -o build/games-distribution
+build/games-distribution data/currentaccounts.txt data/availablegames.txt \
+    data/gamescollection.txt transout.atf
 ```
 
-`build/` is ignored by git.
-
-## Run
-
-```sh
-build/games-distribution <users-file> <games-file> <collections-file> <daily-transaction-file> < <transaction-input>
-```
-
-Commands are read from standard input, one per line, until the end of input. The user
-accounts file is read at each login, and the games and collections files once the
-username is accepted. The Daily Transaction File is written at each logout. The order of
-the arguments is our own choice and doesn't come from the handout.
-
-Example using a Phase 1 test:
-
-```sh
-build/games-distribution inputs/TC01.user.txt inputs/TC01.game.txt inputs/TC01.collection.txt \
-    build/TC01.atf.txt < inputs/TC01.inp.txt
-diff --strip-trailing-cr build/TC01.atf.txt expected/TC01.exptf.txt
-```
-
-In PowerShell, pipe the input instead: `Get-Content inputs\TC01.inp.txt | build\games-distribution.exe ...`
+Arguments: Current User Accounts File, Available Games File, Games Collection File, and the
+daily transaction file to write at each logout. Commands are read from standard input; to
+replay a saved test, redirect it in: `... outputs/TC01.atf < inputs/TC01.txt`.
 
 ## Test
 
 ```sh
-bash scripts/run_tests.sh
-bash scripts/validate_tests.sh
-python3 scripts/supplemental_tests.py --label my-check
-python3 scripts/check_validator.py
+bash scripts/run_tests.sh        # compile and run every test into outputs/
+bash scripts/validate_tests.sh   # diff outputs/ against expected/, print PASS/FAIL
+python3 scripts/supplemental_tests.py --label my-run   # optional extra checks
 ```
 
-Requires Bash, Python 3.9+ (standard library), with optional Git metadata for execution provenance.
-Use `python` instead of `python3` on Windows if needed. Each runner label must be
-new: historical evidence is never overwritten. Original `inputs/` and `expected/`
-files are unchanged. Behavioral `.expout.txt` descriptions are validated through
-separately authored event assertions, not compared as literal console transcripts.
+## Submission zip
 
-## Review package
-
-`python scripts/prepare_submission.py` creates the PDF report, checksum manifest
-and ZIP in `submission/` (ignored by Git). PDF authoring requires ReportLab and
-pypdf as described in the execution guide. Nothing is uploaded to Canvas or merged
-into main by these scripts. Export the complete conversation before final packaging;
-see [AI disclosure instructions](docs/AI_USAGE_LOG.md).
+```sh
+bash scripts/package_submission.sh   # creates submission/CSCI3060U_Phase3.zip
+```

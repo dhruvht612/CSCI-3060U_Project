@@ -1,0 +1,29 @@
+Enter command: login
+Enter username: admin
+Login accepted. Welcome, admin.
+Enter command: delete
+Enter the username to delete: seller1
+Delete accepted. User seller1 deleted.
+Enter command: buy
+Enter the game name: ExistingGame
+Enter the seller's username: seller1
+Error: buy of ExistingGame was not accepted.
+Enter command: addcredit
+Enter the amount to add (e.g. 15.00): 1.00
+Enter the username to add the credit to: seller1
+Error: addcredit to seller1 was not accepted.
+Enter command: list
+Active accounts (9):
+Username        Type  Credit ($)
+admin           AA       5000.00
+buyer1          BS        500.00
+seller2         SS        500.00
+delete1         FS        100.00
+lowcredit       BS          5.00
+exactbuyer      BS         10.00
+selleradmin     AA        100.00
+adminfan        BS        500.00
+fullgamer       FS        300.00
+Enter command: logout
+Logout accepted. Session for admin ended.
+Enter command: 

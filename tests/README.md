@@ -1,41 +1,33 @@
-# Terminal behavior oracle and review status
+# Tests
 
-The original 46 `.expout.txt` files are descriptions, not transcripts. TC47-TC54
-were added for the SEARCH requirement change; their assertions were written from
-the requirement before search was implemented, and also list `stdout_contains` /
-`stdout_absent` patterns (whole stdout lines that must or must not appear), so the
-search results themselves are checked. They are
-preserved byte-for-byte. `terminal_assertions.json` maps each description to an
-ordered sequence of expected success/rejection events using regular expressions.
-These assertions were authored from the descriptions, input streams and existing
-CLI messages **before the baseline run**, not copied from actual output.
+Each test is one transaction input file, `inputs/TCxx.txt`, run against the shared
+data files in `data/`. For each test there are two expected outputs:
 
-Every case must have exactly the expected events in order, no unexpected success
-or rejection, a command prompt, a username prompt, exit status zero and empty
-stderr. Every original case ends in a valid logout, checked explicitly. Errors
-in TC04 and TC25 caused by unused field lines are explicitly represented.
-Exact DTF comparison independently verifies that a terminal success actually
-produces the required transaction record.
+- `expected/TCxx.out`: exactly what the user sees on the terminal (prompts, the
+  typed input, and the Front End's responses)
+- `expected/TCxx.etf`: the daily transaction file written at logout
 
-No exact full-console transcript fixtures are introduced. Prompt wording/spacing
-is not prescribed by the handout. If the team introduces `.transcript.txt` files
-later, author them from specified behavior, obtain human review/sign-off, and
-record reviewer/date before enabling them. Do not bless actual output as expected.
+`TEST_CATALOG.md` lists every test with a short description of what it checks.
 
-## Human review still required
+Run and check all tests from the repository root:
 
-Status: AI-authored behavioral mapping; **team/TA sign-off pending**. Review all
-46 mappings alongside the original prose and inputs. A passing event check proves
-observable acceptance/rejection, not the internal reason for a generic rejection.
-Assess prompt clarity/politeness and intended interaction manually. Approve or
-revise the provisional format/edge-case decisions in the accompanying document.
+```sh
+bash scripts/run_tests.sh
+bash scripts/validate_tests.sh
+```
 
-State effects absent from the original streams are covered by 21 supplemental
-black-box scenarios in `scripts/supplemental_tests.py`: list-observed balances,
-duplicate purchases, seller deletion, credit limits, new listings and recovery.
-Expected amounts are specified independently. These scenarios supplement, rather
-than overwrite or inflate, the count of 46 original acceptance tests.
+## How the expected outputs were written
 
-The 11 validator mutation checks disable evidence hashing only on temporary copies
-so the semantic validator itself must detect corrupted records/status/events.
-The original saved evidence is never edited by these checks.
+- The transaction records in each `.etf` file come from the Phase 1 test plan.
+  The final `00` record was calculated by hand from the handout: the test's
+  starting credit in `data/currentaccounts.txt` plus or minus every buy, refund
+  and credit addition in that file.
+- Each `.out` file shows the prompts and responses from our terminal design with the
+  test's input lines placed after their prompts. Each one was checked against the
+  test's description in `TEST_CATALOG.md`.
+
+## Adding a test
+
+1. Add the input as `inputs/TC55.txt` (one entry per line, ending with `logout`).
+2. Add `expected/TC55.out` and `expected/TC55.etf`.
+3. Add a line for it in `TEST_CATALOG.md`, then run both scripts.

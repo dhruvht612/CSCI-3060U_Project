@@ -1,4 +1,0 @@
-TC38 – Admin Adds Credit to Nonexistent User
-
-Expected behaviour: The add-credit transaction is rejected because the
-admin specified a username that does not exist.

@@ -1,0 +1,236 @@
+---
+title: "CSCI 3060U Phase 3: Front End Testing"
+subtitle: "Games Distribution System"
+author: "Qudsia Fawad, Diana Riyahi, Dhruv Thakar"
+date: "November 2026"
+---
+
+GitHub: <https://github.com/dhruvht612/CSCI-3060U_Project>
+
+We are not willing to share our Front End with other students, so we understand
+we won't be eligible for the bonus marks.
+
+# Running the program
+
+The Front End is written in C++17. To compile it, run this from the top folder of
+the repo in a Bash terminal (we used Git Bash on Windows, but Linux/macOS work too):
+
+```
+mkdir -p build
+g++ -std=c++17 -Wall -Wextra -Iinclude src/*.cpp -o build/games-distribution
+```
+
+The program takes the three input files and then the name of the daily transaction
+file to write, in this order:
+
+```
+build/games-distribution data/currentaccounts.txt data/availablegames.txt \
+    data/gamescollection.txt transout.atf
+```
+
+You can type commands in directly, or feed in a file of commands with `<`:
+
+```
+build/games-distribution data/currentaccounts.txt data/availablegames.txt \
+    data/gamescollection.txt outputs/TC01.atf < inputs/TC01.txt
+```
+
+When the commands come from a file, the program prints each line it reads after
+the prompt. That way the saved output looks the same as what you'd see typing it in.
+
+The commands are login, logout, create, delete, sell, buy, refund, addcredit,
+list (admin only) and search.
+
+# Running the tests
+
+From the top folder of the repo:
+
+```
+bash scripts/run_tests.sh
+bash scripts/validate_tests.sh
+```
+
+`run_tests.sh` compiles the program and runs it once for every file in `inputs/`.
+For each test it saves the terminal output to `outputs/TCxx.out` and the daily
+transaction file to `outputs/TCxx.atf`.
+
+`validate_tests.sh` uses `diff` to compare each `.atf` file with `expected/TCxx.etf`
+and each `.out` file with `expected/TCxx.out`. It prints which tests passed or
+failed (and the differences for any that failed), then adds a one-line summary to
+`outputs/test_history.log`.
+
+We also have 21 extra tests for things the main tests don't check directly, like
+account balances after a buy or refund and what happens with a broken input file.
+They need Python 3:
+
+```
+python3 scripts/supplemental_tests.py --label some-name
+```
+
+# How the tests are set up
+
+All 54 tests use the same three data files in `data/`. Each test has:
+
+- `inputs/TCxx.txt`: the commands typed in, one per line
+- `expected/TCxx.out`: what should show up on the screen
+- `expected/TCxx.etf`: the daily transaction file it should write
+
+`tests/TEST_CATALOG.md` has a short description of every test. TC01-TC46 are from
+Phase 1 and TC47-TC54 test the new SEARCH transaction.
+
+## Changes from the Phase 1 feedback
+
+We changed our tests to address each of the TA's comments on Phase 1:
+
+| Feedback | What we changed |
+|---|---|
+| The output should show what the user will see, not "T0 ..., Expected Output: ..." | Our expected output files were descriptions of what should happen. We replaced them with the actual screen output (prompts, what's typed, and the responses), and the scripts compare them with `diff`. The descriptions moved to `tests/TEST_CATALOG.md`. |
+| Daily transaction files are not input files | `inputs/` now only has the command files. Transaction files only show up as expected results (`.etf`) and actual results (`.atf`). |
+| Couldn't tell what most of the files in `inputs/` were for | Every test used to have four input files (commands, users, games, collections), so `inputs/` had 216 files. Now all tests share one set of data files and there's just one input file per test. |
+| Random files with just 00 inside | A lot of our expected transaction files only had `00` in them. We changed the 00 line to the handout's format (`00`, username, account type, credit), e.g. `00 admin AA 005000.00`, and fixed the program to match (runs 7 and 8 in the failure log). |
+
+We worked out the credit in each new 00 line by hand: we started from the user's
+balance in `currentaccounts.txt`, then applied any buys, refunds and added credit
+from that test.
+
+# The SEARCH update
+
+SEARCH was added as a new requirement. It lists all games and users whose names
+contain the search text, but non-admin users shouldn't see admins who aren't selling
+any games.
+
+How we implemented it:
+
+- Any logged-in user can search. It asks for the search text, and blank text is rejected.
+- Matching isn't case-sensitive.
+- Games show the name, seller and price. Users show the name and account type.
+- If you're not an admin, an admin account only shows up if it has a game for sale.
+- Games put up for sale in the same session don't show up until the next session,
+  the same as with buying.
+- Search doesn't write anything to the daily transaction file.
+
+TC47-TC54 test this. We wrote them before writing the code, so they failed in run 5
+and passed in run 6.
+
+# Failure log
+
+We kept every failure we saw, even after fixing it. TC01-TC54 are the main tests
+(listed in `tests/TEST_CATALOG.md`). S01-S21 are extra tests in
+`scripts/supplemental_tests.py`. H01 was a problem with one of our scripts.
+
+## Test runs
+
+| Run | What changed before this run | Main tests | Extra tests |
+|---|---|---|---|
+| 1 | First run on our Phase 2 code (most transactions were still stubs) | 30/46 | 7/21 |
+| 2 | Implemented the transactions (see fixes below) | 46/46 | 21/21 |
+| 3 | Reran everything | 46/46 | 21/21 |
+| 4 | Ran from a clean copy of the repo | 46/46 | - |
+| 5 | Added TC47-TC54 for SEARCH, before writing any SEARCH code | 46/54 | - |
+| 6 | Implemented SEARCH | 54/54 | 21/21 |
+| 7 | Redid the tests from the Phase 1 feedback (no code changes yet) | 0/54 | 5/21 |
+| 8 | Fixed the 00 record and input echo | 54/54 | 21/21 |
+
+Runs 1-6 used our first test runner (written in Python). Their outputs are saved in
+`archive/phase3_iterations1-6_evidence/`. Runs 7-8 used `run_tests.sh` and
+`validate_tests.sh`; the full output is in `outputs/history/` and the summaries
+are in `outputs/test_history.log`.
+
+## Failures
+
+| Test | What it was testing | What was wrong with the output | Error in the code / test | What we changed | Result after fix |
+|---|---|---|---|---|---|
+| TC08 | Valid Create User | Run 1: the create was rejected, so the .etf only had 00 (the 01 record missing) | createUser() was still a stub that always returned false | Wrote createUser(): checks the name and type, rejects duplicates, adds the account with 0 credit and writes the 01 record | Pass (runs 2 and 3) |
+| TC12 | Username Exactly 15 Characters | Run 1: the create was rejected, so the .etf only had 00 (the 01 record missing) | createUser() was still a stub that always returned false | Wrote createUser(): checks the name and type, rejects duplicates, adds the account with 0 credit and writes the 01 record | Pass (runs 2 and 3) |
+| TC13 | Valid Delete User | Run 1: the delete was rejected, so the .etf only had 00 (the 02 record missing) | deleteUser() and removeUser() were empty stubs | Wrote deleteUser(): removes the account and the user's games for sale, writes the 02 record | Pass (runs 2 and 3) |
+| TC17 | Valid Sell | Run 1: the sell was rejected, so the .etf only had 00 (the 03 record missing) | sell() was still a stub that always returned false | Wrote sell(): checks permission, price and name, writes the 03 record | Pass (runs 2 and 3) |
+| TC19 | Maximum Game Price | Run 1: the sell was rejected, so the .etf only had 00 (the 03 record missing) | sell() was still a stub that always returned false | Wrote sell(): checks permission, price and name, writes the 03 record | Pass (runs 2 and 3) |
+| TC21 | Game Name Exactly 25 Characters | Run 1: the sell was rejected, so the .etf only had 00 (the 03 record missing) | sell() was still a stub that always returned false | Wrote sell(): checks permission, price and name, writes the 03 record | Pass (runs 2 and 3) |
+| TC25 | Transaction on Newly Listed Game | Run 1: the sell was rejected, so the .etf only had 00 (the 03 record missing) | sell() was still a stub that always returned false | Wrote sell(): checks permission, price and name, writes the 03 record | Pass (runs 2 and 3) |
+| TC26 | Valid Buy | Run 1: the buy was rejected, so the .etf only had 00 (the 04 record missing) | buy() was a stub, and the games/collections files were never actually read | Wrote the file loaders and buy(): checks seller, ownership and credit, moves the money, writes the 04 record | Pass (runs 2 and 3) |
+| TC30 | Exact Credit Purchase | Run 1: the buy was rejected, so the .etf only had 00 (the 04 record missing) | buy() was a stub, and the games/collections files were never actually read | Wrote the file loaders and buy(): checks seller, ownership and credit, moves the money, writes the 04 record | Pass (runs 2 and 3) |
+| TC32 | Valid Refund | Run 1: the refund was rejected, so the .etf only had 00 (the 05 record missing) | refund() and adjustCredit() were stubs | Wrote refund(): checks both accounts, moves the credit, writes the 05 record | Pass (runs 2 and 3) |
+| TC36 | Valid Add Credit - Standard User | Run 1: the addcredit was rejected, so the .etf only had 00 (the 06 record missing) | addCredit() and adjustCredit() were stubs, and nothing tracked the $1000-per-session limit | Wrote addCredit() with a per-account session total, writes the 06 record | Pass (runs 2 and 3) |
+| TC37 | Valid Add Credit - Admin | Run 1: the addcredit was rejected, so the .etf only had 00 (the 06 record missing) | addCredit() and adjustCredit() were stubs, and nothing tracked the $1000-per-session limit | Wrote addCredit() with a per-account session total, writes the 06 record | Pass (runs 2 and 3) |
+| TC39 | Add Exactly $1000 | Run 1: the addcredit was rejected, so the .etf only had 00 (the 06 record missing) | addCredit() and adjustCredit() were stubs, and nothing tracked the $1000-per-session limit | Wrote addCredit() with a per-account session total, writes the 06 record | Pass (runs 2 and 3) |
+| TC41 | Multiple Credit Additions to $1000 | Run 1: the addcredit was rejected, so the .etf only had 00 (both 06 records missing) | addCredit() and adjustCredit() were stubs, and nothing tracked the $1000-per-session limit | Wrote addCredit() with a per-account session total, writes the 06 record | Pass (runs 2 and 3) |
+| TC42 | Multiple Credit Additions Over $1000 | Run 1: the addcredit was rejected, so the .etf only had 00 (the 06 record missing) | addCredit() and adjustCredit() were stubs, and nothing tracked the $1000-per-session limit | Wrote addCredit() with a per-account session total, writes the 06 record | Pass (runs 2 and 3) |
+| TC46 | Daily Transaction File Formatting | Run 1: the create was rejected, so the .etf only had 00 (the 01 record missing) | createUser() was still a stub that always returned false | Wrote createUser(): checks the name and type, rejects duplicates, adds the account with 0 credit and writes the 01 record | Pass (runs 2 and 3) |
+| S01 | Very large credit amount | Run 1: the program crashed with "Error: stoll" instead of rejecting the amount | std::stoll throws on a number that big and nothing caught it | Rewrote the money parser in Money.h to reject amounts that are too large | Pass (runs 2 and 3) |
+| S03 | Buying the same game twice; balances after a buy | Run 1: second buy wasn't rejected properly and balances were wrong (admin should be 4985.00, seller1 515.00) | buy() was a stub, and the games/collections files were never actually read | Wrote the file loaders and buy(): checks seller, ownership and credit, moves the money, writes the 04 record | Pass (runs 2 and 3) |
+| S04 | Refund moves credit between accounts | Run 1: balances didn't change (buyer1 should be 510.00, seller1 490.00) | refund() and adjustCredit() were stubs | Wrote refund(): checks both accounts, moves the credit, writes the 05 record | Pass (runs 2 and 3) |
+| S05 | Deleted user's account and games can't be used | Run 1: deleted account still showed up in list | deleteUser() and removeUser() were empty stubs | Wrote deleteUser(): removes the account and the user's games for sale, writes the 02 record | Pass (runs 2 and 3) |
+| S06 | New game can't be bought same session; duplicate name rejected | Run 1: wrong records and error count | sell() was still a stub that always returned false | Wrote sell(): checks permission, price and name, writes the 03 record | Pass (runs 2 and 3) |
+| S07 | $1000 limit is per account | Run 1: credit limits weren't tracked per account (buyer1 and seller1 should both be 1500.00) | addCredit() and adjustCredit() were stubs, and nothing tracked the $1000-per-session limit | Wrote addCredit() with a per-account session total, writes the 06 record | Pass (runs 2 and 3) |
+| S08 | Creating each account type; duplicate name | Run 1: new accounts weren't created | createUser() was still a stub that always returned false | Wrote createUser(): checks the name and type, rejects duplicates, adds the account with 0 credit and writes the 01 record | Pass (runs 2 and 3) |
+| S12 | Games file missing | Run 1: login was accepted even though the games file was missing | loadGames() ignored the file path and returned an empty list | loadGames() now opens the file and login is rejected with a message if it can't be read | Pass (runs 2 and 3) |
+| S13 | Broken collections file | Run 1: login was accepted with a broken collections file | loadCollections() didn't check the record format | Added format checks for collection records and the END line | Pass (runs 2 and 3) |
+| S14 | Games file with no END line | Run 1: login was accepted with no END line in the games file | loadGames() didn't check for END | Missing END is now reported and the login is rejected | Pass (runs 2 and 3) |
+| S15 | Files using the handout's line widths | Run 1: the buy was rejected, so its 04 record was missing | buy() was a stub, and the games/collections files were never actually read | Loaders accept both widths; buy() implemented | Pass (runs 2 and 3) |
+| S17 | Credit limit resets at next login | Run 1: addcredit was rejected, so the 06 record was missing | addCredit() and adjustCredit() were stubs, and nothing tracked the $1000-per-session limit | Session totals reset and files reload at each login | Pass (runs 2 and 3) |
+| S18 | Buying with credit added in the same session | Run 1: couldn't buy with credit added earlier in the same session | addCredit() and buy() were stubs | Credit changes are applied in memory so later transactions see them | Pass (runs 2 and 3) |
+| S21 | Names with spaces; max-length names | Run 1: names with spaces / maximum-length names were rejected | createUser() and sell() were stubs | Names with spaces and exact max lengths now work | Pass (runs 2 and 3) |
+| TC47 | Search by Admin - Games and Users | Run 5: "search" was an unrecognized command, so no results were printed | SEARCH wasn't implemented yet (we wrote these tests first) | Added the search command: FrontEnd::handleSearch(), TransactionProcessor::search() and GameManager::isSelling() | Pass (run 6) |
+| TC48 | Search by Standard User Hides Non-Selling Admins | Run 5: "search" was an unrecognized command, so no results were printed | SEARCH wasn't implemented yet (we wrote these tests first) | Added the search command: FrontEnd::handleSearch(), TransactionProcessor::search() and GameManager::isSelling() | Pass (run 6) |
+| TC49 | Search Is Case-Insensitive for a Sell-Standard User | Run 5: "search" was an unrecognized command, so no results were printed | SEARCH wasn't implemented yet (we wrote these tests first) | Added the search command: FrontEnd::handleSearch(), TransactionProcessor::search() and GameManager::isSelling() | Pass (run 6) |
+| TC50 | Search With No Matches | Run 5: "search" was an unrecognized command, so no results were printed | SEARCH wasn't implemented yet (we wrote these tests first) | Added the search command: FrontEnd::handleSearch(), TransactionProcessor::search() and GameManager::isSelling() | Pass (run 6) |
+| TC51 | Search Before Login | Run 5: search before login gave "unrecognized command" instead of "you must log in" | SEARCH wasn't implemented yet (we wrote these tests first) | Added the search command: FrontEnd::handleSearch(), TransactionProcessor::search() and GameManager::isSelling() | Pass (run 6) |
+| TC52 | Blank Search Query | Run 5: "search" was an unrecognized command, so the blank query was never checked | SEARCH wasn't implemented yet (we wrote these tests first) | Added the search command: FrontEnd::handleSearch(), TransactionProcessor::search() and GameManager::isSelling() | Pass (run 6) |
+| TC53 | Search After Deleting a User | Run 5: "search" was an unrecognized command, so no results were printed | SEARCH wasn't implemented yet (we wrote these tests first) | Added the search command: FrontEnd::handleSearch(), TransactionProcessor::search() and GameManager::isSelling() | Pass (run 6) |
+| TC54 | Newly Listed Game Not Found by Search | Run 5: "search" was an unrecognized command, so no results were printed | SEARCH wasn't implemented yet (we wrote these tests first) | Added the search command: FrontEnd::handleSearch(), TransactionProcessor::search() and GameManager::isSelling() | Pass (run 6) |
+| H01 | Test script on Windows (Git Bash) | run_tests.sh failed with "Permission denied" on python3 | Our script found the Windows Store python3 shortcut, which does not run | Script checks that python3 actually runs before using it, otherwise uses python | Fixed (run 3). The scripts no longer use Python. |
+| TC01 | Valid Login | Run 7: last line of the .atf was just 00, expected `00 admin AA 005000.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC02 | Invalid Login | Run 7: last line of the .atf was just 00, expected `00 admin AA 005000.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC03 | Transaction Before Login | Run 7: last line of the .atf was just 00, expected `00 admin AA 005000.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC04 | Second Login During Session | Run 7: last line of the .atf was just 00, expected `00 admin AA 005000.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC05 | Valid Logout | Run 7: last line of the .atf was just 00, expected `00 admin AA 005000.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC06 | Logout Before Login | Run 7: last line of the .atf was just 00, expected `00 admin AA 005000.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC07 | Transaction After Logout | Run 7: last line of the .atf was just 00, expected `00 admin AA 005000.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC08 | Valid Create User | Run 7: last line of the .atf was just 00, expected `00 admin AA 005000.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC09 | Unauthorized Create User | Run 7: last line of the .atf was just 00, expected `00 buyer1 BS 000500.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC10 | Duplicate Username | Run 7: last line of the .atf was just 00, expected `00 admin AA 005000.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC11 | Username Over 15 Characters | Run 7: last line of the .atf was just 00, expected `00 admin AA 005000.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC12 | Username Exactly 15 Characters | Run 7: last line of the .atf was just 00, expected `00 admin AA 005000.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC13 | Valid Delete User | Run 7: last line of the .atf was just 00, expected `00 admin AA 005000.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC14 | Unauthorized Delete User | Run 7: last line of the .atf was just 00, expected `00 buyer1 BS 000500.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC15 | Delete Nonexistent User | Run 7: last line of the .atf was just 00, expected `00 admin AA 005000.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC16 | Delete Current User | Run 7: last line of the .atf was just 00, expected `00 admin AA 005000.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC17 | Valid Sell | Run 7: last line of the .atf was just 00, expected `00 seller1 SS 000500.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC18 | Buy-Standard User Attempts Sell | Run 7: last line of the .atf was just 00, expected `00 buyer1 BS 000500.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC19 | Maximum Game Price | Run 7: last line of the .atf was just 00, expected `00 seller1 SS 000500.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC20 | Price Above Maximum | Run 7: last line of the .atf was just 00, expected `00 seller1 SS 000500.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC21 | Game Name Exactly 25 Characters | Run 7: last line of the .atf was just 00, expected `00 seller1 SS 000500.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC22 | Game Name Over 25 Characters | Run 7: last line of the .atf was just 00, expected `00 seller1 SS 000500.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC23 | Duplicate Game Name | Run 7: last line of the .atf was just 00, expected `00 seller1 SS 000500.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC24 | Invalid Sell Input | Run 7: last line of the .atf was just 00, expected `00 seller1 SS 000500.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC25 | Transaction on Newly Listed Game | Run 7: last line of the .atf was just 00, expected `00 seller1 SS 000500.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC26 | Valid Buy | Run 7: last line of the .atf was just 00, expected `00 buyer1 BS 000485.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC27 | Sell-Standard User Attempts Buy | Run 7: last line of the .atf was just 00, expected `00 seller1 SS 000500.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC28 | Buy Nonexistent Game | Run 7: last line of the .atf was just 00, expected `00 buyer1 BS 000500.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC29 | Insufficient Credit | Run 7: last line of the .atf was just 00, expected `00 lowcredit BS 000005.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC30 | Exact Credit Purchase | Run 7: last line of the .atf was just 00, expected `00 exactbuyer BS 000000.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC31 | Already-Owned Game | Run 7: last line of the .atf was just 00, expected `00 buyer1 BS 000500.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC32 | Valid Refund | Run 7: last line of the .atf was just 00, expected `00 admin AA 005000.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC33 | Unauthorized Refund | Run 7: last line of the .atf was just 00, expected `00 buyer1 BS 000500.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC34 | Refund to Nonexistent Buyer | Run 7: last line of the .atf was just 00, expected `00 admin AA 005000.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC35 | Refund from Nonexistent Seller | Run 7: last line of the .atf was just 00, expected `00 admin AA 005000.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC36 | Valid Add Credit - Standard User | Run 7: last line of the .atf was just 00, expected `00 buyer1 BS 000600.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC37 | Valid Add Credit - Admin | Run 7: last line of the .atf was just 00, expected `00 admin AA 005000.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC38 | Admin Adds Credit to Nonexistent User | Run 7: last line of the .atf was just 00, expected `00 admin AA 005000.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC39 | Add Exactly $1000 | Run 7: last line of the .atf was just 00, expected `00 buyer1 BS 001500.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC40 | Add More Than $1000 | Run 7: last line of the .atf was just 00, expected `00 buyer1 BS 000500.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC41 | Multiple Credit Additions to $1000 | Run 7: last line of the .atf was just 00, expected `00 buyer1 BS 001500.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC42 | Multiple Credit Additions Over $1000 | Run 7: last line of the .atf was just 00, expected `00 buyer1 BS 001100.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC43 | Invalid Credit Amount | Run 7: last line of the .atf was just 00, expected `00 buyer1 BS 000500.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC44 | Invalid Transaction Code | Run 7: last line of the .atf was just 00, expected `00 admin AA 005000.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC45 | Daily Transaction File End Code | Run 7: last line of the .atf was just 00, expected `00 admin AA 005000.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC46 | Daily Transaction File Formatting | Run 7: last line of the .atf was just 00, expected `00 admin AA 005000.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC47 | Search by Admin - Games and Users | Run 7: last line of the .atf was just 00, expected `00 admin AA 005000.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC48 | Search by Standard User Hides Non-Selling Admins | Run 7: last line of the .atf was just 00, expected `00 buyer1 BS 000500.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC49 | Search Is Case-Insensitive for a Sell-Standard User | Run 7: last line of the .atf was just 00, expected `00 seller1 SS 000500.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC50 | Search With No Matches | Run 7: last line of the .atf was just 00, expected `00 fullgamer FS 000300.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC51 | Search Before Login | Run 7: last line of the .atf was just 00, expected `00 admin AA 005000.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC52 | Blank Search Query | Run 7: last line of the .atf was just 00, expected `00 admin AA 005000.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC53 | Search After Deleting a User | Run 7: last line of the .atf was just 00, expected `00 admin AA 005000.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| TC54 | Newly Listed Game Not Found by Search | Run 7: last line of the .atf was just 00, expected `00 seller1 SS 000500.00`. The .out was also missing the typed input | logout() wrote a bare 00, and the program doesn't show the input it reads from a file | logout() now writes the full 00 record (user, type, credit). Input lines are echoed when they come from a file | Pass (run 8) |
+| S01-S11, S15, S17-S19, S21 | Extra tests that write a .atf | Run 7: 16 of 21 failed on the last line (bare 00) | Same 00 problem as above | Same fix; added the expected 00 line to each case | Pass (run 8) |

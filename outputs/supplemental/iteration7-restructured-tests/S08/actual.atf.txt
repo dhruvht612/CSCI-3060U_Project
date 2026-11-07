@@ -1,0 +1,4 @@
+01 newadmin        AA 000000.00
+01 newbuyer        BS 000000.00
+01 newseller       SS 000000.00
+00

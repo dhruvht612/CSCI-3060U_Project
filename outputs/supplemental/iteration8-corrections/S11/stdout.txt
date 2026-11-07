@@ -1,0 +1,24 @@
+Enter command: login
+Enter username: admin
+Login accepted. Welcome, admin.
+Enter command: refund
+Enter the buyer's username: buyer1
+Enter the seller's username: seller1
+Enter the refund amount (e.g. 15.00): 500.01
+Error: refund from seller1 to buyer1 was not accepted.
+Enter command: list
+Active accounts (10):
+Username        Type  Credit ($)
+admin           AA       5000.00
+buyer1          BS        500.00
+seller1         SS        500.00
+seller2         SS        500.00
+delete1         FS        100.00
+lowcredit       BS          5.00
+exactbuyer      BS         10.00
+selleradmin     AA        100.00
+adminfan        BS        500.00
+fullgamer       FS        300.00
+Enter command: logout
+Logout accepted. Session for admin ended.
+Enter command: 

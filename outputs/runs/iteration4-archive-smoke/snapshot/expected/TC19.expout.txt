@@ -1,4 +1,0 @@
-TC19 – Maximum Game Price
-
-Expected behaviour: The sell transaction is accepted because $999.99 is
-the maximum permitted game price.

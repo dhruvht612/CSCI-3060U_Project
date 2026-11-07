@@ -1,0 +1,8 @@
+Enter command: login
+Enter username: seller1
+Login accepted. Welcome, seller1.
+Enter command: buy
+Error: "buy" is not permitted for seller1 (account type SS).
+Enter command: logout
+Logout accepted. Session for seller1 ended.
+Enter command: 
