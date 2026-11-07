@@ -1,0 +1,5 @@
+Enter command: Enter username: Login accepted. Welcome, admin.
+Enter command: Enter the new username: Enter the account type (admin, full-standard, buy-standard, sell-standard): Create accepted. User Jane Doe created.
+Enter command: Enter the game name: Enter the asking price (e.g. 15.00): Sell accepted. ABCDEFGHIJKLMNOPQRSTUVWXY is for sale.
+Enter command: Logout accepted. Session for admin ended.
+Enter command: 

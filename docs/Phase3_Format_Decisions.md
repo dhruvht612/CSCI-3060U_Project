@@ -1,15 +1,10 @@
-# Phase 3 format decisions and TA questions
+# Phase 3 file-format decisions and open questions
 
-Status: provisional compatibility decisions, **not TA-approved requirements**.
-The original inputs and expected files are unchanged. Source: the repository's
-`Project_Docs/Extreme Project - Games Distribution (2026).docx.md`, Transaction
-Code Details and file-format sections; compare `docs/phase2_design_notes.md`,
-section 5, and `Project_Docs/README.txt`.
-
-The Phase 3 assignment handout was not present in the repository or among the
-course documents found in Downloads. Its path/link has been requested. This work
-uses the available original handout, Phase 1 plan/cases, Phase 2 design, and the
-user's Phase 3 checklist. Assignment-specific compliance remains unverified.
+The handout's file descriptions disagree with each other in a few places (for
+example, the Available Games File is described as both 49 and 42 characters per
+line). This file records the layout we implemented for each record and the
+questions we still want the TA to confirm. Source: `Project_Docs/Extreme Project -
+Games Distribution (2026).docx.md`, file-format sections.
 
 ## Explicit compatibility profile
 
@@ -29,7 +24,7 @@ validation normalizes only CRLF to LF, retaining every other byte.
 | 04 buy | code 2, space, game 25, space, seller 15, space, buyer 15, space, price 6 | 67 | Same conflict with short handout template |
 | 05 refund | code 2, space, buyer 15, space, seller 15, space, amount 9 | 44 | Handout and fixtures agree |
 | 06 addcredit | code 2, space, name 15, space, type 2, space, amount added 9 | 31 | Fixtures record delta; handout calls field available credit |
-| 00 logout | bare `00` | 2 | Original fixtures and merged-file prose; user-layout template conflicts |
+| 00 logout | code 2, space, name 15, space, type 2, space, credit at logout 9 | 31 | Handout's end-of-session layout; changed from a bare `00` after Phase 1 feedback |
 
 `END` followed by spaces (or bare `END`) terminates each input file. Blank lines,
 bad separators, duplicate records, invalid types/money/names, and missing END are
@@ -39,7 +34,7 @@ in game and user names remain intact. A 26-character game name remains invalid.
 
 ## Behavior decisions requiring confirmation
 
-1. Confirm all disputed widths and whether 00 needs user fields. Confirm whether
+1. Confirm all disputed widths. (The 00 record now uses the handout's user layout.) Confirm whether
    delete type/credit should be retained and addcredit should contain a delta or
    resulting balance. No alternative expected fixtures have been silently substituted.
 2. Confirm that each logout replaces the output file with that session only
@@ -77,19 +72,4 @@ in game and user names remain intact. A 26-character game name remains invalid.
    one game available for sale. Games show name, seller and price; users show name
    and account type, never credit. Search writes no DTF record. Tests: TC47-TC54.
 
-No approval is implied by a passing fixture test. These questions are for the
-TA/team to resolve before declaring official format compliance.
-
-## Original test limitations
-
-- TC25 uses an SS account, so buy is rejected before reading its fields; its two
-  remaining field lines become invalid commands. Preserve this evidence. S06
-  adds a buy-capable admin and verifies new listing and repeated listing rules.
-- TC13 deletes `delete1`, which has no games in its fixture. S05 deletes `seller1`,
-  attempts a purchase and a credit addition, and checks that the account vanishes.
-- TC04 supplies a username after a rejected second login; the existing interface
-  treats it as a new invalid command. The terminal assertion records this explicitly.
-- Negative cases can pass while every transaction is a stub. Positive cases,
-  state-sensitive supplemental cases and preserved baseline failures are necessary.
-- TC46 covers create formatting only. Exact DTF validation applies to every case;
-  supplemental tests cover mixed transaction sequences and state changes.
+These questions are still open with the TA.

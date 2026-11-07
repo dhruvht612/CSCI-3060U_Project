@@ -1,0 +1,13 @@
+Enter command: login
+Enter username: lowcredit
+Login accepted. Welcome, lowcredit.
+Enter command: addcredit
+Enter the amount to add (e.g. 15.00): 10.00
+Addcredit accepted. 10.00 added to lowcredit.
+Enter command: buy
+Enter the game name: ExistingGame
+Enter the seller's username: seller1
+Buy accepted. lowcredit now owns ExistingGame.
+Enter command: logout
+Logout accepted. Session for lowcredit ended.
+Enter command: 

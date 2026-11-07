@@ -1,0 +1,17 @@
+Enter command: login
+Enter username: admin
+Login accepted. Welcome, admin.
+Enter command: delete
+Enter the username to delete: seller1
+Delete accepted. User seller1 deleted.
+Enter command: search
+Enter the text to search for: seller
+Search results for "seller":
+Games for sale (0):
+Users (2):
+seller2         SS
+selleradmin     AA
+Search accepted. 0 game(s) and 2 user(s) match "seller".
+Enter command: logout
+Logout accepted. Session for admin ended.
+Enter command: 

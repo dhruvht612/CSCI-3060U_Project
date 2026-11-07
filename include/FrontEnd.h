@@ -10,7 +10,11 @@ class TransactionProcessor;
 class FrontEnd {
 public:
     // Reads commands and fields from `in` and writes prompts and results to `out`.
-    FrontEnd(TransactionProcessor& processor, std::istream& in, std::ostream& out);
+    // When `echoInput` is true, each line read is written back to `out` after its
+    // prompt, so a run fed from a file shows exactly what a user at a terminal
+    // would see (the terminal itself echoes typed input in an interactive run).
+    FrontEnd(TransactionProcessor& processor, std::istream& in, std::ostream& out,
+             bool echoInput = false);
 
     // Processes commands until the end of input. Whitespace around a command is
     // ignored; commands stay case-sensitive.
@@ -63,4 +67,5 @@ private:
     TransactionProcessor& processor_;
     std::istream& in_;
     std::ostream& out_;
+    bool echoInput_;
 };

@@ -1,0 +1,4 @@
+Enter command: Error: you must log in before using "logout".
+Enter command: Enter username: Login accepted. Welcome, admin.
+Enter command: Logout accepted. Session for admin ended.
+Enter command: 

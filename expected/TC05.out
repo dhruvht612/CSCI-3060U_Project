@@ -1,0 +1,6 @@
+Enter command: login
+Enter username: admin
+Login accepted. Welcome, admin.
+Enter command: logout
+Logout accepted. Session for admin ended.
+Enter command: 

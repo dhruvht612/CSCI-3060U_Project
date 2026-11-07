@@ -1,0 +1,8 @@
+Enter command: login
+Enter username: buyer1
+Login accepted. Welcome, buyer1.
+Enter command: sell
+Error: "sell" is not permitted for buyer1 (account type BS).
+Enter command: logout
+Logout accepted. Session for buyer1 ended.
+Enter command: 

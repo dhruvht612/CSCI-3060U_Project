@@ -1,0 +1,12 @@
+login
+admin
+sell
+Fresh Game
+10.00
+buy
+Fresh Game
+admin
+sell
+Fresh Game
+10.00
+logout

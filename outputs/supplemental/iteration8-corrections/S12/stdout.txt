@@ -1,0 +1,6 @@
+Enter command: login
+Enter username: admin
+Error: cannot open games file /home/claude/repo/CSCI-3060U_Project-main/outputs/supplemental/iteration8-corrections/S12/game.txt. Login rejected.
+Enter command: logout
+Error: you must log in before using "logout".
+Enter command: 

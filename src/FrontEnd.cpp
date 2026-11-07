@@ -80,8 +80,9 @@ bool isPermitted(const std::string& command, const std::string& userType) {
 
 // Creates the front end with the processor to send transactions to
 // and the input and output streams to use.
-FrontEnd::FrontEnd(TransactionProcessor& processor, std::istream& in, std::ostream& out)
-    : processor_(processor), in_(in), out_(out) {}
+FrontEnd::FrontEnd(TransactionProcessor& processor, std::istream& in, std::ostream& out,
+                   bool echoInput)
+    : processor_(processor), in_(in), out_(out), echoInput_(echoInput) {}
 
 // Runs the session: prompts for a command and dispatches it until input ends.
 void FrontEnd::run() {
@@ -99,6 +100,7 @@ void FrontEnd::run() {
 bool FrontEnd::readLine(std::string& line) {
     if (!std::getline(in_, line)) return false;
     if (!line.empty() && line.back() == '\r') line.pop_back();
+    if (echoInput_) out_ << line << '\n';  // show the "typed" line after its prompt
     return true;
 }
 

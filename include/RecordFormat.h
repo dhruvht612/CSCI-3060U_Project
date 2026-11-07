@@ -2,7 +2,7 @@
 
 #include <string>
 
-// Phase 1 compatibility profile, pending TA clarification of handout conflicts.
+// Record layouts for the input files and the daily transaction file.
 // See docs/Phase3_Format_Decisions.md. Never truncate a valid name to fit a record.
 namespace record {
 constexpr long long maxCreditCents = 99999900;

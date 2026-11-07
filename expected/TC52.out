@@ -1,0 +1,9 @@
+Enter command: login
+Enter username: admin
+Login accepted. Welcome, admin.
+Enter command: search
+Enter the text to search for: 
+Error: the search text cannot be blank.
+Enter command: logout
+Logout accepted. Session for admin ended.
+Enter command: 

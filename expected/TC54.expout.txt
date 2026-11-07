@@ -1,5 +1,0 @@
-TC54 – Newly Listed Game Not Found by Search
-
-Expected behaviour: seller1 lists the new game Star Shooter and then searches for "star".
-A game sold this session is not available until the next session, so only
-Star Seller is shown. The sell is saved for the Daily Transaction File.

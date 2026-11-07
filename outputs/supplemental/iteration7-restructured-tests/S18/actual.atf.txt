@@ -1,0 +1,3 @@
+06 lowcredit       BS 000010.00
+04 ExistingGame              seller1         lowcredit       015.00
+00

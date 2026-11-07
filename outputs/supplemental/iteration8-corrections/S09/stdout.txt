@@ -1,0 +1,22 @@
+Enter command: login
+Enter username: admin
+Login accepted. Welcome, admin.
+Enter command: create
+Enter the new username: 
+Enter the account type (admin, full-standard, buy-standard, sell-standard): admin
+Error: create of  was not accepted.
+Enter command: create
+Enter the new username: END
+Enter the account type (admin, full-standard, buy-standard, sell-standard): admin
+Error: create of END was not accepted.
+Enter command: create
+Enter the new username: name 
+Enter the account type (admin, full-standard, buy-standard, sell-standard): admin
+Error: create of name  was not accepted.
+Enter command: create
+Enter the new username: valid
+Enter the account type (admin, full-standard, buy-standard, sell-standard): invalid
+Error: create of valid was not accepted.
+Enter command: logout
+Logout accepted. Session for admin ended.
+Enter command: 

@@ -1,0 +1,8 @@
+Enter command: login
+Enter username: admin
+Login accepted. Welcome, admin.
+Enter command: invalidcommand
+Error: unrecognized command "invalidcommand". Valid commands: login, logout, create, delete, sell, buy, refund, addcredit, list, search.
+Enter command: logout
+Logout accepted. Session for admin ended.
+Enter command: 

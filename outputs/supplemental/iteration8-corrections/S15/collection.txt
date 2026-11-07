@@ -1,0 +1,3 @@
+OwnedGame                  buyer1         
+AdminQuest                 adminfan       
+END                                       

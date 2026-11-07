@@ -1,4 +1,0 @@
-TC39 – Add Exactly $1000
-
-Expected behaviour: Exactly $1000.00 is accepted because it is the
-maximum credit that may be added to an account in one session.

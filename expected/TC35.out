@@ -1,0 +1,11 @@
+Enter command: login
+Enter username: admin
+Login accepted. Welcome, admin.
+Enter command: refund
+Enter the buyer's username: buyer1
+Enter the seller's username: ghostuser
+Enter the refund amount (e.g. 15.00): 10.00
+Error: refund from ghostuser to buyer1 was not accepted.
+Enter command: logout
+Logout accepted. Session for admin ended.
+Enter command: 

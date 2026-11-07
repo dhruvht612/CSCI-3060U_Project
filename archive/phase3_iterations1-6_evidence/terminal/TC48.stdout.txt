@@ -1,0 +1,10 @@
+Enter command: Enter username: Login accepted. Welcome, buyer1.
+Enter command: Enter the text to search for: Search results for "admin":
+Games for sale (1):
+AdminQuest                selleradmin       20.00
+Users (2):
+selleradmin     AA
+adminfan        BS
+Search accepted. 1 game(s) and 2 user(s) match "admin".
+Enter command: Logout accepted. Session for buyer1 ended.
+Enter command: 

@@ -1,0 +1,10 @@
+Enter command: login
+Enter username: admin
+Login accepted. Welcome, admin.
+Enter command: create
+Enter the new username: newuser
+Enter the account type (admin, full-standard, buy-standard, sell-standard): full-standard
+Create accepted. User newuser created.
+Enter command: logout
+Logout accepted. Session for admin ended.
+Enter command: 

@@ -1,0 +1,16 @@
+login
+admin
+create
+newadmin
+admin
+create
+newbuyer
+buy-standard
+create
+newseller
+sell-standard
+create
+newbuyer
+full-standard
+list
+logout

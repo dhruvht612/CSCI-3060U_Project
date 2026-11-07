@@ -1,0 +1,1134 @@
+checking outputs of test TC01
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 admin           AA 005000.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,2c1,5
+    < Enter command: Enter username: Login accepted. Welcome, admin.
+    < Enter command: Logout accepted. Session for admin ended.
+    ---
+    > Enter command: login
+    > Enter username: admin
+    > Login accepted. Welcome, admin.
+    > Enter command: logout
+    > Logout accepted. Session for admin ended.
+checking outputs of test TC02
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 admin           AA 005000.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,8
+    < Enter command: Enter username: Error: no user named "ghostuser". Login rejected.
+    < Enter command: Enter username: Login accepted. Welcome, admin.
+    < Enter command: Logout accepted. Session for admin ended.
+    ---
+    > Enter command: login
+    > Enter username: ghostuser
+    > Error: no user named "ghostuser". Login rejected.
+    > Enter command: login
+    > Enter username: admin
+    > Login accepted. Welcome, admin.
+    > Enter command: logout
+    > Logout accepted. Session for admin ended.
+checking outputs of test TC03
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 admin           AA 005000.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,7
+    < Enter command: Error: you must log in before using "sell".
+    < Enter command: Enter username: Login accepted. Welcome, admin.
+    < Enter command: Logout accepted. Session for admin ended.
+    ---
+    > Enter command: sell
+    > Error: you must log in before using "sell".
+    > Enter command: login
+    > Enter username: admin
+    > Login accepted. Welcome, admin.
+    > Enter command: logout
+    > Logout accepted. Session for admin ended.
+checking outputs of test TC04
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 admin           AA 005000.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,4c1,9
+    < Enter command: Enter username: Login accepted. Welcome, admin.
+    < Enter command: Error: already logged in as admin; log out first.
+    < Enter command: Error: unrecognized command "buyer1". Valid commands: login, logout, create, delete, sell, buy, refund, addcredit, list, search.
+    < Enter command: Logout accepted. Session for admin ended.
+    ---
+    > Enter command: login
+    > Enter username: admin
+    > Login accepted. Welcome, admin.
+    > Enter command: login
+    > Error: already logged in as admin; log out first.
+    > Enter command: buyer1
+    > Error: unrecognized command "buyer1". Valid commands: login, logout, create, delete, sell, buy, refund, addcredit, list, search.
+    > Enter command: logout
+    > Logout accepted. Session for admin ended.
+checking outputs of test TC05
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 admin           AA 005000.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,2c1,5
+    < Enter command: Enter username: Login accepted. Welcome, admin.
+    < Enter command: Logout accepted. Session for admin ended.
+    ---
+    > Enter command: login
+    > Enter username: admin
+    > Login accepted. Welcome, admin.
+    > Enter command: logout
+    > Logout accepted. Session for admin ended.
+checking outputs of test TC06
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 admin           AA 005000.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,7
+    < Enter command: Error: you must log in before using "logout".
+    < Enter command: Enter username: Login accepted. Welcome, admin.
+    < Enter command: Logout accepted. Session for admin ended.
+    ---
+    > Enter command: logout
+    > Error: you must log in before using "logout".
+    > Enter command: login
+    > Enter username: admin
+    > Login accepted. Welcome, admin.
+    > Enter command: logout
+    > Logout accepted. Session for admin ended.
+checking outputs of test TC07
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 admin           AA 005000.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,5c1,12
+    < Enter command: Enter username: Login accepted. Welcome, admin.
+    < Enter command: Logout accepted. Session for admin ended.
+    < Enter command: Error: you must log in before using "sell".
+    < Enter command: Enter username: Login accepted. Welcome, admin.
+    < Enter command: Logout accepted. Session for admin ended.
+    ---
+    > Enter command: login
+    > Enter username: admin
+    > Login accepted. Welcome, admin.
+    > Enter command: logout
+    > Logout accepted. Session for admin ended.
+    > Enter command: sell
+    > Error: you must log in before using "sell".
+    > Enter command: login
+    > Enter username: admin
+    > Login accepted. Welcome, admin.
+    > Enter command: logout
+    > Logout accepted. Session for admin ended.
+checking outputs of test TC08
+  FAIL: daily transaction file differs (< actual, > expected):
+    2c2
+    < 00
+    ---
+    > 00 admin           AA 005000.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,9
+    < Enter command: Enter username: Login accepted. Welcome, admin.
+    < Enter command: Enter the new username: Enter the account type (admin, full-standard, buy-standard, sell-standard): Create accepted. User newuser created.
+    < Enter command: Logout accepted. Session for admin ended.
+    ---
+    > Enter command: login
+    > Enter username: admin
+    > Login accepted. Welcome, admin.
+    > Enter command: create
+    > Enter the new username: newuser
+    > Enter the account type (admin, full-standard, buy-standard, sell-standard): full-standard
+    > Create accepted. User newuser created.
+    > Enter command: logout
+    > Logout accepted. Session for admin ended.
+checking outputs of test TC09
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 buyer1          BS 000500.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,7
+    < Enter command: Enter username: Login accepted. Welcome, buyer1.
+    < Enter command: Error: "create" is not permitted for buyer1 (account type BS).
+    < Enter command: Logout accepted. Session for buyer1 ended.
+    ---
+    > Enter command: login
+    > Enter username: buyer1
+    > Login accepted. Welcome, buyer1.
+    > Enter command: create
+    > Error: "create" is not permitted for buyer1 (account type BS).
+    > Enter command: logout
+    > Logout accepted. Session for buyer1 ended.
+checking outputs of test TC10
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 admin           AA 005000.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,9
+    < Enter command: Enter username: Login accepted. Welcome, admin.
+    < Enter command: Enter the new username: Enter the account type (admin, full-standard, buy-standard, sell-standard): Error: create of buyer1 was not accepted.
+    < Enter command: Logout accepted. Session for admin ended.
+    ---
+    > Enter command: login
+    > Enter username: admin
+    > Login accepted. Welcome, admin.
+    > Enter command: create
+    > Enter the new username: buyer1
+    > Enter the account type (admin, full-standard, buy-standard, sell-standard): full-standard
+    > Error: create of buyer1 was not accepted.
+    > Enter command: logout
+    > Logout accepted. Session for admin ended.
+checking outputs of test TC11
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 admin           AA 005000.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,9
+    < Enter command: Enter username: Login accepted. Welcome, admin.
+    < Enter command: Enter the new username: Enter the account type (admin, full-standard, buy-standard, sell-standard): Error: create of abcdefghijklmnop was not accepted.
+    < Enter command: Logout accepted. Session for admin ended.
+    ---
+    > Enter command: login
+    > Enter username: admin
+    > Login accepted. Welcome, admin.
+    > Enter command: create
+    > Enter the new username: abcdefghijklmnop
+    > Enter the account type (admin, full-standard, buy-standard, sell-standard): full-standard
+    > Error: create of abcdefghijklmnop was not accepted.
+    > Enter command: logout
+    > Logout accepted. Session for admin ended.
+checking outputs of test TC12
+  FAIL: daily transaction file differs (< actual, > expected):
+    2c2
+    < 00
+    ---
+    > 00 admin           AA 005000.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,9
+    < Enter command: Enter username: Login accepted. Welcome, admin.
+    < Enter command: Enter the new username: Enter the account type (admin, full-standard, buy-standard, sell-standard): Create accepted. User abcdefghijklmno created.
+    < Enter command: Logout accepted. Session for admin ended.
+    ---
+    > Enter command: login
+    > Enter username: admin
+    > Login accepted. Welcome, admin.
+    > Enter command: create
+    > Enter the new username: abcdefghijklmno
+    > Enter the account type (admin, full-standard, buy-standard, sell-standard): full-standard
+    > Create accepted. User abcdefghijklmno created.
+    > Enter command: logout
+    > Logout accepted. Session for admin ended.
+checking outputs of test TC13
+  FAIL: daily transaction file differs (< actual, > expected):
+    2c2
+    < 00
+    ---
+    > 00 admin           AA 005000.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,8
+    < Enter command: Enter username: Login accepted. Welcome, admin.
+    < Enter command: Enter the username to delete: Delete accepted. User delete1 deleted.
+    < Enter command: Logout accepted. Session for admin ended.
+    ---
+    > Enter command: login
+    > Enter username: admin
+    > Login accepted. Welcome, admin.
+    > Enter command: delete
+    > Enter the username to delete: delete1
+    > Delete accepted. User delete1 deleted.
+    > Enter command: logout
+    > Logout accepted. Session for admin ended.
+checking outputs of test TC14
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 buyer1          BS 000500.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,7
+    < Enter command: Enter username: Login accepted. Welcome, buyer1.
+    < Enter command: Error: "delete" is not permitted for buyer1 (account type BS).
+    < Enter command: Logout accepted. Session for buyer1 ended.
+    ---
+    > Enter command: login
+    > Enter username: buyer1
+    > Login accepted. Welcome, buyer1.
+    > Enter command: delete
+    > Error: "delete" is not permitted for buyer1 (account type BS).
+    > Enter command: logout
+    > Logout accepted. Session for buyer1 ended.
+checking outputs of test TC15
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 admin           AA 005000.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,8
+    < Enter command: Enter username: Login accepted. Welcome, admin.
+    < Enter command: Enter the username to delete: Error: delete of ghostuser was not accepted.
+    < Enter command: Logout accepted. Session for admin ended.
+    ---
+    > Enter command: login
+    > Enter username: admin
+    > Login accepted. Welcome, admin.
+    > Enter command: delete
+    > Enter the username to delete: ghostuser
+    > Error: delete of ghostuser was not accepted.
+    > Enter command: logout
+    > Logout accepted. Session for admin ended.
+checking outputs of test TC16
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 admin           AA 005000.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,8
+    < Enter command: Enter username: Login accepted. Welcome, admin.
+    < Enter command: Enter the username to delete: Error: delete of admin was not accepted.
+    < Enter command: Logout accepted. Session for admin ended.
+    ---
+    > Enter command: login
+    > Enter username: admin
+    > Login accepted. Welcome, admin.
+    > Enter command: delete
+    > Enter the username to delete: admin
+    > Error: delete of admin was not accepted.
+    > Enter command: logout
+    > Logout accepted. Session for admin ended.
+checking outputs of test TC17
+  FAIL: daily transaction file differs (< actual, > expected):
+    2c2
+    < 00
+    ---
+    > 00 seller1         SS 000500.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,9
+    < Enter command: Enter username: Login accepted. Welcome, seller1.
+    < Enter command: Enter the game name: Enter the asking price (e.g. 15.00): Sell accepted. NewGame is for sale.
+    < Enter command: Logout accepted. Session for seller1 ended.
+    ---
+    > Enter command: login
+    > Enter username: seller1
+    > Login accepted. Welcome, seller1.
+    > Enter command: sell
+    > Enter the game name: NewGame
+    > Enter the asking price (e.g. 15.00): 15.00
+    > Sell accepted. NewGame is for sale.
+    > Enter command: logout
+    > Logout accepted. Session for seller1 ended.
+checking outputs of test TC18
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 buyer1          BS 000500.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,7
+    < Enter command: Enter username: Login accepted. Welcome, buyer1.
+    < Enter command: Error: "sell" is not permitted for buyer1 (account type BS).
+    < Enter command: Logout accepted. Session for buyer1 ended.
+    ---
+    > Enter command: login
+    > Enter username: buyer1
+    > Login accepted. Welcome, buyer1.
+    > Enter command: sell
+    > Error: "sell" is not permitted for buyer1 (account type BS).
+    > Enter command: logout
+    > Logout accepted. Session for buyer1 ended.
+checking outputs of test TC19
+  FAIL: daily transaction file differs (< actual, > expected):
+    2c2
+    < 00
+    ---
+    > 00 seller1         SS 000500.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,9
+    < Enter command: Enter username: Login accepted. Welcome, seller1.
+    < Enter command: Enter the game name: Enter the asking price (e.g. 15.00): Sell accepted. MaxPriceGame is for sale.
+    < Enter command: Logout accepted. Session for seller1 ended.
+    ---
+    > Enter command: login
+    > Enter username: seller1
+    > Login accepted. Welcome, seller1.
+    > Enter command: sell
+    > Enter the game name: MaxPriceGame
+    > Enter the asking price (e.g. 15.00): 999.99
+    > Sell accepted. MaxPriceGame is for sale.
+    > Enter command: logout
+    > Logout accepted. Session for seller1 ended.
+checking outputs of test TC20
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 seller1         SS 000500.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,9
+    < Enter command: Enter username: Login accepted. Welcome, seller1.
+    < Enter command: Enter the game name: Enter the asking price (e.g. 15.00): Error: sell of TooPricey was not accepted.
+    < Enter command: Logout accepted. Session for seller1 ended.
+    ---
+    > Enter command: login
+    > Enter username: seller1
+    > Login accepted. Welcome, seller1.
+    > Enter command: sell
+    > Enter the game name: TooPricey
+    > Enter the asking price (e.g. 15.00): 1000.00
+    > Error: sell of TooPricey was not accepted.
+    > Enter command: logout
+    > Logout accepted. Session for seller1 ended.
+checking outputs of test TC21
+  FAIL: daily transaction file differs (< actual, > expected):
+    2c2
+    < 00
+    ---
+    > 00 seller1         SS 000500.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,9
+    < Enter command: Enter username: Login accepted. Welcome, seller1.
+    < Enter command: Enter the game name: Enter the asking price (e.g. 15.00): Sell accepted. ABCDEFGHIJKLMNOPQRSTUVWXY is for sale.
+    < Enter command: Logout accepted. Session for seller1 ended.
+    ---
+    > Enter command: login
+    > Enter username: seller1
+    > Login accepted. Welcome, seller1.
+    > Enter command: sell
+    > Enter the game name: ABCDEFGHIJKLMNOPQRSTUVWXY
+    > Enter the asking price (e.g. 15.00): 15.00
+    > Sell accepted. ABCDEFGHIJKLMNOPQRSTUVWXY is for sale.
+    > Enter command: logout
+    > Logout accepted. Session for seller1 ended.
+checking outputs of test TC22
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 seller1         SS 000500.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,9
+    < Enter command: Enter username: Login accepted. Welcome, seller1.
+    < Enter command: Enter the game name: Enter the asking price (e.g. 15.00): Error: sell of ABCDEFGHIJKLMNOPQRSTUVWXYZ was not accepted.
+    < Enter command: Logout accepted. Session for seller1 ended.
+    ---
+    > Enter command: login
+    > Enter username: seller1
+    > Login accepted. Welcome, seller1.
+    > Enter command: sell
+    > Enter the game name: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+    > Enter the asking price (e.g. 15.00): 15.00
+    > Error: sell of ABCDEFGHIJKLMNOPQRSTUVWXYZ was not accepted.
+    > Enter command: logout
+    > Logout accepted. Session for seller1 ended.
+checking outputs of test TC23
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 seller1         SS 000500.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,9
+    < Enter command: Enter username: Login accepted. Welcome, seller1.
+    < Enter command: Enter the game name: Enter the asking price (e.g. 15.00): Error: sell of ExistingGame was not accepted.
+    < Enter command: Logout accepted. Session for seller1 ended.
+    ---
+    > Enter command: login
+    > Enter username: seller1
+    > Login accepted. Welcome, seller1.
+    > Enter command: sell
+    > Enter the game name: ExistingGame
+    > Enter the asking price (e.g. 15.00): 15.00
+    > Error: sell of ExistingGame was not accepted.
+    > Enter command: logout
+    > Logout accepted. Session for seller1 ended.
+checking outputs of test TC24
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 seller1         SS 000500.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,9
+    < Enter command: Enter username: Login accepted. Welcome, seller1.
+    < Enter command: Enter the game name: Enter the asking price (e.g. 15.00): Error: "not-a-price" is not a price like 15.00.
+    < Enter command: Logout accepted. Session for seller1 ended.
+    ---
+    > Enter command: login
+    > Enter username: seller1
+    > Login accepted. Welcome, seller1.
+    > Enter command: sell
+    > Enter the game name: NewGame
+    > Enter the asking price (e.g. 15.00): not-a-price
+    > Error: "not-a-price" is not a price like 15.00.
+    > Enter command: logout
+    > Logout accepted. Session for seller1 ended.
+checking outputs of test TC25
+  FAIL: daily transaction file differs (< actual, > expected):
+    2c2
+    < 00
+    ---
+    > 00 seller1         SS 000500.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,6c1,15
+    < Enter command: Enter username: Login accepted. Welcome, seller1.
+    < Enter command: Enter the game name: Enter the asking price (e.g. 15.00): Sell accepted. BrandNewGame is for sale.
+    < Enter command: Error: "buy" is not permitted for seller1 (account type SS).
+    < Enter command: Error: unrecognized command "BrandNewGame". Valid commands: login, logout, create, delete, sell, buy, refund, addcredit, list, search.
+    < Enter command: Error: unrecognized command "seller1". Valid commands: login, logout, create, delete, sell, buy, refund, addcredit, list, search.
+    < Enter command: Logout accepted. Session for seller1 ended.
+    ---
+    > Enter command: login
+    > Enter username: seller1
+    > Login accepted. Welcome, seller1.
+    > Enter command: sell
+    > Enter the game name: BrandNewGame
+    > Enter the asking price (e.g. 15.00): 10.00
+    > Sell accepted. BrandNewGame is for sale.
+    > Enter command: buy
+    > Error: "buy" is not permitted for seller1 (account type SS).
+    > Enter command: BrandNewGame
+    > Error: unrecognized command "BrandNewGame". Valid commands: login, logout, create, delete, sell, buy, refund, addcredit, list, search.
+    > Enter command: seller1
+    > Error: unrecognized command "seller1". Valid commands: login, logout, create, delete, sell, buy, refund, addcredit, list, search.
+    > Enter command: logout
+    > Logout accepted. Session for seller1 ended.
+checking outputs of test TC26
+  FAIL: daily transaction file differs (< actual, > expected):
+    2c2
+    < 00
+    ---
+    > 00 buyer1          BS 000485.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,9
+    < Enter command: Enter username: Login accepted. Welcome, buyer1.
+    < Enter command: Enter the game name: Enter the seller's username: Buy accepted. buyer1 now owns ExistingGame.
+    < Enter command: Logout accepted. Session for buyer1 ended.
+    ---
+    > Enter command: login
+    > Enter username: buyer1
+    > Login accepted. Welcome, buyer1.
+    > Enter command: buy
+    > Enter the game name: ExistingGame
+    > Enter the seller's username: seller1
+    > Buy accepted. buyer1 now owns ExistingGame.
+    > Enter command: logout
+    > Logout accepted. Session for buyer1 ended.
+checking outputs of test TC27
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 seller1         SS 000500.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,7
+    < Enter command: Enter username: Login accepted. Welcome, seller1.
+    < Enter command: Error: "buy" is not permitted for seller1 (account type SS).
+    < Enter command: Logout accepted. Session for seller1 ended.
+    ---
+    > Enter command: login
+    > Enter username: seller1
+    > Login accepted. Welcome, seller1.
+    > Enter command: buy
+    > Error: "buy" is not permitted for seller1 (account type SS).
+    > Enter command: logout
+    > Logout accepted. Session for seller1 ended.
+checking outputs of test TC28
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 buyer1          BS 000500.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,9
+    < Enter command: Enter username: Login accepted. Welcome, buyer1.
+    < Enter command: Enter the game name: Enter the seller's username: Error: buy of MissingGame was not accepted.
+    < Enter command: Logout accepted. Session for buyer1 ended.
+    ---
+    > Enter command: login
+    > Enter username: buyer1
+    > Login accepted. Welcome, buyer1.
+    > Enter command: buy
+    > Enter the game name: MissingGame
+    > Enter the seller's username: seller1
+    > Error: buy of MissingGame was not accepted.
+    > Enter command: logout
+    > Logout accepted. Session for buyer1 ended.
+checking outputs of test TC29
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 lowcredit       BS 000005.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,9
+    < Enter command: Enter username: Login accepted. Welcome, lowcredit.
+    < Enter command: Enter the game name: Enter the seller's username: Error: buy of ExistingGame was not accepted.
+    < Enter command: Logout accepted. Session for lowcredit ended.
+    ---
+    > Enter command: login
+    > Enter username: lowcredit
+    > Login accepted. Welcome, lowcredit.
+    > Enter command: buy
+    > Enter the game name: ExistingGame
+    > Enter the seller's username: seller1
+    > Error: buy of ExistingGame was not accepted.
+    > Enter command: logout
+    > Logout accepted. Session for lowcredit ended.
+checking outputs of test TC30
+  FAIL: daily transaction file differs (< actual, > expected):
+    2c2
+    < 00
+    ---
+    > 00 exactbuyer      BS 000000.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,9
+    < Enter command: Enter username: Login accepted. Welcome, exactbuyer.
+    < Enter command: Enter the game name: Enter the seller's username: Buy accepted. exactbuyer now owns TenDollarGame.
+    < Enter command: Logout accepted. Session for exactbuyer ended.
+    ---
+    > Enter command: login
+    > Enter username: exactbuyer
+    > Login accepted. Welcome, exactbuyer.
+    > Enter command: buy
+    > Enter the game name: TenDollarGame
+    > Enter the seller's username: seller1
+    > Buy accepted. exactbuyer now owns TenDollarGame.
+    > Enter command: logout
+    > Logout accepted. Session for exactbuyer ended.
+checking outputs of test TC31
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 buyer1          BS 000500.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,9
+    < Enter command: Enter username: Login accepted. Welcome, buyer1.
+    < Enter command: Enter the game name: Enter the seller's username: Error: buy of OwnedGame was not accepted.
+    < Enter command: Logout accepted. Session for buyer1 ended.
+    ---
+    > Enter command: login
+    > Enter username: buyer1
+    > Login accepted. Welcome, buyer1.
+    > Enter command: buy
+    > Enter the game name: OwnedGame
+    > Enter the seller's username: seller1
+    > Error: buy of OwnedGame was not accepted.
+    > Enter command: logout
+    > Logout accepted. Session for buyer1 ended.
+checking outputs of test TC32
+  FAIL: daily transaction file differs (< actual, > expected):
+    2c2
+    < 00
+    ---
+    > 00 admin           AA 005000.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,10
+    < Enter command: Enter username: Login accepted. Welcome, admin.
+    < Enter command: Enter the buyer's username: Enter the seller's username: Enter the refund amount (e.g. 15.00): Refund accepted. 10.00 moved from seller1 to buyer1.
+    < Enter command: Logout accepted. Session for admin ended.
+    ---
+    > Enter command: login
+    > Enter username: admin
+    > Login accepted. Welcome, admin.
+    > Enter command: refund
+    > Enter the buyer's username: buyer1
+    > Enter the seller's username: seller1
+    > Enter the refund amount (e.g. 15.00): 10.00
+    > Refund accepted. 10.00 moved from seller1 to buyer1.
+    > Enter command: logout
+    > Logout accepted. Session for admin ended.
+checking outputs of test TC33
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 buyer1          BS 000500.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,7
+    < Enter command: Enter username: Login accepted. Welcome, buyer1.
+    < Enter command: Error: "refund" is not permitted for buyer1 (account type BS).
+    < Enter command: Logout accepted. Session for buyer1 ended.
+    ---
+    > Enter command: login
+    > Enter username: buyer1
+    > Login accepted. Welcome, buyer1.
+    > Enter command: refund
+    > Error: "refund" is not permitted for buyer1 (account type BS).
+    > Enter command: logout
+    > Logout accepted. Session for buyer1 ended.
+checking outputs of test TC34
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 admin           AA 005000.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,10
+    < Enter command: Enter username: Login accepted. Welcome, admin.
+    < Enter command: Enter the buyer's username: Enter the seller's username: Enter the refund amount (e.g. 15.00): Error: refund from seller1 to ghostuser was not accepted.
+    < Enter command: Logout accepted. Session for admin ended.
+    ---
+    > Enter command: login
+    > Enter username: admin
+    > Login accepted. Welcome, admin.
+    > Enter command: refund
+    > Enter the buyer's username: ghostuser
+    > Enter the seller's username: seller1
+    > Enter the refund amount (e.g. 15.00): 10.00
+    > Error: refund from seller1 to ghostuser was not accepted.
+    > Enter command: logout
+    > Logout accepted. Session for admin ended.
+checking outputs of test TC35
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 admin           AA 005000.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,10
+    < Enter command: Enter username: Login accepted. Welcome, admin.
+    < Enter command: Enter the buyer's username: Enter the seller's username: Enter the refund amount (e.g. 15.00): Error: refund from ghostuser to buyer1 was not accepted.
+    < Enter command: Logout accepted. Session for admin ended.
+    ---
+    > Enter command: login
+    > Enter username: admin
+    > Login accepted. Welcome, admin.
+    > Enter command: refund
+    > Enter the buyer's username: buyer1
+    > Enter the seller's username: ghostuser
+    > Enter the refund amount (e.g. 15.00): 10.00
+    > Error: refund from ghostuser to buyer1 was not accepted.
+    > Enter command: logout
+    > Logout accepted. Session for admin ended.
+checking outputs of test TC36
+  FAIL: daily transaction file differs (< actual, > expected):
+    2c2
+    < 00
+    ---
+    > 00 buyer1          BS 000600.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,8
+    < Enter command: Enter username: Login accepted. Welcome, buyer1.
+    < Enter command: Enter the amount to add (e.g. 15.00): Addcredit accepted. 100.00 added to buyer1.
+    < Enter command: Logout accepted. Session for buyer1 ended.
+    ---
+    > Enter command: login
+    > Enter username: buyer1
+    > Login accepted. Welcome, buyer1.
+    > Enter command: addcredit
+    > Enter the amount to add (e.g. 15.00): 100.00
+    > Addcredit accepted. 100.00 added to buyer1.
+    > Enter command: logout
+    > Logout accepted. Session for buyer1 ended.
+checking outputs of test TC37
+  FAIL: daily transaction file differs (< actual, > expected):
+    2c2
+    < 00
+    ---
+    > 00 admin           AA 005000.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,9
+    < Enter command: Enter username: Login accepted. Welcome, admin.
+    < Enter command: Enter the amount to add (e.g. 15.00): Enter the username to add the credit to: Addcredit accepted. 100.00 added to buyer1.
+    < Enter command: Logout accepted. Session for admin ended.
+    ---
+    > Enter command: login
+    > Enter username: admin
+    > Login accepted. Welcome, admin.
+    > Enter command: addcredit
+    > Enter the amount to add (e.g. 15.00): 100.00
+    > Enter the username to add the credit to: buyer1
+    > Addcredit accepted. 100.00 added to buyer1.
+    > Enter command: logout
+    > Logout accepted. Session for admin ended.
+checking outputs of test TC38
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 admin           AA 005000.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,9
+    < Enter command: Enter username: Login accepted. Welcome, admin.
+    < Enter command: Enter the amount to add (e.g. 15.00): Enter the username to add the credit to: Error: addcredit to ghostuser was not accepted.
+    < Enter command: Logout accepted. Session for admin ended.
+    ---
+    > Enter command: login
+    > Enter username: admin
+    > Login accepted. Welcome, admin.
+    > Enter command: addcredit
+    > Enter the amount to add (e.g. 15.00): 100.00
+    > Enter the username to add the credit to: ghostuser
+    > Error: addcredit to ghostuser was not accepted.
+    > Enter command: logout
+    > Logout accepted. Session for admin ended.
+checking outputs of test TC39
+  FAIL: daily transaction file differs (< actual, > expected):
+    2c2
+    < 00
+    ---
+    > 00 buyer1          BS 001500.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,8
+    < Enter command: Enter username: Login accepted. Welcome, buyer1.
+    < Enter command: Enter the amount to add (e.g. 15.00): Addcredit accepted. 1000.00 added to buyer1.
+    < Enter command: Logout accepted. Session for buyer1 ended.
+    ---
+    > Enter command: login
+    > Enter username: buyer1
+    > Login accepted. Welcome, buyer1.
+    > Enter command: addcredit
+    > Enter the amount to add (e.g. 15.00): 1000.00
+    > Addcredit accepted. 1000.00 added to buyer1.
+    > Enter command: logout
+    > Logout accepted. Session for buyer1 ended.
+checking outputs of test TC40
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 buyer1          BS 000500.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,8
+    < Enter command: Enter username: Login accepted. Welcome, buyer1.
+    < Enter command: Enter the amount to add (e.g. 15.00): Error: addcredit to buyer1 was not accepted.
+    < Enter command: Logout accepted. Session for buyer1 ended.
+    ---
+    > Enter command: login
+    > Enter username: buyer1
+    > Login accepted. Welcome, buyer1.
+    > Enter command: addcredit
+    > Enter the amount to add (e.g. 15.00): 1000.01
+    > Error: addcredit to buyer1 was not accepted.
+    > Enter command: logout
+    > Logout accepted. Session for buyer1 ended.
+checking outputs of test TC41
+  FAIL: daily transaction file differs (< actual, > expected):
+    3c3
+    < 00
+    ---
+    > 00 buyer1          BS 001500.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,4c1,11
+    < Enter command: Enter username: Login accepted. Welcome, buyer1.
+    < Enter command: Enter the amount to add (e.g. 15.00): Addcredit accepted. 400.00 added to buyer1.
+    < Enter command: Enter the amount to add (e.g. 15.00): Addcredit accepted. 600.00 added to buyer1.
+    < Enter command: Logout accepted. Session for buyer1 ended.
+    ---
+    > Enter command: login
+    > Enter username: buyer1
+    > Login accepted. Welcome, buyer1.
+    > Enter command: addcredit
+    > Enter the amount to add (e.g. 15.00): 400.00
+    > Addcredit accepted. 400.00 added to buyer1.
+    > Enter command: addcredit
+    > Enter the amount to add (e.g. 15.00): 600.00
+    > Addcredit accepted. 600.00 added to buyer1.
+    > Enter command: logout
+    > Logout accepted. Session for buyer1 ended.
+checking outputs of test TC42
+  FAIL: daily transaction file differs (< actual, > expected):
+    2c2
+    < 00
+    ---
+    > 00 buyer1          BS 001100.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,4c1,11
+    < Enter command: Enter username: Login accepted. Welcome, buyer1.
+    < Enter command: Enter the amount to add (e.g. 15.00): Addcredit accepted. 600.00 added to buyer1.
+    < Enter command: Enter the amount to add (e.g. 15.00): Error: addcredit to buyer1 was not accepted.
+    < Enter command: Logout accepted. Session for buyer1 ended.
+    ---
+    > Enter command: login
+    > Enter username: buyer1
+    > Login accepted. Welcome, buyer1.
+    > Enter command: addcredit
+    > Enter the amount to add (e.g. 15.00): 600.00
+    > Addcredit accepted. 600.00 added to buyer1.
+    > Enter command: addcredit
+    > Enter the amount to add (e.g. 15.00): 400.01
+    > Error: addcredit to buyer1 was not accepted.
+    > Enter command: logout
+    > Logout accepted. Session for buyer1 ended.
+checking outputs of test TC43
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 buyer1          BS 000500.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,8
+    < Enter command: Enter username: Login accepted. Welcome, buyer1.
+    < Enter command: Enter the amount to add (e.g. 15.00): Error: "not-a-number" is not an amount like 15.00.
+    < Enter command: Logout accepted. Session for buyer1 ended.
+    ---
+    > Enter command: login
+    > Enter username: buyer1
+    > Login accepted. Welcome, buyer1.
+    > Enter command: addcredit
+    > Enter the amount to add (e.g. 15.00): not-a-number
+    > Error: "not-a-number" is not an amount like 15.00.
+    > Enter command: logout
+    > Logout accepted. Session for buyer1 ended.
+checking outputs of test TC44
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 admin           AA 005000.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,7
+    < Enter command: Enter username: Login accepted. Welcome, admin.
+    < Enter command: Error: unrecognized command "invalidcommand". Valid commands: login, logout, create, delete, sell, buy, refund, addcredit, list, search.
+    < Enter command: Logout accepted. Session for admin ended.
+    ---
+    > Enter command: login
+    > Enter username: admin
+    > Login accepted. Welcome, admin.
+    > Enter command: invalidcommand
+    > Error: unrecognized command "invalidcommand". Valid commands: login, logout, create, delete, sell, buy, refund, addcredit, list, search.
+    > Enter command: logout
+    > Logout accepted. Session for admin ended.
+checking outputs of test TC45
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 admin           AA 005000.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,2c1,5
+    < Enter command: Enter username: Login accepted. Welcome, admin.
+    < Enter command: Logout accepted. Session for admin ended.
+    ---
+    > Enter command: login
+    > Enter username: admin
+    > Login accepted. Welcome, admin.
+    > Enter command: logout
+    > Logout accepted. Session for admin ended.
+checking outputs of test TC46
+  FAIL: daily transaction file differs (< actual, > expected):
+    2c2
+    < 00
+    ---
+    > 00 admin           AA 005000.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,9
+    < Enter command: Enter username: Login accepted. Welcome, admin.
+    < Enter command: Enter the new username: Enter the account type (admin, full-standard, buy-standard, sell-standard): Create accepted. User newuser created.
+    < Enter command: Logout accepted. Session for admin ended.
+    ---
+    > Enter command: login
+    > Enter username: admin
+    > Login accepted. Welcome, admin.
+    > Enter command: create
+    > Enter the new username: newuser
+    > Enter the account type (admin, full-standard, buy-standard, sell-standard): full-standard
+    > Create accepted. User newuser created.
+    > Enter command: logout
+    > Logout accepted. Session for admin ended.
+checking outputs of test TC47
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 admin           AA 005000.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,2c1,6
+    < Enter command: Enter username: Login accepted. Welcome, admin.
+    < Enter command: Enter the text to search for: Search results for "admin":
+    ---
+    > Enter command: login
+    > Enter username: admin
+    > Login accepted. Welcome, admin.
+    > Enter command: search
+    > Enter the text to search for: admin
+    > Search results for "admin":
+    10c14,15
+    < Enter command: Logout accepted. Session for admin ended.
+    ---
+    > Enter command: logout
+    > Logout accepted. Session for admin ended.
+checking outputs of test TC48
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 buyer1          BS 000500.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,2c1,6
+    < Enter command: Enter username: Login accepted. Welcome, buyer1.
+    < Enter command: Enter the text to search for: Search results for "admin":
+    ---
+    > Enter command: login
+    > Enter username: buyer1
+    > Login accepted. Welcome, buyer1.
+    > Enter command: search
+    > Enter the text to search for: admin
+    > Search results for "admin":
+    9c13,14
+    < Enter command: Logout accepted. Session for buyer1 ended.
+    ---
+    > Enter command: logout
+    > Logout accepted. Session for buyer1 ended.
+checking outputs of test TC49
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 seller1         SS 000500.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,2c1,6
+    < Enter command: Enter username: Login accepted. Welcome, seller1.
+    < Enter command: Enter the text to search for: Search results for "STAR":
+    ---
+    > Enter command: login
+    > Enter username: seller1
+    > Login accepted. Welcome, seller1.
+    > Enter command: search
+    > Enter the text to search for: STAR
+    > Search results for "STAR":
+    7c11,12
+    < Enter command: Logout accepted. Session for seller1 ended.
+    ---
+    > Enter command: logout
+    > Logout accepted. Session for seller1 ended.
+checking outputs of test TC50
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 fullgamer       FS 000300.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,2c1,6
+    < Enter command: Enter username: Login accepted. Welcome, fullgamer.
+    < Enter command: Enter the text to search for: Search results for "zzz":
+    ---
+    > Enter command: login
+    > Enter username: fullgamer
+    > Login accepted. Welcome, fullgamer.
+    > Enter command: search
+    > Enter the text to search for: zzz
+    > Search results for "zzz":
+    6c10,11
+    < Enter command: Logout accepted. Session for fullgamer ended.
+    ---
+    > Enter command: logout
+    > Logout accepted. Session for fullgamer ended.
+checking outputs of test TC51
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 admin           AA 005000.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,7
+    < Enter command: Error: you must log in before using "search".
+    < Enter command: Enter username: Login accepted. Welcome, admin.
+    < Enter command: Logout accepted. Session for admin ended.
+    ---
+    > Enter command: search
+    > Error: you must log in before using "search".
+    > Enter command: login
+    > Enter username: admin
+    > Login accepted. Welcome, admin.
+    > Enter command: logout
+    > Logout accepted. Session for admin ended.
+checking outputs of test TC52
+  FAIL: daily transaction file differs (< actual, > expected):
+    1c1
+    < 00
+    ---
+    > 00 admin           AA 005000.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,8
+    < Enter command: Enter username: Login accepted. Welcome, admin.
+    < Enter command: Enter the text to search for: Error: the search text cannot be blank.
+    < Enter command: Logout accepted. Session for admin ended.
+    ---
+    > Enter command: login
+    > Enter username: admin
+    > Login accepted. Welcome, admin.
+    > Enter command: search
+    > Enter the text to search for: 
+    > Error: the search text cannot be blank.
+    > Enter command: logout
+    > Logout accepted. Session for admin ended.
+checking outputs of test TC53
+  FAIL: daily transaction file differs (< actual, > expected):
+    2c2
+    < 00
+    ---
+    > 00 admin           AA 005000.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,9
+    < Enter command: Enter username: Login accepted. Welcome, admin.
+    < Enter command: Enter the username to delete: Delete accepted. User seller1 deleted.
+    < Enter command: Enter the text to search for: Search results for "seller":
+    ---
+    > Enter command: login
+    > Enter username: admin
+    > Login accepted. Welcome, admin.
+    > Enter command: delete
+    > Enter the username to delete: seller1
+    > Delete accepted. User seller1 deleted.
+    > Enter command: search
+    > Enter the text to search for: seller
+    > Search results for "seller":
+    9c15,16
+    < Enter command: Logout accepted. Session for admin ended.
+    ---
+    > Enter command: logout
+    > Logout accepted. Session for admin ended.
+checking outputs of test TC54
+  FAIL: daily transaction file differs (< actual, > expected):
+    2c2
+    < 00
+    ---
+    > 00 seller1         SS 000500.00
+  FAIL: terminal output differs (< actual, > expected):
+    1,3c1,10
+    < Enter command: Enter username: Login accepted. Welcome, seller1.
+    < Enter command: Enter the game name: Enter the asking price (e.g. 15.00): Sell accepted. Star Shooter is for sale.
+    < Enter command: Enter the text to search for: Search results for "star":
+    ---
+    > Enter command: login
+    > Enter username: seller1
+    > Login accepted. Welcome, seller1.
+    > Enter command: sell
+    > Enter the game name: Star Shooter
+    > Enter the asking price (e.g. 15.00): 15.00
+    > Sell accepted. Star Shooter is for sale.
+    > Enter command: search
+    > Enter the text to search for: star
+    > Search results for "star":
+    8c15,16
+    < Enter command: Logout accepted. Session for seller1 ended.
+    ---
+    > Enter command: logout
+    > Logout accepted. Session for seller1 ended.
+
+Summary: 0 passed, 54 failed
+Failed tests: TC01 TC02 TC03 TC04 TC05 TC06 TC07 TC08 TC09 TC10 TC11 TC12 TC13 TC14 TC15 TC16 TC17 TC18 TC19 TC20 TC21 TC22 TC23 TC24 TC25 TC26 TC27 TC28 TC29 TC30 TC31 TC32 TC33 TC34 TC35 TC36 TC37 TC38 TC39 TC40 TC41 TC42 TC43 TC44 TC45 TC46 TC47 TC48 TC49 TC50 TC51 TC52 TC53 TC54

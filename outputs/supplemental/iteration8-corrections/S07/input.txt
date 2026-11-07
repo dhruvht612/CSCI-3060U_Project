@@ -1,0 +1,13 @@
+login
+admin
+addcredit
+1000.00
+buyer1
+addcredit
+1000.00
+seller1
+addcredit
+0.01
+buyer1
+list
+logout
