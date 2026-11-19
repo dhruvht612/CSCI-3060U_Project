@@ -1,0 +1,16 @@
+01 newuser         FS 000000.00
+00                    000000.00
+03 Celeste                    fulluser        020.00
+00                    000000.00
+04 Stardew Valley             selluser        fulluser        015.00
+00                    000000.00
+06 fulluser        FS 000100.00
+00                    000000.00
+05 buyuser         selluser        000015.00
+00                    000000.00
+02 buyuser         BS 000500.00
+00                    000000.00
+01 fulluser        FS 000000.00
+04 Pricey Game                selluser        pooruser        999.99
+00                    000000.00
+00                    000000.00

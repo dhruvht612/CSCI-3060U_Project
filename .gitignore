@@ -5,3 +5,7 @@ submission
 __pycache__/
 *.pyc
 .opencode
+# Front End A (Phase 4 replacement front end): build products and test run outputs
+frontend_a/phase2/frontend
+frontend_a/phase2/frontend.exe
+frontend_a/phase3/outputs/
