@@ -1,7 +1,7 @@
 // RefundTransaction.h
 //
 // RefundTransaction
-// The refund command (admin only): moves credit from a seller's account back
+// The refund command (admin or account manager): moves credit from a seller's account back
 // to a buyer's account. Asks for the buyer's username, the seller's username
 // and the amount, checking each answer straight away. Records a refund (05)
 // line.

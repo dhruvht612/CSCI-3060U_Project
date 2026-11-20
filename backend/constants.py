@@ -38,7 +38,8 @@ ADMIN = "AA"
 FULL_STANDARD = "FS"
 BUY_STANDARD = "BS"
 SELL_STANDARD = "SS"
-VALID_USER_TYPES = (ADMIN, FULL_STANDARD, BUY_STANDARD, SELL_STANDARD)
+ACCOUNT_MANAGER = "AM"   # client update: admin privileges, but cannot buy, sell, or create/delete admins
+VALID_USER_TYPES = (ADMIN, ACCOUNT_MANAGER, FULL_STANDARD, BUY_STANDARD, SELL_STANDARD)
 
 # ---- Transaction codes in the daily transaction file ----
 END_OF_SESSION = "00"

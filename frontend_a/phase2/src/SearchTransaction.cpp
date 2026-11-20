@@ -33,13 +33,13 @@ void SearchTransaction::execute(Session& session, Console& console) {
         }
     }
 
-    bool viewerIsAdmin = session.getCurrentUser().isAdmin();
+    bool viewerIsAdmin = session.getCurrentUser().hasAdminPrivileges();
     std::vector<std::string> matchingUsers;
     for (const User& user : session.getUsers()) {
         if (!containsIgnoringCase(user.getName(), query)) {
             continue;
         }
-        // Non-admins never see an admin's name unless that admin is selling a game
+        // Users without admin privileges never see an admin's name unless that admin is selling a game
         if (!viewerIsAdmin && user.isAdmin() && !isSelling(gamesForSale, user.getName())) {
             continue;
         }

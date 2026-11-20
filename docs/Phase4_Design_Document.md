@@ -2,7 +2,7 @@
 
 Phase 4 - Back End Design Document (Rapid Prototype)
 
-CSCI 3060U - Fall 2026 - Version 1.0, November 20, 2026
+CSCI 3060U - Fall 2026 - Version 1.1, November 20, 2026
 
 Group: Qudsia Fawad, Diana Riyahi, Dhruv Thakar
 
@@ -10,9 +10,7 @@ Group: Qudsia Fawad, Diana Riyahi, Dhruv Thakar
 
 The Back End is the overnight batch processor of the Games Distribution System. It reads the previous day's Current User Accounts File, Available Games File and Games Collection File, applies every transaction in the Merged Daily Transaction File, and writes new versions of the three files for the next day's Front End sessions. It is written in Python 3 and lives in the `backend/` folder.
 
-**Front End used.** Following the Front End replacement, the team's Back End reads files produced by **Front End A** (from the course's NewFrontEnds3 folder), whose source and test suite are now in the repository's `frontend_a/` folder. Front End A writes every file with the field widths given in the project handout (user names 15 characters, game names 26 characters, credit 9 characters, price 6 characters), so the Back End reads and writes exactly those widths. All widths are kept in one file, `constants.py`, so a change of Front End or of a field width touches only that file.
-
-This is the Phase 4 rapid prototype. It runs on the sample inputs in `backend/sample/`, and on all 147 of Front End A's expected daily transaction files merged into one file, but has not been systematically tested; unit testing is the work of Phase 5.
+It reads the files written by our replacement Front End, Front End A (in `frontend_a/`), which uses the field widths given in the project handout. It also supports the client's new Account Manager (AM) user type. This is the Phase 4 rapid prototype: it runs on the sample inputs in `backend/sample/` but has not yet been tested; testing is Phase 5.
 
 # 2. How to run
 
@@ -72,11 +70,11 @@ A transaction that names a user who does not exist is also reported and skipped,
 # 6. Classes and methods
 
 | Module | Class / function | Method | Intention (one sentence) |
-|---|---|---|---|
+|----------|-----------|--------------|------------------------------|
 | backend.py | (main module) | | Entry point: reads the old files and merged transactions, applies them, and writes the new files. |
 | backend.py | | `main(arguments)` | Checks the seven command-line arguments, runs the Back End, reports a fatal error if one occurs, and returns the exit status. |
 | backend.py | | `run_backend(...)` | Reads all four input files, applies the transactions with a TransactionProcessor, and writes the three output files. |
-| constants.py | (constants) | | Holds every field width, line length, user type code and transaction code in one place. |
+| constants.py | (constants) | | Holds every field width, line length, user type code (AA, AM, FS, BS, SS) and transaction code in one place. |
 | field_format.py | `FieldFormat` | | Reads and writes the fixed-width text and money fields used in every file. |
 | field_format.py | `FieldFormat` | `pad_text(text, width)` | Returns text left-justified and padded with spaces to exactly width characters. |
 | field_format.py | `FieldFormat` | `read_text(line, start, width)` | Returns the text field at the given columns with its trailing padding removed. |
@@ -114,7 +112,7 @@ A transaction that names a user who does not exist is also reported and skipped,
 | transaction_processor.py | `TransactionProcessor` | `_sell_game(t)` | 03: adds the game to the available games. |
 | transaction_processor.py | `TransactionProcessor` | `_buy_game(t)` | 04: moves the price from buyer to seller and adds the game to the buyer's collection. |
 | transaction_processor.py | `TransactionProcessor` | `_refund(t)` | 05: moves the refund amount from seller to buyer. |
-| transaction_processor.py | `TransactionProcessor` | `_add_credit(t)` | 06: adds credit to the user's account. |
+| transaction_processor.py | `TransactionProcessor` | `_add_credit(t)` | 06: adds the credit amount on the line (Front End A writes the amount added) to the user's account. |
 | transaction_processor.py | `TransactionProcessor` | `_user_exists(username, t)` | Returns whether the user exists, reporting a failed constraint if not. |
 | transaction_processor.py | `TransactionProcessor` | `_transfer_credit(payer, payee, amount, t)` | Moves credit between users unless the payer would go negative, in which case it reports a failed constraint. |
 | error_log.py | `ErrorLog` | | Prints errors to the terminal in the required `ERROR: <msg>` form. |
@@ -122,9 +120,24 @@ A transaction that names a user who does not exist is also reported and skipped,
 | error_log.py | `ErrorLog` | `fatal(error)` | Prints a fatal error naming the problem and the file. |
 | error_log.py | `FatalBackEndError` | | Exception raised when an input file is bad; carries the description and file name. |
 
+
+Constructors:
+
+| Module | Class | Method | Intention (one sentence) |
+|----------|-----------|--------------|------------------------------|
+| data_files.py | `DataFile` | `__init__(path)` | Remembers the path of the file to read from or write to. |
+| records.py | `UserAccount` | `__init__(username, user_type, credit_cents)` | Creates an account record from its three fields. |
+| records.py | `GameForSale` | `__init__(game_name, seller, price_cents)` | Creates a game-for-sale record from its three fields. |
+| records.py | `OwnedGame` | `__init__(game_name, owner)` | Creates a collection record saying that owner owns game_name. |
+| transactions.py | `Transaction` | `__init__(code, line)` | Creates a transaction with its code and original line, leaving the other fields empty until a reader fills them. |
+| transactions.py | `TransactionFileReader` | `__init__(path)` | Remembers the merged file's path and which reader and line length go with each code. |
+| transaction_processor.py | `TransactionProcessor` | `__init__(user_accounts, games_for_sale, owned_games, error_log)` | Loads yesterday's records into memory and maps each transaction code to its method. |
+| error_log.py | `ErrorLog` | `__init__(output)` | Creates an error log that prints to the given stream (the terminal by default). |
+| error_log.py | `FatalBackEndError` | `__init__(description, file_name)` | Stores the problem description and the file that caused it. |
+
 # 7. Known limits of this prototype (left for Phase 5)
 
 - Credit is not capped; a balance above 999,999.99 would not fit the 9-character credit field.
-- The Back End trusts the Front End for rules it already enforces (user type permissions, unique game names, price and name length limits, the 1000.00 add-credit session limit).
+- The Back End trusts the Front End for rules it already enforces (user type permissions, including the Account Manager limits, unique game names, price and name length limits, the 1000.00 add-credit session limit).
 - Game names are not checked for uniqueness across sessions: if two sessions on the same day each sell a game with the same name, the new Available Games File lists it twice.
 - No unit tests yet; these are written in Phase 5.

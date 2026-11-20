@@ -2,7 +2,7 @@
 //
 // SellTransaction
 // The sell command: puts a game up for sale under the logged-in user's name.
-// Allowed for every user type except buy-standard (BS). Asks for the game name
+// Allowed for every user type except buy-standard (BS) and account manager (AM). Asks for the game name
 // and checks it straight away, then asks for the price (0.00 to 999.99).
 // Records a sell (03) line. The new game is marked as listed this session, so
 // it can't be bought until the next session.
@@ -18,7 +18,7 @@ public:
     // Returns the command word "sell".
     std::string getName() const override;
 
-    // Returns true if the user's type may sell games (everyone except buy-standard).
+    // Returns true if the user's type may sell games (everyone except buy-standard and account manager).
     bool isAllowedFor(const User& user) const override;
 
     // Asks for a game name and price and lists the game, or prints why it can't.

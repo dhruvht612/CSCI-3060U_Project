@@ -1,9 +1,10 @@
 // DeleteTransaction.h
 //
 // DeleteTransaction
-// The delete command (admin only): removes a user account and cancels every
+// The delete command (admin or account manager): removes a user account and cancels every
 // game that user has for sale. Asks for the username, which must be an
-// existing user other than the one logged in. Records a delete (02) line with
+// existing user other than the one logged in (and not an admin when an
+// account manager is logged in). Records a delete (02) line with
 // the deleted user's type and current credit. After this, no transaction in
 // the session can use the user or their games.
 

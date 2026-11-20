@@ -57,7 +57,10 @@ class TransactionProcessor:
     # ---- One method per transaction code ----
 
     def _end_session(self, transaction):
-        """00 - end of a Front End session: nothing to change."""
+        """00 - end of a Front End session: nothing to change.
+
+        Front End A writes this line with a blank username and type and zero credit.
+        """
 
     def _create_user(self, transaction):
         """01 - add a new user, unless a user with that name already exists."""
@@ -102,7 +105,10 @@ class TransactionProcessor:
         self._transfer_credit(transaction.seller, transaction.buyer, transaction.amount, transaction)
 
     def _add_credit(self, transaction):
-        """06 - add credit to a user's account."""
+        """06 - add credit to a user's account.
+
+        Front End A writes the amount that was added (not the new balance), so it is added on.
+        """
         if not self._user_exists(transaction.username, transaction):
             return
         self.users[transaction.username].credit_cents += transaction.amount

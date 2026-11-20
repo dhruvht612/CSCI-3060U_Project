@@ -51,6 +51,8 @@ namespace Config {
     const std::string USER_TYPE_FULL_STANDARD = "FS";  // can buy and sell
     const std::string USER_TYPE_BUY_STANDARD  = "BS";  // can buy, cannot sell
     const std::string USER_TYPE_SELL_STANDARD = "SS";  // can sell, cannot buy
+    const std::string USER_TYPE_ACCOUNT_MANAGER = "AM";  // client update: admin privileges, but cannot buy, sell,
+                                                         // or create/delete admins
 
     // ---- Daily transaction file codes ----
 

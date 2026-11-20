@@ -75,8 +75,11 @@ bash scripts/validate_tests.sh   # diff outputs/ against expected/, print PASS/F
 python3 scripts/supplemental_tests.py --label my-run   # optional extra checks
 ```
 
-## Submission zip
+## Submission zips
 
 ```sh
-bash scripts/package_submission.sh   # creates submission/CSCI3060U_Phase3.zip
+bash scripts/package_phase4.sh       # Phase 4: creates submission/CSCI3060U_Phase4_BackEnd.zip (.py files + sample inputs)
+bash scripts/package_submission.sh   # Phase 3: creates submission/CSCI3060U_Phase3.zip
 ```
+
+For Phase 4, submit `docs/Phase4_Design_Document.pdf` and the Back End zip separately on Canvas.

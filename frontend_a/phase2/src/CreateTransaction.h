@@ -1,9 +1,9 @@
 // CreateTransaction.h
 //
 // CreateTransaction
-// The create command (admin only): adds a new user account. Asks for the new
-// username and checks it straight away, then asks for the user type (AA, FS,
-// BS or SS). A new account starts with 0.00 credit. Records a create (01)
+// The create command (admin or account manager): adds a new user account. Asks for the new
+// username and checks it straight away, then asks for the user type (AA, AM,
+// FS, BS or SS); an account manager may not create an admin. A new account starts with 0.00 credit. Records a create (01)
 // line; the account file itself is only updated by the Back End, but the new
 // user can be used by later transactions in this session.
 
